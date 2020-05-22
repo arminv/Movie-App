@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { fetch_movie_by_id } from '../api/index';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -12,7 +14,7 @@ import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: '20vw',
+    maxWidth: '25vw',
     border: '1px solid lightblue',
   },
   media: {
@@ -23,14 +25,28 @@ const useStyles = makeStyles({
 
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
-export const Cards = ({ movie }) => {
-  const { title, poster_path, homepage, genres } = movie;
+export const Cards = ({ id }) => {
+  const [movie, setMovie] = useState({});
+
+  useEffect(() => {
+    async function getMovie(id) {
+      const {
+        title,
+        overview,
+        poster_path,
+        homepage,
+        genres,
+      } = await fetch_movie_by_id(id);
+      setMovie({ id, title, overview, poster_path, homepage, genres });
+    }
+    getMovie(id);
+  }, [id]);
 
   // Extract the genre names without their ids:
   const genreNames = [];
-  if (genres) {
-    for (var i = 0; i < genres.length; i++) {
-      genreNames.push(genres[i]['name']);
+  if (movie.genres) {
+    for (var i = 0; i < movie.genres.length; i++) {
+      genreNames.push(movie.genres[i]['name']);
     }
   }
 
@@ -46,20 +62,21 @@ export const Cards = ({ movie }) => {
         <CardMedia
           className={classes.media}
           component='img'
-          alt={`${title}`}
+          alt={`${movie.title}`}
           height='500'
-          image={`${BASE_IMG_URL}${poster_path}`}
-          title={`${title}`}
+          image={`${BASE_IMG_URL}${movie.poster_path}`}
+          title={`${movie.title}`}
+          onClick={() => {}}
         />
         <CardContent>
           <Typography gutterBottom variant='h5' component='h2'>
-            {title}
+            {movie.title}
           </Typography>
           {genreChips}
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Link target='_blank' href={homepage} rel='noopener noreferrer'>
+        <Link target='_blank' href={movie.homepage} rel='noopener noreferrer'>
           <Button size='small' color='primary'>
             Website
           </Button>
