@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
+import { Pagination } from '@material-ui/lab';
 import './App.css';
 
 import { fetch_popular_movies, search_movies_by_name } from './api/index';
@@ -33,6 +34,11 @@ const App = () => {
         <Grid item xs={12}>
           <Grid container justify='center' spacing={3}>
             {popularMovieCards}
+            <Pagination
+              count={500}
+              page={page}
+              onChange={(event, value) => setPage(value)}
+            />
           </Grid>
         </Grid>
       </Grid>
