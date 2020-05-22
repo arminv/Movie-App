@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-const BASE_URL = 'https://api.themoviedb.org/';
+const BASE_URL = 'https://api.themoviedb.org';
 const HEADERS = {
-  //   'Authorization': `Bearer ${API_KEY}`,
+    // 'Authorization': `Bearer ${API_KEY}`,
   'content-type': 'Content-Type: application/json;charset=utf-8',
 };
 
@@ -14,8 +14,21 @@ export const fetch_movie_by_id = async (id) => {
     headers: HEADERS,
   })
     .then((response) => {
-      console.log('fetch_all_countries -> response', response);
-      return response;
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const fetch_popular_movies = async (page) => {
+  return await axios({
+    method: 'GET',
+    url: `${BASE_URL}/3/movie/popular?api_key=${API_KEY}&page=${page}`,
+    headers: HEADERS,
+  })
+    .then((response) => {
+      return response.data.results;
     })
     .catch((error) => {
       console.log(error);
@@ -29,7 +42,7 @@ export const search_movies_by_name = async (query) => {
     headers: HEADERS,
   })
     .then((response) => {
-      console.log('fetch_all_countries -> response', response);
+      // console.log('fetch_all_countries -> response', response);
       return response;
     })
     .catch((error) => {

@@ -1,30 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
-import { fetch_movie_by_id, search_movies_by_name } from './api/index';
+import {
+  fetch_movie_by_id,
+  fetch_popular_movies,
+  search_movies_by_name,
+} from './api/index';
 
-function App() {
-  // fetch_a_movie(557);
-  search_movies_by_name('mad');
+import { Cards } from './components/Cards';
+
+const App = () => {
+  const [movie, setMovie] = useState({});
+  const [popularMovies, setPopularMovies] = useState({});
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    async function getMovie(id) {
+      const {
+        title,
+        overview,
+        poster_path,
+        homepage,
+        genres,
+      } = await fetch_movie_by_id(id);
+      setMovie({ id, title, overview, poster_path, homepage, genres });
+    }
+    getMovie(76341);
+
+    async function getPopularMovies(page) {
+      const popularMoviesResponse = await fetch_popular_movies(page);
+      setPopularMovies(popularMoviesResponse);
+    }
+    getPopularMovies(page);
+  }, [page]);
+
+  console.log(popularMovies);
+
   return (
     <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <Cards movie={movie} /> */}
     </div>
   );
-}
+};
 
 export default App;
