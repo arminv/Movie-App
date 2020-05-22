@@ -14,8 +14,8 @@ import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: '25vw',
-    border: '1px solid lightblue',
+    maxWidth: '15vw',
+    border: '2px solid lightblue',
   },
   media: {
     maxWidth: '100%',
@@ -57,7 +57,14 @@ export const Cards = ({ id }) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card
+      className={classes.root}
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'column',
+      }}
+    >
       <CardActionArea>
         <CardMedia
           className={classes.media}

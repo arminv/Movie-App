@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import './App.css';
 
@@ -7,23 +6,7 @@ import { fetch_popular_movies, search_movies_by_name } from './api/index';
 
 import { Cards } from './components/Cards';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    height: 140,
-    width: 100,
-  },
-  control: {
-    padding: theme.spacing(2),
-  },
-}));
-
 const App = () => {
-  const [spacing, setSpacing] = React.useState(2);
-  const classes = useStyles();
-
   const [popularMovies, setPopularMovies] = useState({});
   const [page, setPage] = useState(1);
 
@@ -37,9 +20,8 @@ const App = () => {
 
   // Get popular movies:
   const popularMovieCards = Object.keys(popularMovies).map((item, index) => {
-    console.log(popularMovies[item]);
     return (
-      <Grid key={index} item>
+      <Grid key={index} item style={{ display: 'flex' }}>
         <Cards id={popularMovies[item]['id']} key={index} />
       </Grid>
     );
@@ -47,9 +29,9 @@ const App = () => {
 
   return (
     <div className='App'>
-      <Grid container className={classes.root} spacing={2}>
+      <Grid container spacing={2} alignItems='stretch'>
         <Grid item xs={12}>
-          <Grid container justify='center' spacing={spacing}>
+          <Grid container justify='center' spacing={3}>
             {popularMovieCards}
           </Grid>
         </Grid>
