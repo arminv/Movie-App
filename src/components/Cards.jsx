@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { fetch_movie_by_id } from '../api/index';
 
+import { Link as LinkRoute } from 'react-router-dom';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -37,6 +39,7 @@ export const Cards = ({ id }) => {
         homepage,
         genres,
       } = await fetch_movie_by_id(id);
+
       setMovie({ id, title, overview, poster_path, homepage, genres });
     }
     getMovie(id);
@@ -66,21 +69,23 @@ export const Cards = ({ id }) => {
       }}
     >
       <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          component='img'
-          alt={`${movie.title}`}
-          height='500'
-          image={`${BASE_IMG_URL}${movie.poster_path}`}
-          title={`${movie.title}`}
-          onClick={() => {}}
-        />
-        <CardContent>
-          <Typography gutterBottom variant='h5' component='h2'>
-            {movie.title}
-          </Typography>
-          {genreChips}
-        </CardContent>
+        <LinkRoute to={`movie/${id}`}>
+          <CardMedia
+            className={classes.media}
+            component='img'
+            alt={`${movie.title}`}
+            height='500'
+            image={`${BASE_IMG_URL}${movie.poster_path}`}
+            title={`${movie.title}`}
+            onClick={() => {}}
+          />
+          <CardContent>
+            <Typography gutterBottom variant='h5' component='h2'>
+              {movie.title}
+            </Typography>
+            {genreChips}
+          </CardContent>
+        </LinkRoute>
       </CardActionArea>
       <CardActions>
         <Link target='_blank' href={movie.homepage} rel='noopener noreferrer'>

@@ -81,25 +81,25 @@ export const fetch_upcoming_movies = async (page) => {
     });
 };
 
-
-
-// TODO:
-// LATEST MOVIE:
-export const fetch_latest_movies = async () => {
+// UPCOMING MOVIES:
+export const fetch_cast = async (id) => {
   return await axios({
     method: 'GET',
-    url: `${BASE_URL}/3/movie/latest?api_key=${API_KEY}`,
+    url: `${BASE_URL}/3/movie/${id}/credits?api_key=${API_KEY}`,
     headers: HEADERS,
   })
     .then((response) => {
-      // console.log('LATEST:', response.data);
-      return response.data;
+      return response.data.cast;
     })
     .catch((error) => {
       console.log(error);
     });
 };
 
+
+
+
+// TODO:
 export const search_movies_by_name = async (query) => {
   return await axios({
     method: 'GET',
