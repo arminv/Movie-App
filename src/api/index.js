@@ -21,6 +21,7 @@ export const fetch_movie_by_id = async (id) => {
     });
 };
 
+// POPULAR MOVIES:
 export const fetch_popular_movies = async (page) => {
   return await axios({
     method: 'GET',
@@ -29,6 +30,70 @@ export const fetch_popular_movies = async (page) => {
   })
     .then((response) => {
       return response.data.results;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+// NOW-PLAYING MOVIES:
+export const fetch_now_playing_movies = async (page) => {
+  return await axios({
+    method: 'GET',
+    url: `${BASE_URL}/3/movie/now_playing?api_key=${API_KEY}&page=${page}`,
+    headers: HEADERS,
+  })
+    .then((response) => {
+      return response.data.results;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+// TOP-RATED MOVIES:
+export const fetch_top_rated_movies = async (page) => {
+  return await axios({
+    method: 'GET',
+    url: `${BASE_URL}/3/movie/top_rated?api_key=${API_KEY}&page=${page}`,
+    headers: HEADERS,
+  })
+    .then((response) => {
+      return response.data.results;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+// UPCOMING MOVIES:
+export const fetch_upcoming_movies = async (page) => {
+  return await axios({
+    method: 'GET',
+    url: `${BASE_URL}/3/movie/upcoming?api_key=${API_KEY}&page=${page}`,
+    headers: HEADERS,
+  })
+    .then((response) => {
+      return response.data.results;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+
+
+// TODO:
+// LATEST MOVIE:
+export const fetch_latest_movies = async () => {
+  return await axios({
+    method: 'GET',
+    url: `${BASE_URL}/3/movie/latest?api_key=${API_KEY}`,
+    headers: HEADERS,
+  })
+    .then((response) => {
+      // console.log('LATEST:', response.data);
+      return response.data;
     })
     .catch((error) => {
       console.log(error);
