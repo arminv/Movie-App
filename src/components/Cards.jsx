@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetch_movie_by_id } from '../api/index';
+import { fetch_by_id } from '../api/index';
 
 import { Link as LinkRoute } from 'react-router-dom';
 
@@ -38,7 +38,7 @@ export const Cards = ({ id }) => {
         poster_path,
         homepage,
         genres,
-      } = await fetch_movie_by_id(id);
+      } = await fetch_by_id('MOVIE', id);
 
       setMovie({ id, title, overview, poster_path, homepage, genres });
     }

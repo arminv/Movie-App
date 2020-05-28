@@ -3,13 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import { ButtonGroup, Button } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 
-import {
-  fetch_popular_movies,
-  fetch_now_playing_movies,
-  fetch_top_rated_movies,
-  fetch_upcoming_movies,
-  // search_movies_by_name,
-} from '../api/index';
+import { fetch_movies } from '../api/index';
 
 import { Cards } from '../components/Cards';
 
@@ -23,25 +17,25 @@ const Home = () => {
 
   useEffect(() => {
     async function getPopularMovies(page) {
-      const popularMoviesResponse = await fetch_popular_movies(page);
+      const popularMoviesResponse = await fetch_movies('POPULAR', page);
       setPopularMovies(popularMoviesResponse);
     }
     getPopularMovies(page);
 
     async function getNowPlayingMovies(page) {
-      const nowPlayingMoviesResponse = await fetch_now_playing_movies(page);
+      const nowPlayingMoviesResponse = await fetch_movies('NOW_PLAYING', page);
       setNowPlayingMovies(nowPlayingMoviesResponse);
     }
     getNowPlayingMovies(page);
 
     async function getTopRatedMovies(page) {
-      const topRatedMoviesResponse = await fetch_top_rated_movies(page);
+      const topRatedMoviesResponse = await fetch_movies('TOP_RATED', page);
       setTopRatedMovies(topRatedMoviesResponse);
     }
     getTopRatedMovies(page);
 
     async function getUpcomingMovies(page) {
-      const upcomingMoviesResponse = await fetch_upcoming_movies(page);
+      const upcomingMoviesResponse = await fetch_movies('UPCOMING', page);
       setUpcomingMovies(upcomingMoviesResponse);
     }
     getUpcomingMovies(page);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { fetch_movie_by_id, fetch_cast } from '../api/index';
+import { fetch_by_id } from '../api/index';
 
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
@@ -23,7 +23,7 @@ const Movie = ({ match }) => {
         revenue,
         release_date,
         vote_aevrage,
-      } = await fetch_movie_by_id(id);
+      } = await fetch_by_id('MOVIE', id);
 
       setMovie({
         title,
@@ -42,7 +42,7 @@ const Movie = ({ match }) => {
     getMovie(id);
 
     async function getCast(id) {
-      const cast = await fetch_cast(id);
+      const cast = await fetch_by_id('CAST', id);
 
       setCast({
         cast,
