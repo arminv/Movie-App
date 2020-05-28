@@ -69,7 +69,7 @@ export const Cards = ({ id }) => {
       }}
     >
       <CardActionArea>
-        <LinkRoute to={`movie/${id}`}>
+        <LinkRoute to={`movie/${id}`} style={{ textDecoration: 'none' }}>
           <CardMedia
             className={classes.media}
             component='img'
