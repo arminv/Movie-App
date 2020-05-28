@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { fetch_by_id } from '../api/index';
 import './Movie.css';
 
-// const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500/';
-const BASE_IMG_URL = 'https://image.tmdb.org/t/p/original/';
+// const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
+const BASE_IMG_URL = 'https://image.tmdb.org/t/p/original';
 
 const Movie = ({ match }) => {
   const id = match.params.id;

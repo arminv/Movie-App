@@ -8,15 +8,15 @@
   background-position: center center;
   height: 100vh;
   z-index: 1;
-  -webkit-filter: blur(8px);
-  -moz-filter: blur(8px);
-  -o-filter: blur(8px);
-  -ms-filter: blur(8px);
-  filter: blur(8px);
+  -webkit-filter: blur(9px);
+  -moz-filter: blur(9px);
+  -o-filter: blur(9px);
+  -ms-filter: blur(9px);
+  filter: blur(9px);
 }
 
 .movie {
-    background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0, 0, 0, 0.8);
   position: absolute;
   color: white;
   /* height: 100vh; */
