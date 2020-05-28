@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { ButtonGroup, Button } from '@material-ui/core';
+import Container from '@material-ui/core/Container';
 import { Pagination } from '@material-ui/lab';
 
 import { fetch_movies } from '../api/index';
@@ -98,31 +99,34 @@ const Home = () => {
       </ButtonGroup>
 
       <h1>{selectedTab}</h1>
-      <Grid container spacing={2} alignItems='stretch'>
-        <Grid item xs={12}>
-          <Grid container justify='center' spacing={3}>
-            {(() => {
-              switch (selectedTab) {
-                case 'POPULAR':
-                  return <>{popularMovieCards}</>;
-                case 'NOW PLAYING':
-                  return <>{nowPlayingMovieCards}</>;
-                case 'TOP RATED':
-                  return <>{topRatedMovieCards}</>;
-                case 'UPCOMING':
-                  return <>{upcomingMovieCards}</>;
-                default:
-                  return null;
-              }
-            })()}
+
+      <Container>
+        <Grid container spacing={2} alignItems='stretch'>
+          <Grid item xs={12}>
+            <Grid container justify='center' spacing={3}>
+              {(() => {
+                switch (selectedTab) {
+                  case 'POPULAR':
+                    return <>{popularMovieCards}</>;
+                  case 'NOW PLAYING':
+                    return <>{nowPlayingMovieCards}</>;
+                  case 'TOP RATED':
+                    return <>{topRatedMovieCards}</>;
+                  case 'UPCOMING':
+                    return <>{upcomingMovieCards}</>;
+                  default:
+                    return null;
+                }
+              })()}
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-      <Pagination
-        count={500}
-        page={page}
-        onChange={(event, value) => setPage(value)}
-      />
+        <Pagination
+          count={500}
+          page={page}
+          onChange={(event, value) => setPage(value)}
+        />
+      </Container>
     </div>
   );
 };
