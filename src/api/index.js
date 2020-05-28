@@ -8,6 +8,7 @@ const HEADERS = {
 };
 
 // Fetch movie or cast by movie id:
+// TODO: Fetch images for each movie
 export const fetch_by_id = async (type, id) => {
   switch (type) {
     case 'MOVIE': {

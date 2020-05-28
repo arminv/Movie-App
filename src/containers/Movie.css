@@ -1,0 +1,28 @@
+.container {
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  display: block;
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+  z-index: 1;
+  -webkit-filter: blur(8px);
+  -moz-filter: blur(8px);
+  -o-filter: blur(8px);
+  -ms-filter: blur(8px);
+  filter: blur(8px);
+}
+
+.movie {
+    background-color: rgba(0,0,0,0.6);
+  position: absolute;
+  color: white;
+  /* height: 100vh; */
+  top: 50px;
+  left: 100px;
+  right: 100px;
+  bottom: 50px;
+  z-index: 2;
+}
