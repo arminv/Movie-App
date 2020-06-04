@@ -8,7 +8,10 @@ import { fetch_movies } from '../api/index';
 
 import { Cards } from '../components/Cards';
 
-const Home = () => {
+import { connect } from 'react-redux';
+import { addTopRated } from '../redux/actions';
+
+const Home = (props) => {
   const [selectedTab, setSelectedTab] = useState('POPULAR');
   const [page, setPage] = useState(1);
   const [popularMovies, setPopularMovies] = useState({});
@@ -32,6 +35,7 @@ const Home = () => {
     async function getTopRatedMovies(page) {
       const topRatedMoviesResponse = await fetch_movies('TOP_RATED', page);
       setTopRatedMovies(topRatedMoviesResponse);
+      props.addTopRated(page, topRatedMoviesResponse);
     }
     getTopRatedMovies(page);
 
@@ -131,4 +135,5 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default connect(null, { addTopRated })(Home);
+// export default Home;
