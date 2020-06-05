@@ -9,7 +9,12 @@ import { fetch_movies } from '../api/index';
 import { Cards } from '../components/Cards';
 
 import { connect } from 'react-redux';
-import { addTopRated } from '../redux/actions';
+import {
+  addTopRated,
+  addPopular,
+  addUpcoming,
+  addNowPlaying,
+} from '../redux/actions';
 
 const Home = (props) => {
   const [selectedTab, setSelectedTab] = useState('POPULAR');
@@ -23,12 +28,14 @@ const Home = (props) => {
     async function getPopularMovies(page) {
       const popularMoviesResponse = await fetch_movies('POPULAR', page);
       setPopularMovies(popularMoviesResponse);
+      props.addPopular(page, popularMoviesResponse);
     }
     getPopularMovies(page);
 
     async function getNowPlayingMovies(page) {
       const nowPlayingMoviesResponse = await fetch_movies('NOW_PLAYING', page);
       setNowPlayingMovies(nowPlayingMoviesResponse);
+      props.addNowPlaying(page, nowPlayingMoviesResponse);
     }
     getNowPlayingMovies(page);
 
@@ -42,8 +49,10 @@ const Home = (props) => {
     async function getUpcomingMovies(page) {
       const upcomingMoviesResponse = await fetch_movies('UPCOMING', page);
       setUpcomingMovies(upcomingMoviesResponse);
+      props.addUpcoming(page, upcomingMoviesResponse);
     }
     getUpcomingMovies(page);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   // Get popular movies:
@@ -135,5 +144,19 @@ const Home = (props) => {
   );
 };
 
-export default connect(null, { addTopRated })(Home);
+function mapStateToProps(state) {
+  return {
+    popular: state.moviesReducer.popular,
+    nowPlaying: state.moviesReducer.nowPlaying,
+    topRated: state.moviesReducer.topRated,
+    upcoming: state.moviesReducer.upcoming,
+  };
+}
+
+export default connect(mapStateToProps, {
+  addTopRated,
+  addNowPlaying,
+  addPopular,
+  addUpcoming,
+})(Home);
 // export default Home;
