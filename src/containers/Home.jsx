@@ -14,84 +14,89 @@ import {
   addPopular,
   addUpcoming,
   addNowPlaying,
+  setLoading,
 } from '../redux/actions';
 
 const Home = (props) => {
   const [selectedTab, setSelectedTab] = useState('POPULAR');
   const [page, setPage] = useState(1);
-  const [popularMovies, setPopularMovies] = useState({});
-  const [nowPlayingMovies, setNowPlayingMovies] = useState({});
-  const [topRatedMovies, setTopRatedMovies] = useState({});
-  const [upcomingMovies, setUpcomingMovies] = useState({});
 
   useEffect(() => {
     async function getPopularMovies(page) {
       const popularMoviesResponse = await fetch_movies('POPULAR', page);
-      setPopularMovies(popularMoviesResponse);
       props.addPopular(page, popularMoviesResponse);
     }
     getPopularMovies(page);
 
     async function getNowPlayingMovies(page) {
       const nowPlayingMoviesResponse = await fetch_movies('NOW_PLAYING', page);
-      setNowPlayingMovies(nowPlayingMoviesResponse);
       props.addNowPlaying(page, nowPlayingMoviesResponse);
     }
     getNowPlayingMovies(page);
 
     async function getTopRatedMovies(page) {
       const topRatedMoviesResponse = await fetch_movies('TOP_RATED', page);
-      setTopRatedMovies(topRatedMoviesResponse);
       props.addTopRated(page, topRatedMoviesResponse);
     }
     getTopRatedMovies(page);
 
     async function getUpcomingMovies(page) {
       const upcomingMoviesResponse = await fetch_movies('UPCOMING', page);
-      setUpcomingMovies(upcomingMoviesResponse);
       props.addUpcoming(page, upcomingMoviesResponse);
     }
     getUpcomingMovies(page);
+
+    props.setLoading(false);
+
+    return () => {
+      props.setLoading(true);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
-  // Get popular movies:
-  const popularMovieCards = Object.keys(popularMovies).map((item, index) => {
-    return (
-      <Grid key={index} item style={{ display: 'flex' }}>
-        <Cards id={popularMovies[item]['id']} key={index} />
-      </Grid>
-    );
-  });
-
-  // Get now-playing movies:
-  const nowPlayingMovieCards = Object.keys(nowPlayingMovies).map(
-    (item, index) => {
+  // Popular movies card:
+  const popularMovieCards =
+    props.popular[page] &&
+    Object.keys(props.popular[page]).map((item, index) => {
       return (
         <Grid key={index} item style={{ display: 'flex' }}>
-          <Cards id={nowPlayingMovies[item]['id']} key={index} />
+          <Cards id={props.popular[page][item]['id']} key={index} />
         </Grid>
       );
-    }
-  );
+    });
 
-  // Get top-rated movies:
-  const topRatedMovieCards = Object.keys(topRatedMovies).map((item, index) => {
-    return (
-      <Grid key={index} item style={{ display: 'flex' }}>
-        <Cards id={topRatedMovies[item]['id']} key={index} />
-      </Grid>
-    );
-  });
+  // Now-playing movies cards:
+  const nowPlayingMovieCards =
+    props.nowPlaying[page] &&
+    Object.keys(props.nowPlaying[page]).map((item, index) => {
+      return (
+        <Grid key={index} item style={{ display: 'flex' }}>
+          <Cards id={props.nowPlaying[page][item]['id']} key={index} />
+        </Grid>
+      );
+    });
 
-  // Get upcoming movies:
-  const upcomingMovieCards = Object.keys(upcomingMovies).map((item, index) => {
-    return (
-      <Grid key={index} item style={{ display: 'flex' }}>
-        <Cards id={upcomingMovies[item]['id']} key={index} />
-      </Grid>
-    );
-  });
+  // Top-rated movies cards:
+  const topRatedMovieCards =
+    props.topRated[page] &&
+    Object.keys(props.topRated[page]).map((item, index) => {
+      return (
+        <Grid key={index} item style={{ display: 'flex' }}>
+          <Cards id={props.topRated[page][item]['id']} key={index} />
+        </Grid>
+      );
+    });
+
+  // Upcoming movies cards:
+  const upcomingMovieCards =
+    props.upcoming[page] &&
+    Object.keys(props.upcoming[page]).map((item, index) => {
+      return (
+        <Grid key={index} item style={{ display: 'flex' }}>
+          <Cards id={props.upcoming[page][item]['id']} key={index} />
+        </Grid>
+      );
+    });
 
   const handleTabSwitch = (e) => {
     setPage(1);
@@ -120,13 +125,35 @@ const Home = (props) => {
               {(() => {
                 switch (selectedTab) {
                   case 'POPULAR':
-                    return <>{popularMovieCards}</>;
+                    return (
+                      <>
+                        {props.popular[page] ? popularMovieCards : 'Loading...'}
+                      </>
+                    );
                   case 'NOW PLAYING':
-                    return <>{nowPlayingMovieCards}</>;
+                    return (
+                      <>
+                        {props.nowPlaying[page]
+                          ? nowPlayingMovieCards
+                          : 'Loading...'}
+                      </>
+                    );
                   case 'TOP RATED':
-                    return <>{topRatedMovieCards}</>;
+                    return (
+                      <>
+                        {props.topRated[page]
+                          ? topRatedMovieCards
+                          : 'Loading...'}
+                      </>
+                    );
                   case 'UPCOMING':
-                    return <>{upcomingMovieCards}</>;
+                    return (
+                      <>
+                        {props.upcoming[page]
+                          ? upcomingMovieCards
+                          : 'Loading...'}
+                      </>
+                    );
                   default:
                     return null;
                 }
@@ -150,6 +177,7 @@ function mapStateToProps(state) {
     nowPlaying: state.moviesReducer.nowPlaying,
     topRated: state.moviesReducer.topRated,
     upcoming: state.moviesReducer.upcoming,
+    isLoading: state.moviesReducer.isLoading,
   };
 }
 
@@ -158,5 +186,5 @@ export default connect(mapStateToProps, {
   addNowPlaying,
   addPopular,
   addUpcoming,
+  setLoading,
 })(Home);
-// export default Home;

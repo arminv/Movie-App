@@ -3,6 +3,7 @@ import {
   ADD_POPULAR,
   ADD_NOW_PLAYING,
   ADD_UPCOMING,
+  SET_LOADING,
 } from '../actionTypes';
 
 const initialState = {
@@ -41,6 +42,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         upcoming: { ...state.upcoming, [page]: content },
+      };
+    }
+    case SET_LOADING: {
+      const { isLoading } = action.payload;
+      return {
+        ...state,
+        isLoading: isLoading,
       };
     }
     default:

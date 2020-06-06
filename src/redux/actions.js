@@ -3,6 +3,7 @@ import {
   ADD_POPULAR,
   ADD_NOW_PLAYING,
   ADD_UPCOMING,
+  SET_LOADING,
 } from './actionTypes';
 
 export const addTopRated = (page, content) => ({
@@ -35,4 +36,11 @@ export const addNowPlaying = (page, content) => ({
     page,
     content,
   },
+});
+
+export const setLoading = (isLoading) => ({
+  type: SET_LOADING,
+  payload: {
+    isLoading,
+  }
 });
