@@ -163,7 +163,7 @@ const Movie = ({ match }) => {
             </Grid>
             {images ? (
               <Grid item xs={12}>
-                <ImageGallery items={imageGallery} />;
+                <ImageGallery items={imageGallery} />
               </Grid>
             ) : null}
           </Grid>

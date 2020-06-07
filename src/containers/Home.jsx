@@ -25,26 +25,40 @@ const Home = (props) => {
 
   useEffect(() => {
     async function getPopularMovies(page) {
-      const popularMoviesResponse = await fetch_movies('POPULAR', page);
-      props.addPopular(page, popularMoviesResponse);
+      const [popularMoviesResponse, popularTotalPages] = await fetch_movies(
+        'POPULAR',
+        page
+      );
+
+      props.addPopular(page, popularMoviesResponse, popularTotalPages);
     }
     getPopularMovies(page);
 
     async function getNowPlayingMovies(page) {
-      const nowPlayingMoviesResponse = await fetch_movies('NOW_PLAYING', page);
-      props.addNowPlaying(page, nowPlayingMoviesResponse);
+      const [
+        nowPlayingMoviesResponse,
+        nowPlayingTotalPages,
+      ] = await fetch_movies('NOW_PLAYING', page);
+
+      props.addNowPlaying(page, nowPlayingMoviesResponse, nowPlayingTotalPages);
     }
     getNowPlayingMovies(page);
 
     async function getTopRatedMovies(page) {
-      const topRatedMoviesResponse = await fetch_movies('TOP_RATED', page);
-      props.addTopRated(page, topRatedMoviesResponse);
+      const [topRatedMoviesResponse, topRatedTotalPages] = await fetch_movies(
+        'TOP_RATED',
+        page
+      );
+      props.addTopRated(page, topRatedMoviesResponse, topRatedTotalPages);
     }
     getTopRatedMovies(page);
 
     async function getUpcomingMovies(page) {
-      const upcomingMoviesResponse = await fetch_movies('UPCOMING', page);
-      props.addUpcoming(page, upcomingMoviesResponse);
+      const [upcomingMoviesResponse, upcomingTotalPages] = await fetch_movies(
+        'UPCOMING',
+        page
+      );
+      props.addUpcoming(page, upcomingMoviesResponse, upcomingTotalPages);
     }
     getUpcomingMovies(page);
 
@@ -53,6 +67,7 @@ const Home = (props) => {
     return () => {
       props.setLoading(true);
     };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
@@ -164,14 +179,47 @@ const Home = (props) => {
             </Grid>
           </Grid>
         </Grid>
-        <Pagination
-          size='large'
-          color='primary'
-          variant='outlined'
-          count={500}
-          page={page}
-          onChange={(event, value) => setPage(value)}
-        />
+
+        {selectedTab === 'POPULAR' && (
+          <Pagination
+            size='large'
+            color='primary'
+            variant='outlined'
+            count={props.popular.totalPages}
+            page={page}
+            onChange={(event, value) => setPage(value)}
+          />
+        )}
+        {selectedTab === 'NOW PLAYING' && (
+          <Pagination
+            size='large'
+            color='primary'
+            variant='outlined'
+            count={props.nowPlaying.totalPages}
+            page={page}
+            onChange={(event, value) => setPage(value)}
+          />
+        )}
+        {selectedTab === 'TOP RATED' && (
+          <Pagination
+            size='large'
+            color='primary'
+            variant='outlined'
+            count={props.topRated.totalPages}
+            page={page}
+            onChange={(event, value) => setPage(value)}
+          />
+        )}
+        {selectedTab === 'UPCOMING' && (
+          <Pagination
+            size='large'
+            color='primary'
+            variant='outlined'
+            count={props.upcoming.totalPages}
+            page={page}
+            onChange={(event, value) => setPage(value)}
+          />
+        )}
       </Container>
     </div>
   );

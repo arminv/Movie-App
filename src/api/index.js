@@ -65,7 +65,7 @@ export const fetch_movies = async (type, page) => {
         headers: HEADERS,
       })
         .then((response) => {
-          return response.data.results;
+          return [response.data.results, response.data.total_pages];
         })
         .catch((error) => {
           console.log(error);
@@ -79,7 +79,7 @@ export const fetch_movies = async (type, page) => {
         headers: HEADERS,
       })
         .then((response) => {
-          return response.data.results;
+          return [response.data.results, response.data.total_pages];
         })
         .catch((error) => {
           console.log(error);
@@ -93,7 +93,7 @@ export const fetch_movies = async (type, page) => {
         headers: HEADERS,
       })
         .then((response) => {
-          return response.data.results;
+          return [response.data.results, response.data.total_pages];
         })
         .catch((error) => {
           console.log(error);
@@ -107,7 +107,7 @@ export const fetch_movies = async (type, page) => {
         headers: HEADERS,
       })
         .then((response) => {
-          return response.data.results;
+          return [response.data.results, response.data.total_pages];
         })
         .catch((error) => {
           console.log(error);

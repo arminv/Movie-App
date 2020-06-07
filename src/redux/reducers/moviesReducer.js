@@ -17,31 +17,31 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case ADD_TOP_RATED: {
-      const { content, page } = action.payload;
+      const { content, page, totalPages } = action.payload;
       return {
         ...state,
-        topRated: { ...state.topRated, [page]: content },
+        topRated: { ...state.topRated, [page]: content, totalPages },
       };
     }
     case ADD_POPULAR: {
-      const { content, page } = action.payload;
+      const { content, page, totalPages } = action.payload;
       return {
         ...state,
-        popular: { ...state.popular, [page]: content },
+        popular: { ...state.popular, [page]: content, totalPages },
       };
     }
     case ADD_NOW_PLAYING: {
-      const { content, page } = action.payload;
+      const { content, page, totalPages } = action.payload;
       return {
         ...state,
-        nowPlaying: { ...state.nowPlaying, [page]: content },
+        nowPlaying: { ...state.nowPlaying, [page]: content, totalPages },
       };
     }
     case ADD_UPCOMING: {
-      const { content, page } = action.payload;
+      const { content, page, totalPages } = action.payload;
       return {
         ...state,
-        upcoming: { ...state.upcoming, [page]: content },
+        upcoming: { ...state.upcoming, [page]: content, totalPages },
       };
     }
     case SET_LOADING: {
