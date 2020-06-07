@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
+import Link from '@material-ui/core/Link';
 
 // const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/original';
@@ -95,22 +96,39 @@ const Movie = ({ match }) => {
             <Grid item xs={3}>
               <Card className={classes.card}>
                 <CardActionArea>
-                  <CardMedia
-                    className={classes.media}
-                    component='img'
-                    alt={`${movie.title}`}
-                    height='500'
-                    image={`${BASE_IMG_URL}${movie.poster_path}`}
-                    title={`${movie.title}`}
-                    onClick={() => {}}
-                  />
+                  {movie.homepage ? (
+                    <Link
+                      target='_blank'
+                      href={movie.homepage}
+                      rel='noopener noreferrer'
+                    >
+                      <CardMedia
+                        className={classes.media}
+                        component='img'
+                        alt={`${movie.title}`}
+                        height='500'
+                        image={`${BASE_IMG_URL}${movie.poster_path}`}
+                        title={`${movie.title}`}
+                        onClick={() => {}}
+                      />
+                    </Link>
+                  ) : (
+                    <CardMedia
+                      className={classes.media}
+                      component='img'
+                      alt={`${movie.title}`}
+                      height='500'
+                      image={`${BASE_IMG_URL}${movie.poster_path}`}
+                      title={`${movie.title}`}
+                      onClick={() => {}}
+                    />
+                  )}
                 </CardActionArea>
               </Card>
             </Grid>
             <Grid item xs={9}>
               <h4>{movie.overview}</h4>
               <br />
-              <p>Homepage: {movie.homepage}</p>
               <p>Budget: {movie.budget}</p>
               {/* <p>Genres: {movie.genres}</p> */}
               <p>Runtime: {movie.runtime}</p>
