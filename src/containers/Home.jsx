@@ -17,6 +17,8 @@ import {
   setLoading,
 } from '../redux/actions';
 
+import './Home.css';
+
 const Home = (props) => {
   const [selectedTab, setSelectedTab] = useState('POPULAR');
   const [page, setPage] = useState(1);
@@ -106,6 +108,7 @@ const Home = (props) => {
   return (
     <div className='App'>
       <ButtonGroup
+        className='tabs'
         variant='contained'
         color='primary'
         aria-label='contained primary button group'
@@ -162,6 +165,9 @@ const Home = (props) => {
           </Grid>
         </Grid>
         <Pagination
+          size='large'
+          color='primary'
+          variant='outlined'
           count={500}
           page={page}
           onChange={(event, value) => setPage(value)}

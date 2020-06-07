@@ -17,7 +17,7 @@ import Chip from '@material-ui/core/Chip';
 const useStyles = makeStyles({
   root: {
     maxWidth: '15vw',
-    border: '2px solid lightblue',
+    border: '2px solid darkblue',
   },
   media: {
     maxWidth: '100%',

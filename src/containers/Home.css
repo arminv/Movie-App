@@ -1,0 +1,22 @@
+.MuiPagination-ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 5vh !important;
+  /* background-color: rgb(255, 255, 255) !important; */
+}
+
+.MuiPaginationItem-root {
+  color: white !important;
+}
+
+.tabs{
+  margin-top: 5vh !important;
+  margin-bottom: 3vh;
+}
+
+h1{
+  color: whitesmoke;
+  margin-bottom: 5vh;
+}

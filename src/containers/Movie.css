@@ -1,4 +1,4 @@
-.container {
+/* .container {
   top: 0px;
   left: 0px;
   right: 0px;
@@ -6,23 +6,41 @@
   display: block;
   background-size: cover;
   background-position: center center;
-  height: 100vh;
+  height: 160vh;
   z-index: 1;
   -webkit-filter: blur(9px);
   -moz-filter: blur(9px);
   -o-filter: blur(9px);
   -ms-filter: blur(9px);
   filter: blur(9px);
-}
+} */
 
 .movie {
-  background-color: rgba(0, 0, 0, 0.8);
-  position: absolute;
+  margin-top: -20px;
+  background-size: 100vw;
+  background-position: center center;
+  background-attachment: fixed;
   color: white;
-  /* height: 100vh; */
-  top: 50px;
-  left: 100px;
-  right: 100px;
-  bottom: 50px;
-  z-index: 2;
+  min-height: 100vmax;
+}
+
+.heading{
+  text-align: center;
+}
+
+.heading > h1 {
+  color: rgb(255, 174, 0);
+}
+
+.heading > h3 {
+  color: rgb(255, 38, 0);
+}
+
+.content {
+  padding: 80px;
+  margin: 0px 350px;
+  min-height: 100vmax;
+  background-color: rgba(0, 0, 0, 0.733);
+  text-align: left;
+  line-height: 30px;
 }
