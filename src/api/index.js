@@ -24,6 +24,19 @@ export const fetch_by_id = async (type, id) => {
           console.log(error);
         });
     }
+    case 'IMAGES': {
+      return await axios({
+        method: 'GET',
+        url: `${BASE_URL}/3/movie/${id}/images?api_key=${API_KEY}`,
+        headers: HEADERS,
+      })
+        .then((response) => {
+          return response.data.backdrops;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
     case 'CAST': {
       return await axios({
         method: 'GET',

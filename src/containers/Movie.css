@@ -1,6 +1,8 @@
+@import '~react-image-gallery/styles/css/image-gallery.css';
+
 .movie {
   margin-top: -20px;
-  background-size: 100vw;
+  background-size: 100vmax;
   background-position: center center;
   background-attachment: fixed;
   color: white;
@@ -20,10 +22,10 @@
 }
 
 .content {
-  padding: 80px;
-  margin: 0px 350px;
+  padding: 5vmax;
+  margin: 0vw 15vw;
   min-height: 100vmax;
-  background-color: rgba(0, 0, 0, 0.815);
+  background-color: rgba(0, 0, 0, 0.863);
   text-align: left;
   line-height: 30px;
 }

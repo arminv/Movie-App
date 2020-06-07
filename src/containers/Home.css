@@ -11,12 +11,16 @@
   color: white !important;
 }
 
-.tabs{
+.tabs {
   margin-top: 5vh !important;
   margin-bottom: 3vh;
 }
 
-h1{
+h1 {
   color: whitesmoke;
   margin-bottom: 5vh;
+}
+
+.cards:hover {
+  transform: translate(0%, -1%);
 }

@@ -61,7 +61,7 @@ const Home = (props) => {
     props.popular[page] &&
     Object.keys(props.popular[page]).map((item, index) => {
       return (
-        <Grid key={index} item style={{ display: 'flex' }}>
+        <Grid className='cards' key={index} item style={{ display: 'flex' }}>
           <Cards id={props.popular[page][item]['id']} key={index} />
         </Grid>
       );
@@ -72,7 +72,7 @@ const Home = (props) => {
     props.nowPlaying[page] &&
     Object.keys(props.nowPlaying[page]).map((item, index) => {
       return (
-        <Grid key={index} item style={{ display: 'flex' }}>
+        <Grid className='cards' key={index} item style={{ display: 'flex' }}>
           <Cards id={props.nowPlaying[page][item]['id']} key={index} />
         </Grid>
       );
@@ -83,7 +83,7 @@ const Home = (props) => {
     props.topRated[page] &&
     Object.keys(props.topRated[page]).map((item, index) => {
       return (
-        <Grid key={index} item style={{ display: 'flex' }}>
+        <Grid className='cards' key={index} item style={{ display: 'flex' }}>
           <Cards id={props.topRated[page][item]['id']} key={index} />
         </Grid>
       );
@@ -94,7 +94,7 @@ const Home = (props) => {
     props.upcoming[page] &&
     Object.keys(props.upcoming[page]).map((item, index) => {
       return (
-        <Grid key={index} item style={{ display: 'flex' }}>
+        <Grid className='cards' key={index} item style={{ display: 'flex' }}>
           <Cards id={props.upcoming[page][item]['id']} key={index} />
         </Grid>
       );

@@ -10,13 +10,18 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import Link from '@material-ui/core/Link';
 
+import ImageGallery from 'react-image-gallery';
+import 'react-image-gallery/styles/css/image-gallery.css';
+
 // const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/original';
+const BASE_IMG_SMALL_URL = 'https://image.tmdb.org/t/p/w185';
+const BASE_IMG_LARGE_URL = 'https://image.tmdb.org/t/p/w1280';
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: '15vw',
-    border: '2px solid darkblue',
+    maxWidth: '20vw',
+    border: '2px solid rgba(255, 174, 0, 0.7)',
   },
   media: {
     maxWidth: '100%',
@@ -27,7 +32,13 @@ const useStyles = makeStyles({
 const Movie = ({ match }) => {
   const id = match.params.id;
   const [movie, setMovie] = useState({});
+  const [images, setImages] = useState({});
   const [cast, setCast] = useState({});
+
+  useEffect(() => {
+    // Scroll to top when page loads:
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     async function getMovie(id) {
@@ -63,9 +74,16 @@ const Movie = ({ match }) => {
     }
     getMovie(id);
 
+    async function getImages(id) {
+      const images = await fetch_by_id('IMAGES', id);
+      setImages({
+        images,
+      });
+    }
+    getImages(id);
+
     async function getCast(id) {
       const cast = await fetch_by_id('CAST', id);
-
       setCast({
         cast,
       });
@@ -73,8 +91,15 @@ const Movie = ({ match }) => {
     getCast(id);
   }, [id]);
 
-  //   console.log('MOVIE:', movie);
-  // console.log('CAST:', cast);
+  const imageGallery = [];
+  for (let item in images.images) {
+    imageGallery.push({
+      original: `${BASE_IMG_LARGE_URL}/${images.images[item]['file_path']}`,
+      thumbnail: `${BASE_IMG_SMALL_URL}/${images.images[item]['file_path']}`,
+    });
+  }
+
+  console.log('CAST:', cast);
 
   const classes = useStyles();
   return (
@@ -136,6 +161,11 @@ const Movie = ({ match }) => {
               <p>Release Date: {movie.release_date}</p>
               <p>Vote Average: {movie.vote_average}</p>
             </Grid>
+            {images ? (
+              <Grid item xs={12}>
+                <ImageGallery items={imageGallery} />;
+              </Grid>
+            ) : null}
           </Grid>
         </div>
       </div>
