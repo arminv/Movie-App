@@ -16,8 +16,11 @@ import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: '15vw',
+    maxWidth: '15vmax',
     border: '2px solid darkblue',
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
   },
   media: {
     maxWidth: '100%',
@@ -60,14 +63,7 @@ export const Cards = ({ id }) => {
   const classes = useStyles();
 
   return (
-    <Card
-      className={classes.root}
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        flexDirection: 'column',
-      }}
-    >
+    <Card className={classes.root}>
       <CardActionArea>
         <LinkRoute to={`movie/${id}`} style={{ textDecoration: 'none' }}>
           <CardMedia
@@ -75,7 +71,11 @@ export const Cards = ({ id }) => {
             component='img'
             alt={`${movie.title}`}
             height='500'
-            image={`${BASE_IMG_URL}${movie.poster_path}`}
+            image={
+              movie.poster_path
+                ? `${BASE_IMG_URL}${movie.poster_path}`
+                : 'https://betravingknows.com/wp-content/uploads/2017/06/video-movie-placeholder-image-grey.png'
+            }
             title={`${movie.title}`}
             onClick={() => {}}
           />

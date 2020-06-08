@@ -7,7 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: url('../src/assets/cinema.jpg');
   background-attachment: fixed;
-  background-size: 100vw;
+  background-size: 100% 100%;
 }
 
 code {

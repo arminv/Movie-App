@@ -9,6 +9,8 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import Link from '@material-ui/core/Link';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
@@ -22,10 +24,33 @@ const useStyles = makeStyles({
   card: {
     maxWidth: '20vw',
     border: '2px solid rgba(255, 174, 0, 0.7)',
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
   },
   media: {
     maxWidth: '100%',
     height: 'auto',
+  },
+  castCard: {
+    maxWidth: '10vmax',
+    border: '2px solid rgba(255, 174, 0, 0.7)',
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+  },
+  castMedia: {
+    maxWidth: '100%',
+    height: 'auto',
+  },
+  castName: {
+    fontSize: '16px',
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  castCharacter: {
+    fontSize: '13px',
+    textAlign: 'center',
   },
 });
 
@@ -99,9 +124,57 @@ const Movie = ({ match }) => {
     });
   }
 
-  console.log('CAST:', cast);
-
   const classes = useStyles();
+
+  const castImages = [];
+  for (let person in cast.cast) {
+    castImages.push(
+      <Grid
+        item
+        xs={6}
+        sm={3}
+        md={2}
+        lg={2}
+        xl={2}
+        style={{ display: 'flex' }}
+        key={person}
+      >
+        <Card className={classes.castCard}>
+          <CardMedia
+            className={classes.castMedia}
+            component='img'
+            alt={`${movie.title}`}
+            height='500'
+            image={
+              cast.cast[person]['profile_path']
+                ? `${BASE_IMG_URL}${cast.cast[person]['profile_path']}`
+                : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+            }
+            title={`${movie.title}`}
+          />
+          <CardContent>
+            <Typography
+              gutterBottom
+              variant='h6'
+              component='h2'
+              className={classes.castName}
+            >
+              {cast.cast[person]['name']}
+            </Typography>
+            <Typography
+              gutterBottom
+              variant='subtitle2'
+              component='h2'
+              className={classes.castCharacter}
+            >
+              {cast.cast[person]['character']}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+    );
+  }
+
   return (
     <div>
       <div
@@ -113,7 +186,7 @@ const Movie = ({ match }) => {
         <div className='content'>
           <div className='heading'>
             <h1>{movie.title}</h1>
-            {movie.tagline ? <h3>"{movie.tagline}"</h3> : ''}
+            {movie.tagline ? <h3>"{movie.tagline}"</h3> : <></>}
           </div>
           <br />
           <br />
@@ -132,9 +205,12 @@ const Movie = ({ match }) => {
                         component='img'
                         alt={`${movie.title}`}
                         height='500'
-                        image={`${BASE_IMG_URL}${movie.poster_path}`}
+                        image={
+                          movie.poster_path
+                            ? `${BASE_IMG_URL}${movie.poster_path}`
+                            : 'https://critics.io/img/movies/poster-placeholder.png'
+                        }
                         title={`${movie.title}`}
-                        onClick={() => {}}
                       />
                     </Link>
                   ) : (
@@ -143,9 +219,12 @@ const Movie = ({ match }) => {
                       component='img'
                       alt={`${movie.title}`}
                       height='500'
-                      image={`${BASE_IMG_URL}${movie.poster_path}`}
+                      image={
+                        movie.poster_path
+                          ? `${BASE_IMG_URL}${movie.poster_path}`
+                          : 'https://critics.io/img/movies/poster-placeholder.png'
+                      }
                       title={`${movie.title}`}
-                      onClick={() => {}}
                     />
                   )}
                 </CardActionArea>
@@ -161,11 +240,29 @@ const Movie = ({ match }) => {
               <p>Release Date: {movie.release_date}</p>
               <p>Vote Average: {movie.vote_average}</p>
             </Grid>
-            {images ? (
-              <Grid item xs={12}>
-                <ImageGallery items={imageGallery} />
-              </Grid>
-            ) : null}
+            {images.images && Object.keys(images.images).length !== 0 ? (
+              <>
+                <h2>Gallery:</h2>
+                <Grid item xs={12}>
+                  <ImageGallery items={imageGallery} />
+                </Grid>
+              </>
+            ) : (
+              <></>
+            )}
+            <Grid>
+              <h2>Cast:</h2>
+              {cast.cast ? (
+                <Grid
+                  container
+                  justify='center'
+                  spacing={3}
+                  alignItems='stretch'
+                >
+                  {castImages}
+                </Grid>
+              ) : null}
+            </Grid>
           </Grid>
         </div>
       </div>

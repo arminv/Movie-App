@@ -2,9 +2,10 @@
 
 .movie {
   margin-top: -20px;
-  background-size: 100vmax;
+  background-size: 100% 100%;
   background-position: center center;
   background-attachment: fixed;
+  background-repeat: auto;
   color: white;
   min-height: 100vmax;
 }
