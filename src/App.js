@@ -9,8 +9,8 @@ const App = () => {
   return (
     <div className='App'>
       <Switch>
-        <Route path='/movie/:id' component={Movie}></Route>
-        <Route path='/' component={Home}></Route>
+        <Route exact path='/movie/:id' component={Movie}></Route>
+        <Route exact path='/' component={Home}></Route>
       </Switch>
       {/* <Home /> */}
       {/* <Movie id={76341} /> */}

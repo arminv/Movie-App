@@ -240,42 +240,42 @@ const Movie = () => {
             <Grid item xs={9}>
               <h4>{movie.overview}</h4>
               <br />
-              <p>
+              <span>
                 <Chip
                   label={`Budget : ${movie.budget}`}
                   icon={<LocalAtmIcon />}
                   size='small'
                 />
-              </p>
+              </span>
               {/* <p>Genres: {movie.genres}</p> */}
-              <p>
+              <span>
                 <Chip
                   label={`Revenue : ${movie.revenue}`}
                   icon={<AttachMoneyIcon />}
                   size='small'
                 />
-              </p>
-              <p>
+              </span>
+              <span>
                 <Chip
                   label={`Runtime : ${movie.runtime}`}
                   icon={<TimerIcon />}
                   size='small'
                 />
-              </p>
-              <p>
+              </span>
+              <span>
                 <Chip
                   label={`Release Date : ${movie.release_date}`}
                   icon={<TodayIcon />}
                   size='small'
                 />
-              </p>
-              <p>
+              </span>
+              <span>
                 <Chip
                   label={`Vote Average : ${movie.vote_average}`}
                   icon={<ThumbUpIcon />}
                   size='small'
                 />
-              </p>
+              </span>
             </Grid>
             {images.images && Object.keys(images.images).length !== 0 ? (
               <>
