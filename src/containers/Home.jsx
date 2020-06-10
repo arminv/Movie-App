@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import { ButtonGroup, Button } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
@@ -20,8 +21,11 @@ import {
 import './Home.css';
 
 const Home = (props) => {
+  const { myPage } = useParams();
+  const history = useHistory();
+
   const [selectedTab, setSelectedTab] = useState('POPULAR');
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(parseInt(myPage) ? parseInt(myPage) : 1);
 
   useEffect(() => {
     async function getPopularMovies(page) {
@@ -115,9 +119,14 @@ const Home = (props) => {
       );
     });
 
-  const handleTabSwitch = (e) => {
-    setPage(1);
-    setSelectedTab(e.target.innerText);
+  const handleTabSwitch = (event) => {
+    handlePageChange(event, 1);
+    setSelectedTab(event.target.innerText);
+  };
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
+    history.push(`/${value}`);
   };
 
   return (
@@ -187,7 +196,7 @@ const Home = (props) => {
             variant='outlined'
             count={props.popular.totalPages}
             page={page}
-            onChange={(event, value) => setPage(value)}
+            onChange={(event, value) => handlePageChange(event, value)}
           />
         )}
         {selectedTab === 'NOW PLAYING' && (
@@ -197,7 +206,7 @@ const Home = (props) => {
             variant='outlined'
             count={props.nowPlaying.totalPages}
             page={page}
-            onChange={(event, value) => setPage(value)}
+            onChange={(event, value) => handlePageChange(event, value)}
           />
         )}
         {selectedTab === 'TOP RATED' && (
@@ -207,7 +216,7 @@ const Home = (props) => {
             variant='outlined'
             count={props.topRated.totalPages}
             page={page}
-            onChange={(event, value) => setPage(value)}
+            onChange={(event, value) => handlePageChange(event, value)}
           />
         )}
         {selectedTab === 'UPCOMING' && (
@@ -217,7 +226,7 @@ const Home = (props) => {
             variant='outlined'
             count={props.upcoming.totalPages}
             page={page}
-            onChange={(event, value) => setPage(value)}
+            onChange={(event, value) => handlePageChange(event, value)}
           />
         )}
       </Container>
