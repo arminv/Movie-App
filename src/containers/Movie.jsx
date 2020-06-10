@@ -11,6 +11,12 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Link from '@material-ui/core/Link';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import Chip from '@material-ui/core/Chip';
+import LocalAtmIcon from '@material-ui/icons/LocalAtm';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import TimerIcon from '@material-ui/icons/Timer';
+import TodayIcon from '@material-ui/icons/Today';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
@@ -233,12 +239,42 @@ const Movie = ({ match }) => {
             <Grid item xs={9}>
               <h4>{movie.overview}</h4>
               <br />
-              <p>Budget: {movie.budget}</p>
+              <p>
+                <Chip
+                  label={`Budget : ${movie.budget}`}
+                  icon={<LocalAtmIcon />}
+                  size='small'
+                />
+              </p>
               {/* <p>Genres: {movie.genres}</p> */}
-              <p>Runtime: {movie.runtime}</p>
-              <p>Revenue: {movie.revenue}</p>
-              <p>Release Date: {movie.release_date}</p>
-              <p>Vote Average: {movie.vote_average}</p>
+              <p>
+                <Chip
+                  label={`Revenue : ${movie.revenue}`}
+                  icon={<AttachMoneyIcon />}
+                  size='small'
+                />
+              </p>
+              <p>
+                <Chip
+                  label={`Runtime : ${movie.runtime}`}
+                  icon={<TimerIcon />}
+                  size='small'
+                />
+              </p>
+              <p>
+                <Chip
+                  label={`Release Date : ${movie.release_date}`}
+                  icon={<TodayIcon />}
+                  size='small'
+                />
+              </p>
+              <p>
+                <Chip
+                  label={`Vote Average : ${movie.vote_average}`}
+                  icon={<ThumbUpIcon />}
+                  size='small'
+                />
+              </p>
             </Grid>
             {images.images && Object.keys(images.images).length !== 0 ? (
               <>
