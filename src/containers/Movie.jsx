@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { fetch_by_id } from '../api/index';
+
 import './Movie.css';
 
 import { makeStyles } from '@material-ui/core/styles';

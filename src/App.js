@@ -1,9 +1,10 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import './App.css';
 import Home from './containers/Home';
 import Movie from './containers/Movie';
+
+import './App.css';
 
 const App = () => {
   return (
@@ -12,8 +13,6 @@ const App = () => {
         <Route exact path='/movie/:id' component={Movie}></Route>
         <Route exact path='/:myPage?' component={Home}></Route>
       </Switch>
-      {/* <Home /> */}
-      {/* <Movie id={76341} /> */}
     </div>
   );
 };

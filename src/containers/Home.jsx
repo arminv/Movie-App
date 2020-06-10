@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+
+import { fetch_movies } from '../api/index';
+
 import Grid from '@material-ui/core/Grid';
 import { ButtonGroup, Button } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import { Pagination } from '@material-ui/lab';
-
-import { fetch_movies } from '../api/index';
 
 import { Cards } from '../components/Cards';
 
