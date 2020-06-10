@@ -131,6 +131,14 @@ const Movie = () => {
     });
   }
 
+  const minutesToHours = (runtime) => {
+    let hrs = runtime / 60;
+    let mins = (hrs - Math.floor(hrs)) * 60;
+    let remHrs = hrs.toFixed(0);
+    let remMins = Math.round(mins);
+    return remHrs + 'h ' + remMins + 'm';
+  };
+
   const classes = useStyles();
 
   const castImages = [];
@@ -242,7 +250,15 @@ const Movie = () => {
               <br />
               <span>
                 <Chip
-                  label={`Budget : ${movie.budget}`}
+                  label={
+                    movie.budget
+                      ? `Budget : ${movie.budget.toLocaleString('en-US', {
+                          style: 'currency',
+                          currency: 'USD',
+                          minimumFractionDigits: 0,
+                        })}`
+                      : ''
+                  }
                   icon={<LocalAtmIcon />}
                   size='small'
                 />
@@ -250,14 +266,22 @@ const Movie = () => {
               {/* <p>Genres: {movie.genres}</p> */}
               <span>
                 <Chip
-                  label={`Revenue : ${movie.revenue}`}
+                  label={
+                    movie.revenue
+                      ? `Revenue : ${movie.revenue.toLocaleString('en-US', {
+                          style: 'currency',
+                          currency: 'USD',
+                          minimumFractionDigits: 0,
+                        })}`
+                      : ''
+                  }
                   icon={<AttachMoneyIcon />}
                   size='small'
                 />
               </span>
               <span>
                 <Chip
-                  label={`Runtime : ${movie.runtime}`}
+                  label={`Runtime : ${minutesToHours(movie.runtime)}`}
                   icon={<TimerIcon />}
                   size='small'
                 />
