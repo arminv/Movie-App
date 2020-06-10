@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { fetch_by_id } from '../api/index';
 import './Movie.css';
@@ -60,8 +61,8 @@ const useStyles = makeStyles({
   },
 });
 
-const Movie = ({ match }) => {
-  const id = match.params.id;
+const Movie = () => {
+  const { id } = useParams();
   const [movie, setMovie] = useState({});
   const [images, setImages] = useState({});
   const [cast, setCast] = useState({});
