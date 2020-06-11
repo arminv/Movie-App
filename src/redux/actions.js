@@ -4,6 +4,7 @@ import {
   ADD_NOW_PLAYING,
   ADD_UPCOMING,
   SET_LOADING,
+  SET_LAST_PAGE,
 } from './actionTypes';
 
 export const addTopRated = (page, content, totalPages) => ({
@@ -46,5 +47,12 @@ export const setLoading = (isLoading) => ({
   type: SET_LOADING,
   payload: {
     isLoading,
+  },
+});
+
+export const setLastPage = (lastPage) => ({
+  type: SET_LAST_PAGE,
+  payload: {
+    lastPage,
   },
 });
