@@ -1,5 +1,6 @@
 **TODO:**
 
+- Change the color/styling of a selectedTab
 - Add the last tab visited to the store and use for router history
 - Add reference to MOVIE DB website (licence)
 - Add reommendations to the bottom of Movie page (based on current page, from Movie DB API)

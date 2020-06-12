@@ -17,6 +17,7 @@ import {
   addUpcoming,
   addNowPlaying,
   setLoading,
+  setLastPage,
 } from '../redux/actions';
 
 import './Home.css';
@@ -25,7 +26,7 @@ const Home = (props) => {
   const { myPage } = useParams();
   const history = useHistory();
 
-  const [selectedTab, setSelectedTab] = useState('POPULAR');
+  const selectedTab = props.lastPage;
   const [page, setPage] = useState(parseInt(myPage) ? parseInt(myPage) : 1);
 
   useEffect(() => {
@@ -122,7 +123,7 @@ const Home = (props) => {
 
   const handleTabSwitch = (event) => {
     handlePageChange(event, 1);
-    setSelectedTab(event.target.innerText);
+    props.setLastPage(event.target.innerText);
   };
 
   const handlePageChange = (event, value) => {
@@ -242,6 +243,7 @@ function mapStateToProps(state) {
     topRated: state.moviesReducer.topRated,
     upcoming: state.moviesReducer.upcoming,
     isLoading: state.moviesReducer.isLoading,
+    lastPage: state.lastPageReducer.lastPage,
   };
 }
 
@@ -251,4 +253,5 @@ export default connect(mapStateToProps, {
   addPopular,
   addUpcoming,
   setLoading,
+  setLastPage,
 })(Home);
