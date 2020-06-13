@@ -118,17 +118,15 @@ export const fetch_movies = async (type, page) => {
   }
 };
 
-// -----------------------------------
-// TODO:
+// SEARCH MOVIES:
 export const search_movies_by_name = async (query) => {
   return await axios({
     method: 'GET',
-    url: `${BASE_URL}/3/search/company?api_key=${API_KEY}&query=${query}`,
+    url: `${BASE_URL}/3/search/movie?api_key=${API_KEY}&query=${query}`,
     headers: HEADERS,
   })
     .then((response) => {
-      // console.log('fetch_all_countries -> response', response);
-      return response;
+      return response.data.results;
     })
     .catch((error) => {
       console.log(error);

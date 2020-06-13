@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link as LinkRoute } from 'react-router-dom';
 import { throttle } from 'lodash';
+
+import { search_movies_by_name } from '../api/index';
 
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -82,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navbar() {
+const Navbar = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -91,11 +93,12 @@ export default function Navbar() {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   // Throttle the search via lodash:
-  const throttledSearch = throttle((value) => {
-    console.log(value);
+  const throttledSearch = throttle(async (query) => {
+    const searchResults = await search_movies_by_name(query);
+    console.log('Query:', query, 'SearchResults:', searchResults);
   }, 3000);
-  const handleSearch = (value) => {
-    throttledSearch(value);
+  const handleSearch = (query) => {
+    throttledSearch(query);
   };
 
   const handleProfileMenuOpen = (event) => {
@@ -242,4 +245,6 @@ export default function Navbar() {
       {renderMenu}
     </div>
   );
-}
+};
+
+export default Navbar;
