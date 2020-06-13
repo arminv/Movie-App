@@ -5,6 +5,8 @@ import {
   ADD_UPCOMING,
   SET_LOADING,
   SET_LAST_PAGE,
+  SET_SEARCH_QUERY,
+  SET_SEARCH_RESULTS,
 } from './actionTypes';
 
 export const addTopRated = (page, content, totalPages) => ({
@@ -54,5 +56,19 @@ export const setLastPage = (lastPage) => ({
   type: SET_LAST_PAGE,
   payload: {
     lastPage,
+  },
+});
+
+export const setSearchQuery = (searchQuery) => ({
+  type: SET_SEARCH_QUERY,
+  payload: {
+    searchQuery,
+  },
+});
+
+export const setSearchResults = (searchResults) => ({
+  type: SET_SEARCH_RESULTS,
+  payload: {
+    searchResults,
   },
 });

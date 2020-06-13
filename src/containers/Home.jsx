@@ -3,13 +3,6 @@ import { useParams, useHistory } from 'react-router-dom';
 
 import { fetch_movies } from '../api/index';
 
-import Grid from '@material-ui/core/Grid';
-import { ButtonGroup, Button } from '@material-ui/core';
-import Container from '@material-ui/core/Container';
-import { Pagination } from '@material-ui/lab';
-
-import { Cards } from '../components/Cards';
-
 import { connect } from 'react-redux';
 import {
   addTopRated,
@@ -19,6 +12,13 @@ import {
   setLoading,
   setLastPage,
 } from '../redux/actions';
+
+import Grid from '@material-ui/core/Grid';
+import { ButtonGroup, Button } from '@material-ui/core';
+import Container from '@material-ui/core/Container';
+import { Pagination } from '@material-ui/lab';
+
+import { Cards } from '../components/Cards';
 
 import './Home.css';
 

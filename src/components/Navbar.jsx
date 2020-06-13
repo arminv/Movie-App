@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link as LinkRoute } from 'react-router-dom';
 import { throttle } from 'lodash';
 
 import { search_movies_by_name } from '../api/index';
+
+import { connect } from 'react-redux';
+import { setSearchQuery, setSearchResults } from '../redux/actions';
 
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -84,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Navbar = () => {
+const Navbar = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -95,7 +98,9 @@ const Navbar = () => {
   // Throttle the search via lodash:
   const throttledSearch = throttle(async (query) => {
     const searchResults = await search_movies_by_name(query);
-    console.log('Query:', query, 'SearchResults:', searchResults);
+    props.setSearchQuery(query);
+    props.setSearchResults(searchResults);
+    // console.log('Query:', query, 'SearchResults:', searchResults);
   }, 3000);
   const handleSearch = (query) => {
     throttledSearch(query);
@@ -247,4 +252,8 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default connect('', {
+  setSearchQuery,
+  setSearchResults,
+})(Navbar);
+// export default Navbar;
