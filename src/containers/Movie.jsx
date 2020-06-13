@@ -60,6 +60,9 @@ const useStyles = makeStyles({
     fontSize: '13px',
     textAlign: 'center',
   },
+  infoChips: {
+    backgroundColor: '#b7e2ed',
+  },
 });
 
 const Movie = () => {
@@ -195,7 +198,12 @@ const Movie = () => {
     movie.genres &&
     Object.keys(movie.genres).map((item, index) => {
       return (
-        <Chip label={movie.genres[item]['name']} size='small' key={index} />
+        <Chip
+          label={movie.genres[item]['name']}
+          size='small'
+          key={index}
+          style={{ backgroundColor: 'yellow' }}
+        />
       );
     });
 
@@ -260,6 +268,7 @@ const Movie = () => {
               <span>
                 {movie.budget ? (
                   <Chip
+                    className={classes.infoChips}
                     label={`Budget : ${movie.budget.toLocaleString('en-US', {
                       style: 'currency',
                       currency: 'USD',
@@ -274,6 +283,7 @@ const Movie = () => {
               <span>
                 {movie.revenue ? (
                   <Chip
+                    className={classes.infoChips}
                     label={`Revenue : ${movie.revenue.toLocaleString('en-US', {
                       style: 'currency',
                       currency: 'USD',
@@ -287,6 +297,7 @@ const Movie = () => {
               <span>
                 {movie.revenue ? (
                   <Chip
+                    className={classes.infoChips}
                     label={`Runtime : ${minutesToHours(movie.runtime)}`}
                     icon={<TimerIcon />}
                     size='small'
@@ -296,6 +307,7 @@ const Movie = () => {
               <span>
                 {movie.release_date ? (
                   <Chip
+                    className={classes.infoChips}
                     label={`Release Date : ${movie.release_date}`}
                     icon={<TodayIcon />}
                     size='small'
@@ -305,12 +317,15 @@ const Movie = () => {
               <span>
                 {movie.vote_average ? (
                   <Chip
+                    className={classes.infoChips}
                     label={`Vote Average : ${movie.vote_average}`}
                     icon={<ThumbUpIcon />}
                     size='small'
                   />
                 ) : null}
               </span>
+              <br />
+              <br />
               <br />
               <span>{movieGenres}</span>
             </Grid>
