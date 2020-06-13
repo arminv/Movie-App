@@ -191,6 +191,14 @@ const Movie = () => {
     );
   }
 
+  const movieGenres =
+    movie.genres &&
+    Object.keys(movie.genres).map((item, index) => {
+      return (
+        <Chip label={movie.genres[item]['name']} size='small' key={index} />
+      );
+    });
+
   return (
     <div>
       <div
@@ -250,57 +258,61 @@ const Movie = () => {
               <h4>{movie.overview}</h4>
               <br />
               <span>
-                <Chip
-                  label={
-                    movie.budget
-                      ? `Budget : ${movie.budget.toLocaleString('en-US', {
-                          style: 'currency',
-                          currency: 'USD',
-                          minimumFractionDigits: 0,
-                        })}`
-                      : ''
-                  }
-                  icon={<LocalAtmIcon />}
-                  size='small'
-                />
+                {movie.budget ? (
+                  <Chip
+                    label={`Budget : ${movie.budget.toLocaleString('en-US', {
+                      style: 'currency',
+                      currency: 'USD',
+                      minimumFractionDigits: 0,
+                    })}`}
+                    icon={<LocalAtmIcon />}
+                    size='small'
+                  />
+                ) : null}
               </span>
               {/* <p>Genres: {movie.genres}</p> */}
               <span>
-                <Chip
-                  label={
-                    movie.revenue
-                      ? `Revenue : ${movie.revenue.toLocaleString('en-US', {
-                          style: 'currency',
-                          currency: 'USD',
-                          minimumFractionDigits: 0,
-                        })}`
-                      : ''
-                  }
-                  icon={<AttachMoneyIcon />}
-                  size='small'
-                />
+                {movie.revenue ? (
+                  <Chip
+                    label={`Revenue : ${movie.revenue.toLocaleString('en-US', {
+                      style: 'currency',
+                      currency: 'USD',
+                      minimumFractionDigits: 0,
+                    })}`}
+                    icon={<AttachMoneyIcon />}
+                    size='small'
+                  />
+                ) : null}
               </span>
               <span>
-                <Chip
-                  label={`Runtime : ${minutesToHours(movie.runtime)}`}
-                  icon={<TimerIcon />}
-                  size='small'
-                />
+                {movie.revenue ? (
+                  <Chip
+                    label={`Runtime : ${minutesToHours(movie.runtime)}`}
+                    icon={<TimerIcon />}
+                    size='small'
+                  />
+                ) : null}
               </span>
               <span>
-                <Chip
-                  label={`Release Date : ${movie.release_date}`}
-                  icon={<TodayIcon />}
-                  size='small'
-                />
+                {movie.release_date ? (
+                  <Chip
+                    label={`Release Date : ${movie.release_date}`}
+                    icon={<TodayIcon />}
+                    size='small'
+                  />
+                ) : null}
               </span>
               <span>
-                <Chip
-                  label={`Vote Average : ${movie.vote_average}`}
-                  icon={<ThumbUpIcon />}
-                  size='small'
-                />
+                {movie.vote_average ? (
+                  <Chip
+                    label={`Vote Average : ${movie.vote_average}`}
+                    icon={<ThumbUpIcon />}
+                    size='small'
+                  />
+                ) : null}
               </span>
+              <br />
+              <span>{movieGenres}</span>
             </Grid>
             {images.images && Object.keys(images.images).length !== 0 ? (
               <>
@@ -312,9 +324,9 @@ const Movie = () => {
             ) : (
               <></>
             )}
-            <Grid>
-              <h2>Cast:</h2>
-              {cast.cast ? (
+            {cast.cast ? (
+              <Grid>
+                <h2>Cast:</h2>
                 <Grid
                   container
                   justify='center'
@@ -323,8 +335,8 @@ const Movie = () => {
                 >
                   {castImages}
                 </Grid>
-              ) : null}
-            </Grid>
+              </Grid>
+            ) : null}
           </Grid>
         </div>
       </div>
