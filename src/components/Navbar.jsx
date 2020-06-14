@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import { Link as LinkRoute, useHistory } from 'react-router-dom';
 import { throttle } from 'lodash';
 
