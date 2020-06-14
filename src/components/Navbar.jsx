@@ -103,14 +103,14 @@ const Navbar = (props) => {
 
   // Throttle the search via lodash and add both query and results to the store:
   const throttledSearch = throttle(async (query) => {
+    history.push(`/`);
+
     if (query === '') {
       props.setSearchQuery('');
       props.setSearchResults([], props.searchPage, 0);
       props.setSearchPage(1);
       return;
     }
-
-    history.push(`/`);
 
     const [searchResults, searchTotalPages] = await search_movies_by_name(
       query,
@@ -119,18 +119,16 @@ const Navbar = (props) => {
 
     props.setSearchQuery(query);
     props.setSearchResults(searchResults, props.searchPage, searchTotalPages);
-  }, 1000);
+  }, 2000);
 
-  const handleSearch = useCallback(
-    (query) => {
-      throttledSearch(query);
-    },
-    [throttledSearch]
-  );
+  const handleSearch = (query) => {
+    throttledSearch(query);
+  };
 
   useEffect(() => {
     handleSearch(props.searchQuery);
-  }, [props, props.searchQuery, props.searchPage, handleSearch]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props]);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
