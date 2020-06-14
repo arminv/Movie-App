@@ -11,6 +11,7 @@ import {
   addNowPlaying,
   setLoading,
   setLastPage,
+  setSearchPage,
 } from '../redux/actions';
 
 import Grid from '@material-ui/core/Grid';
@@ -121,6 +122,20 @@ const Home = (props) => {
       );
     });
 
+  // Upcoming movies cards:
+  const searchResultsCards =
+    props.searchResults[props.searchPage] &&
+    Object.keys(props.searchResults[props.searchPage]).map((item, index) => {
+      return (
+        <Grid className='cards' key={index} item style={{ display: 'flex' }}>
+          <Cards
+            id={props.searchResults[props.searchPage][item]['id']}
+            key={index}
+          />
+        </Grid>
+      );
+    });
+
   const handleTabSwitch = (event) => {
     handlePageChange(event, 1);
     props.setLastPage(event.target.innerText);
@@ -129,6 +144,10 @@ const Home = (props) => {
   const handlePageChange = (event, value) => {
     setPage(value);
     history.push(`/${value}`);
+  };
+
+  const handleSearchPageChange = (event, value) => {
+    props.setSearchPage(value);
   };
 
   return (
@@ -145,91 +164,116 @@ const Home = (props) => {
         <Button onClick={handleTabSwitch}>Upcoming</Button>
       </ButtonGroup>
 
-      <h1>{selectedTab}</h1>
+      <h1>
+        {props.searchQuery !== ''
+          ? `RESULTS FOR: ${props.searchQuery}`
+          : selectedTab}
+      </h1>
 
       <Container>
         <Grid container spacing={2} alignItems='stretch'>
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <Grid container justify='center' spacing={3}>
-              {(() => {
-                switch (selectedTab) {
-                  case 'POPULAR':
-                    return (
-                      <>
-                        {props.popular[page] ? popularMovieCards : 'Loading...'}
-                      </>
-                    );
-                  case 'NOW PLAYING':
-                    return (
-                      <>
-                        {props.nowPlaying[page]
-                          ? nowPlayingMovieCards
-                          : 'Loading...'}
-                      </>
-                    );
-                  case 'TOP RATED':
-                    return (
-                      <>
-                        {props.topRated[page]
-                          ? topRatedMovieCards
-                          : 'Loading...'}
-                      </>
-                    );
-                  case 'UPCOMING':
-                    return (
-                      <>
-                        {props.upcoming[page]
-                          ? upcomingMovieCards
-                          : 'Loading...'}
-                      </>
-                    );
-                  default:
-                    return null;
-                }
-              })()}
-            </Grid>
+            {props.searchQuery !== '' ? (
+              <Grid container justify='center' spacing={3}>
+                {searchResultsCards}
+              </Grid>
+            ) : (
+              <Grid container justify='center' spacing={3}>
+                {(() => {
+                  switch (selectedTab) {
+                    case 'POPULAR':
+                      return (
+                        <>
+                          {props.popular[page]
+                            ? popularMovieCards
+                            : 'Loading...'}
+                        </>
+                      );
+                    case 'NOW PLAYING':
+                      return (
+                        <>
+                          {props.nowPlaying[page]
+                            ? nowPlayingMovieCards
+                            : 'Loading...'}
+                        </>
+                      );
+                    case 'TOP RATED':
+                      return (
+                        <>
+                          {props.topRated[page]
+                            ? topRatedMovieCards
+                            : 'Loading...'}
+                        </>
+                      );
+                    case 'UPCOMING':
+                      return (
+                        <>
+                          {props.upcoming[page]
+                            ? upcomingMovieCards
+                            : 'Loading...'}
+                        </>
+                      );
+                    default:
+                      return null;
+                  }
+                })()}
+              </Grid>
+            )}
           </Grid>
         </Grid>
 
-        {selectedTab === 'POPULAR' && (
+        {props.searchQuery !== '' ? (
           <Pagination
             size='large'
             color='primary'
             variant='outlined'
-            count={props.popular.totalPages}
-            page={page}
-            onChange={(event, value) => handlePageChange(event, value)}
+            count={props.searchResults.totalPages}
+            page={props.searchPage}
+            onChange={(event, value) => handleSearchPageChange(event, value)}
           />
-        )}
-        {selectedTab === 'NOW PLAYING' && (
-          <Pagination
-            size='large'
-            color='primary'
-            variant='outlined'
-            count={props.nowPlaying.totalPages}
-            page={page}
-            onChange={(event, value) => handlePageChange(event, value)}
-          />
-        )}
-        {selectedTab === 'TOP RATED' && (
-          <Pagination
-            size='large'
-            color='primary'
-            variant='outlined'
-            count={props.topRated.totalPages}
-            page={page}
-            onChange={(event, value) => handlePageChange(event, value)}
-          />
-        )}
-        {selectedTab === 'UPCOMING' && (
-          <Pagination
-            size='large'
-            color='primary'
-            variant='outlined'
-            count={props.upcoming.totalPages}
-            page={page}
-            onChange={(event, value) => handlePageChange(event, value)}
-          />
+        ) : (
+          <>
+            {selectedTab === 'POPULAR' && (
+              <Pagination
+                size='large'
+                color='primary'
+                variant='outlined'
+                count={props.popular.totalPages}
+                page={page}
+                onChange={(event, value) => handlePageChange(event, value)}
+              />
+            )}
+            {selectedTab === 'NOW PLAYING' && (
+              <Pagination
+                size='large'
+                color='primary'
+                variant='outlined'
+                count={props.nowPlaying.totalPages}
+                page={page}
+                onChange={(event, value) => handlePageChange(event, value)}
+              />
+            )}
+            {selectedTab === 'TOP RATED' && (
+              <Pagination
+                size='large'
+                color='primary'
+                variant='outlined'
+                count={props.topRated.totalPages}
+                page={page}
+                onChange={(event, value) => handlePageChange(event, value)}
+              />
+            )}
+            {selectedTab === 'UPCOMING' && (
+              <Pagination
+                size='large'
+                color='primary'
+                variant='outlined'
+                count={props.upcoming.totalPages}
+                page={page}
+                onChange={(event, value) => handlePageChange(event, value)}
+              />
+            )}
+          </>
         )}
       </Container>
     </div>
@@ -244,6 +288,9 @@ function mapStateToProps(state) {
     upcoming: state.moviesReducer.upcoming,
     isLoading: state.moviesReducer.isLoading,
     lastPage: state.lastPageReducer.lastPage,
+    searchPage: state.lastPageReducer.searchPage,
+    searchResults: state.searchReducer.searchResults,
+    searchQuery: state.searchReducer.searchQuery,
   };
 }
 
@@ -254,4 +301,5 @@ export default connect(mapStateToProps, {
   addUpcoming,
   setLoading,
   setLastPage,
+  setSearchPage,
 })(Home);

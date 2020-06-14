@@ -2,7 +2,7 @@ import { SET_SEARCH_QUERY, SET_SEARCH_RESULTS } from '../actionTypes';
 
 const initialState = {
   searchQuery: '',
-  searchResults: [],
+  searchResults: {},
 };
 
 export default function (state = initialState, action) {
@@ -15,10 +15,14 @@ export default function (state = initialState, action) {
       };
     }
     case SET_SEARCH_RESULTS: {
-      const { searchResults } = action.payload;
+      const { searchResults, page, totalPages } = action.payload;
       return {
         ...state,
-        searchResults: searchResults,
+        searchResults: {
+          ...state.searchResults,
+          [page]: searchResults,
+          totalPages,
+        },
       };
     }
     default:

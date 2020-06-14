@@ -4,5 +4,6 @@ export const ADD_NOW_PLAYING = 'ADD_NOW_PLAYING';
 export const ADD_UPCOMING = 'ADD_UPCOMING';
 export const SET_LOADING = 'SET_LOADING';
 export const SET_LAST_PAGE = 'SET_LAST_PAGE';
+export const SET_SEARCH_PAGE = 'SET_SEARCH_PAGE';
 export const SET_SEARCH_QUERY = 'SET_SEARCH_QUERY';
 export const SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS';

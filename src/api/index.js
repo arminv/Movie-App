@@ -119,14 +119,14 @@ export const fetch_movies = async (type, page) => {
 };
 
 // SEARCH MOVIES:
-export const search_movies_by_name = async (query) => {
+export const search_movies_by_name = async (query, page) => {
   return await axios({
     method: 'GET',
-    url: `${BASE_URL}/3/search/movie?api_key=${API_KEY}&query=${query}`,
+    url: `${BASE_URL}/3/search/movie?api_key=${API_KEY}&query=${query}&page=${page}`,
     headers: HEADERS,
   })
     .then((response) => {
-      return response.data.results;
+      return [response.data.results, response.data.total_pages];
     })
     .catch((error) => {
       console.log(error);

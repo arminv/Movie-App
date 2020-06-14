@@ -5,6 +5,7 @@ import {
   ADD_UPCOMING,
   SET_LOADING,
   SET_LAST_PAGE,
+  SET_SEARCH_PAGE,
   SET_SEARCH_QUERY,
   SET_SEARCH_RESULTS,
 } from './actionTypes';
@@ -59,6 +60,13 @@ export const setLastPage = (lastPage) => ({
   },
 });
 
+export const setSearchPage = (searchPage) => ({
+  type: SET_SEARCH_PAGE,
+  payload: {
+    searchPage,
+  },
+});
+
 export const setSearchQuery = (searchQuery) => ({
   type: SET_SEARCH_QUERY,
   payload: {
@@ -66,9 +74,11 @@ export const setSearchQuery = (searchQuery) => ({
   },
 });
 
-export const setSearchResults = (searchResults) => ({
+export const setSearchResults = (searchResults, page, totalPages) => ({
   type: SET_SEARCH_RESULTS,
   payload: {
     searchResults,
+    page,
+    totalPages,
   },
 });

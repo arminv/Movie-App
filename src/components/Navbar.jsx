@@ -1,11 +1,15 @@
-import React from 'react';
-import { Link as LinkRoute } from 'react-router-dom';
+import React, { useEffect, useCallback } from 'react';
+import { Link as LinkRoute, useHistory } from 'react-router-dom';
 import { throttle } from 'lodash';
 
 import { search_movies_by_name } from '../api/index';
 
 import { connect } from 'react-redux';
-import { setSearchQuery, setSearchResults } from '../redux/actions';
+import {
+  setSearchQuery,
+  setSearchResults,
+  setSearchPage,
+} from '../redux/actions';
 
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -88,6 +92,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navbar = (props) => {
+  const history = useHistory();
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -95,16 +101,36 @@ const Navbar = (props) => {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  // Throttle the search via lodash:
+  // Throttle the search via lodash and add both query and results to the store:
   const throttledSearch = throttle(async (query) => {
-    const searchResults = await search_movies_by_name(query);
+    if (query === '') {
+      props.setSearchQuery('');
+      props.setSearchResults([], props.searchPage, 0);
+      props.setSearchPage(1);
+      return;
+    }
+
+    history.push(`/`);
+
+    const [searchResults, searchTotalPages] = await search_movies_by_name(
+      query,
+      props.searchPage
+    );
+
     props.setSearchQuery(query);
-    props.setSearchResults(searchResults);
-    // console.log('Query:', query, 'SearchResults:', searchResults);
-  }, 3000);
-  const handleSearch = (query) => {
-    throttledSearch(query);
-  };
+    props.setSearchResults(searchResults, props.searchPage, searchTotalPages);
+  }, 1000);
+
+  const handleSearch = useCallback(
+    (query) => {
+      throttledSearch(query);
+    },
+    [throttledSearch]
+  );
+
+  useEffect(() => {
+    handleSearch(props.searchQuery);
+  }, [props, props.searchQuery, props.searchPage, handleSearch]);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -252,8 +278,15 @@ const Navbar = (props) => {
   );
 };
 
-export default connect('', {
+function mapStateToProps(state) {
+  return {
+    searchPage: state.lastPageReducer.searchPage,
+    searchQuery: state.searchReducer.searchQuery,
+  };
+}
+
+export default connect(mapStateToProps, {
   setSearchQuery,
   setSearchResults,
+  setSearchPage,
 })(Navbar);
-// export default Navbar;

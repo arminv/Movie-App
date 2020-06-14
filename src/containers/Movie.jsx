@@ -225,8 +225,8 @@ const Movie = () => {
           <Grid container spacing={3}>
             <Grid item xs={3}>
               <Card className={classes.card}>
-                <CardActionArea>
-                  {movie.homepage ? (
+                {movie.homepage ? (
+                  <CardActionArea>
                     <Link
                       target='_blank'
                       href={movie.homepage}
@@ -245,21 +245,21 @@ const Movie = () => {
                         title={`${movie.title}`}
                       />
                     </Link>
-                  ) : (
-                    <CardMedia
-                      className={classes.media}
-                      component='img'
-                      alt={`${movie.title}`}
-                      height='500'
-                      image={
-                        movie.poster_path
-                          ? `${BASE_IMG_URL}${movie.poster_path}`
-                          : 'https://critics.io/img/movies/poster-placeholder.png'
-                      }
-                      title={`${movie.title}`}
-                    />
-                  )}
-                </CardActionArea>
+                  </CardActionArea>
+                ) : (
+                  <CardMedia
+                    className={classes.media}
+                    component='img'
+                    alt={`${movie.title}`}
+                    height='500'
+                    image={
+                      movie.poster_path
+                        ? `${BASE_IMG_URL}${movie.poster_path}`
+                        : 'https://critics.io/img/movies/poster-placeholder.png'
+                    }
+                    title={`${movie.title}`}
+                  />
+                )}
               </Card>
             </Grid>
             <Grid item xs={9}>
@@ -339,8 +339,8 @@ const Movie = () => {
             ) : (
               <></>
             )}
-            {cast.cast ? (
-              <Grid>
+            {cast.cast && Object.keys(cast.cast).length ? (
+              <>
                 <h2>Cast:</h2>
                 <Grid
                   container
@@ -350,7 +350,7 @@ const Movie = () => {
                 >
                   {castImages}
                 </Grid>
-              </Grid>
+              </>
             ) : null}
           </Grid>
         </div>
