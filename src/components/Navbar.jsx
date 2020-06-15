@@ -127,7 +127,7 @@ const Navbar = (props) => {
 
   useEffect(() => {
     handleSearch(props.searchQuery);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
 
   const handleProfileMenuOpen = (event) => {
@@ -229,14 +229,14 @@ const Navbar = (props) => {
               <SearchIcon />
             </div>
             <InputBase
-              placeholder='Search…'
+              placeholder='Search Movies…'
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
-              //   onInput={(e) => handleSearch(e.target.value)}
               onInput={(e) => handleSearch(e.target.value)}
+              autoFocus='true'
             />
           </div>
           <div className={classes.grow} />

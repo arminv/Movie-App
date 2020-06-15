@@ -12,6 +12,7 @@ import {
   setLoading,
   setLastPage,
   setSearchPage,
+  setSearchQuery,
 } from '../redux/actions';
 
 import Grid from '@material-ui/core/Grid';
@@ -139,6 +140,7 @@ const Home = (props) => {
   const handleTabSwitch = (event) => {
     handlePageChange(event, 1);
     props.setLastPage(event.target.innerText);
+    props.setSearchQuery('');
   };
 
   const handlePageChange = (event, value) => {
@@ -302,4 +304,5 @@ export default connect(mapStateToProps, {
   setLoading,
   setLastPage,
   setSearchPage,
+  setSearchQuery,
 })(Home);
