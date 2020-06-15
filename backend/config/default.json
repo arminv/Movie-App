@@ -1,0 +1,3 @@
+{
+  "mongoURI": "mongodb+srv://armin:armin123456789@movie-app-cluster-pxaqu.mongodb.net/<dbname>?retryWrites=true&w=majority"
+}
