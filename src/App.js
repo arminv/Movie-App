@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import Home from './containers/Home';
-import Search from './containers/Search';
 import Movie from './containers/Movie';
 
 import './App.css';
@@ -14,7 +13,6 @@ const App = () => {
       <Navbar />
       <Switch>
         <Route exact path='/movie/:id' component={Movie}></Route>
-        <Route exact path='/search/' component={Search}></Route>
         <Route exact path='/:myPage?' component={Home}></Route>
       </Switch>
     </div>

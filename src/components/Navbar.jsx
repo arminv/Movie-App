@@ -119,7 +119,7 @@ const Navbar = (props) => {
 
     props.setSearchQuery(query);
     props.setSearchResults(searchResults, props.searchPage, searchTotalPages);
-  }, 2000);
+  }, 500);
 
   const handleSearch = (query) => {
     throttledSearch(query);
