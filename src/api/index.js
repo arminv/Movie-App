@@ -3,12 +3,10 @@ import axios from 'axios';
 const API_KEY = process.env.REACT_APP_API_KEY;
 const BASE_URL = 'https://api.themoviedb.org';
 const HEADERS = {
-  // 'Authorization': `Bearer ${API_KEY}`,
   'content-type': 'Content-Type: application/json;charset=utf-8',
 };
 
 // Fetch movie or cast by movie id:
-// TODO: Fetch images for each movie
 export const fetch_by_id = async (type, id) => {
   switch (type) {
     case 'MOVIE': {
@@ -45,6 +43,19 @@ export const fetch_by_id = async (type, id) => {
       })
         .then((response) => {
           return response.data.cast;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    case 'RECOMMENDATIONS': {
+      return await axios({
+        method: 'GET',
+        url: `${BASE_URL}/3/movie/${id}/recommendations?api_key=${API_KEY}`,
+        headers: HEADERS,
+      })
+        .then((response) => {
+          return response.data.results;
         })
         .catch((error) => {
           console.log(error);

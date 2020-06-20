@@ -23,6 +23,8 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
+import { Cards } from '../components/Cards';
+
 // const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/original';
 const BASE_IMG_SMALL_URL = 'https://image.tmdb.org/t/p/w185';
@@ -68,13 +70,14 @@ const useStyles = makeStyles({
 const Movie = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
+  const [recommendations, setRecommendations] = useState({});
   const [images, setImages] = useState({});
   const [cast, setCast] = useState({});
 
   useEffect(() => {
     // Scroll to top when page loads:
     window.scrollTo(0, 0);
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     async function getMovie(id) {
@@ -109,6 +112,11 @@ const Movie = () => {
       });
     }
     getMovie(id);
+
+    async function getRecommendations(id) {
+      setRecommendations(await fetch_by_id('RECOMMENDATIONS', id));
+    }
+    getRecommendations(id);
 
     async function getImages(id) {
       const images = await fetch_by_id('IMAGES', id);
@@ -207,6 +215,20 @@ const Movie = () => {
       );
     });
 
+  const recommendationsCards =
+    recommendations &&
+    Object.keys(recommendations).map((item, index) => {
+      return (
+        <Grid className='cards' key={index} item style={{ display: 'flex' }}>
+          <Cards
+            id={recommendations[item]['id']}
+            key={index}
+            recommend='true'
+          />
+        </Grid>
+      );
+    });
+
   return (
     <div>
       <div
@@ -263,7 +285,9 @@ const Movie = () => {
               </Card>
             </Grid>
             <Grid item xs={9}>
-              <h4>{movie.overview}</h4>
+              <h4 style={{ marginTop: '50px', marginBottom: '30px' }}>
+                {movie.overview}
+              </h4>
               <br />
               <span>
                 {movie.budget ? (
@@ -279,7 +303,6 @@ const Movie = () => {
                   />
                 ) : null}
               </span>
-              {/* <p>Genres: {movie.genres}</p> */}
               <span>
                 {movie.revenue ? (
                   <Chip
@@ -324,14 +347,13 @@ const Movie = () => {
                   />
                 ) : null}
               </span>
-              <br />
-              <br />
-              <br />
               <span>{movieGenres}</span>
             </Grid>
             {images.images && Object.keys(images.images).length !== 0 ? (
               <>
-                <h2>Gallery:</h2>
+                <h2 style={{ marginTop: '50px', marginBottom: '30px' }}>
+                  Gallery:
+                </h2>
                 <Grid item xs={12}>
                   <ImageGallery items={imageGallery} />
                 </Grid>
@@ -341,7 +363,9 @@ const Movie = () => {
             )}
             {cast.cast && Object.keys(cast.cast).length ? (
               <>
-                <h2>Cast:</h2>
+                <h2 style={{ marginTop: '50px', marginBottom: '30px' }}>
+                  Cast:
+                </h2>
                 <Grid
                   container
                   justify='center'
@@ -349,6 +373,21 @@ const Movie = () => {
                   alignItems='stretch'
                 >
                   {castImages}
+                </Grid>
+              </>
+            ) : null}
+            {recommendations && Object.keys(recommendations).length ? (
+              <>
+                <h2 style={{ marginTop: '50px', marginBottom: '30px' }}>
+                  Recommendations:
+                </h2>
+                <Grid
+                  container
+                  justify='center'
+                  spacing={3}
+                  alignItems='stretch'
+                >
+                  {recommendationsCards}
                 </Grid>
               </>
             ) : null}

@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
-export const Cards = ({ id }) => {
+export const Cards = ({ id, recommend = 'false' }) => {
   const [movie, setMovie] = useState({});
 
   useEffect(() => {
@@ -65,27 +65,51 @@ export const Cards = ({ id }) => {
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        <LinkRoute to={`movie/${id}`} style={{ textDecoration: 'none' }}>
-          <CardMedia
-            className={classes.media}
-            component='img'
-            alt={`${movie.title}`}
-            height='500'
-            image={
-              movie.poster_path
-                ? `${BASE_IMG_URL}${movie.poster_path}`
-                : 'https://betravingknows.com/wp-content/uploads/2017/06/video-movie-placeholder-image-grey.png'
-            }
-            title={`${movie.title}`}
-            onClick={() => {}}
-          />
-          <CardContent>
-            <Typography gutterBottom variant='h5' component='h2'>
-              {movie.title}
-            </Typography>
-            {genreChips}
-          </CardContent>
-        </LinkRoute>
+        {recommend !== 'true' ? (
+          <LinkRoute to={`movie/${id}`} style={{ textDecoration: 'none' }}>
+            <CardMedia
+              className={classes.media}
+              component='img'
+              alt={`${movie.title}`}
+              height='500'
+              image={
+                movie.poster_path
+                  ? `${BASE_IMG_URL}${movie.poster_path}`
+                  : 'https://betravingknows.com/wp-content/uploads/2017/06/video-movie-placeholder-image-grey.png'
+              }
+              title={`${movie.title}`}
+              onClick={() => {}}
+            />
+            <CardContent>
+              <Typography gutterBottom variant='h5' component='h2'>
+                {movie.title}
+              </Typography>
+              {genreChips}
+            </CardContent>
+          </LinkRoute>
+        ) : (
+          <LinkRoute to={`${id}`} style={{ textDecoration: 'none' }}>
+            <CardMedia
+              className={classes.media}
+              component='img'
+              alt={`${movie.title}`}
+              height='500'
+              image={
+                movie.poster_path
+                  ? `${BASE_IMG_URL}${movie.poster_path}`
+                  : 'https://betravingknows.com/wp-content/uploads/2017/06/video-movie-placeholder-image-grey.png'
+              }
+              title={`${movie.title}`}
+              onClick={() => {}}
+            />
+            <CardContent>
+              <Typography gutterBottom variant='h5' component='h2'>
+                {movie.title}
+              </Typography>
+              {genreChips}
+            </CardContent>
+          </LinkRoute>
+        )}
       </CardActionArea>
       <CardActions>
         <Link target='_blank' href={movie.homepage} rel='noopener noreferrer'>
