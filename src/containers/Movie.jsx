@@ -5,7 +5,6 @@ import { fetch_by_id } from '../api/index';
 
 import './Movie.css';
 
-import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
