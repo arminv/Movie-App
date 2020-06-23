@@ -5,6 +5,7 @@ import { fetch_by_id } from '../api/index';
 
 import './Movie.css';
 
+import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -153,9 +154,9 @@ const Movie = () => {
 
   const classes = useStyles();
 
-  const castImages = [];
+  const castCards = [];
   for (let person in cast.cast) {
-    castImages.push(
+    castCards.push(
       <Grid
         item
         xs={6}
@@ -372,7 +373,7 @@ const Movie = () => {
                   spacing={3}
                   alignItems='stretch'
                 >
-                  {castImages}
+                  {castCards}
                 </Grid>
               </>
             ) : null}
