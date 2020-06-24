@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 const MovieSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'users',
+    // ref: 'users',
   },
   movies: {
-    type: Array,
+    type: Number,
     required: true,
   },
   // movies: [
@@ -32,4 +32,4 @@ const MovieSchema = new Schema({
   },
 });
 
-module.exports = Movie = mongoose.model('post', MovieSchema);
+module.exports = Movie = mongoose.model('movie', MovieSchema);
