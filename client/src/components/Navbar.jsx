@@ -27,6 +27,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ShopIcon from '@material-ui/icons/Shop';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -253,6 +254,14 @@ const Navbar = (props) => {
                 <Badge badgeContent={3} color='secondary'>
                   <ShopIcon />
                 </Badge>
+              </IconButton>
+            </LinkRoute>
+            <LinkRoute
+              to={`register`}
+              style={{ textDecoration: 'none', color: 'white' }}
+            >
+              <IconButton aria-label='show 4 new mails' color='inherit'>
+                <LockOpenIcon />
               </IconButton>
             </LinkRoute>
             {/* <IconButton
