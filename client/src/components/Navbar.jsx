@@ -22,8 +22,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 // import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+// import AccountCircle from '@material-ui/icons/AccountCircle';
+// import NotificationsIcon from '@material-ui/icons/Notifications';
+import HomeIcon from '@material-ui/icons/Home';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ShopIcon from '@material-ui/icons/Shop';
 
@@ -130,9 +131,9 @@ const Navbar = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleProfileMenuOpen = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -175,22 +176,25 @@ const Navbar = (props) => {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label='show 4 new mails' color='inherit'>
-          <Badge badgeContent={4} color='secondary'>
-            <ShopIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
+        <LinkRoute to={`/`} style={{ textDecoration: 'none', color: 'blue' }}>
+          <HomeIcon />
+          <p style={{ color: 'black' }}>Home</p>
+        </LinkRoute>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label='show 11 new notifications' color='inherit'>
-          <Badge badgeContent={11} color='secondary'>
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
+        <LinkRoute
+          to={`login`}
+          style={{ textDecoration: 'none', color: 'blue' }}
+        >
+          <IconButton aria-label='show 11 new notifications' color='inherit'>
+            <Badge badgeContent={5} color='secondary'>
+              <ShopIcon />
+            </Badge>
+          </IconButton>
+          <p style={{ color: 'black' }}>My Movies</p>
+        </LinkRoute>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      {/* <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label='account of current user'
           aria-controls='primary-search-account-menu'
@@ -200,7 +204,7 @@ const Navbar = (props) => {
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
-      </MenuItem>
+      </MenuItem> */}
     </Menu>
   );
 
@@ -241,12 +245,17 @@ const Navbar = (props) => {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label='show 4 new mails' color='inherit'>
-              <Badge badgeContent={3} color='secondary'>
-                <ShopIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
+            <LinkRoute
+              to={`login`}
+              style={{ textDecoration: 'none', color: 'white' }}
+            >
+              <IconButton aria-label='show 4 new mails' color='inherit'>
+                <Badge badgeContent={3} color='secondary'>
+                  <ShopIcon />
+                </Badge>
+              </IconButton>
+            </LinkRoute>
+            {/* <IconButton
               edge='end'
               aria-label='account of current user'
               aria-controls={menuId}
@@ -255,7 +264,7 @@ const Navbar = (props) => {
               color='inherit'
             >
               <AccountCircle />
-            </IconButton>
+            </IconButton> */}
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
