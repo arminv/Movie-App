@@ -1,0 +1,22 @@
+h1 {
+  margin-top: 2rem;
+}
+
+.container {
+  width: 640px;
+  max-width: 80%;
+  margin: auto;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  padding: 10px 10px;
+  margin-bottom: 30px;
+}
+
+.button {
+  color: blue;
+}
+
+.subtitle {
+  margin: 30px 0px;
+  color: white;
+}
