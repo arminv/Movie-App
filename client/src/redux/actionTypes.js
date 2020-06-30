@@ -7,3 +7,5 @@ export const SET_LAST_PAGE = 'SET_LAST_PAGE';
 export const SET_SEARCH_PAGE = 'SET_SEARCH_PAGE';
 export const SET_SEARCH_QUERY = 'SET_SEARCH_QUERY';
 export const SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS';
+export const SET_ALERT = 'SET_ALERT';
+export const REMOVE_ALERT = 'REMOVE_ALERT';
