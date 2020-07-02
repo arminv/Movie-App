@@ -3,9 +3,13 @@ import React, { useState } from 'react';
 
 import { Link as LinkRoute } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
+
+import { setAlert } from '../../redux/actions';
 
 import './Register.css';
 
@@ -18,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Register = () => {
+const Register = (props) => {
   const classes = useStyles();
 
   const [formData, setFormData] = useState({
@@ -37,7 +41,7 @@ const Register = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
-      console.log('Pasword do not match!');
+      props.setAlert('Pasword do not match!', 'danger');
     } else {
       console.log('SUCCESS!');
       // const newUser = {
@@ -133,4 +137,6 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default connect(null, {
+  setAlert,
+})(Register);
