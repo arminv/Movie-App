@@ -86,7 +86,7 @@ export const setSearchResults = (searchResults, page, totalPages) => ({
   },
 });
 
-export const setAlert = (msg, alertType, timeout = 5000) => (dispatch) => {
+export const setAlert = (msg, alertType, timeout = 4000) => (dispatch) => {
   const id = uuidv4();
   dispatch({
     type: SET_ALERT,

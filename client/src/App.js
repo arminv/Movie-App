@@ -6,6 +6,7 @@ import Home from './containers/Home';
 import Movie from './containers/Movie';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import AlertBar from './components/AlertBar';
 
 import './App.css';
 
@@ -14,6 +15,7 @@ const App = () => {
     <BrowserRouter>
       <div className='App'>
         <Navbar />
+        <AlertBar />
         <Switch>
           <Route exact path='/register' component={Register}></Route>
           <Route exact path='/login' component={Login}></Route>

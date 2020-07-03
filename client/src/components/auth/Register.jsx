@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 
 import { setAlert } from '../../redux/actions';
+import PropTypes from 'prop-types';
 
 import './Register.css';
 
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Register = (props) => {
+const Register = ({ setAlert }) => {
   const classes = useStyles();
 
   const [formData, setFormData] = useState({
@@ -41,7 +42,7 @@ const Register = (props) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
-      props.setAlert('Pasword do not match!', 'danger');
+      setAlert('Pasword do not match!', 'error');
     } else {
       console.log('SUCCESS!');
       // const newUser = {
@@ -135,6 +136,10 @@ const Register = (props) => {
       </form>
     </>
   );
+};
+
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
 };
 
 export default connect(null, {
