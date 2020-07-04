@@ -30,3 +30,23 @@
   text-align: left;
   line-height: 30px;
 }
+
+@media only screen and (max-width: 600px) {
+  .movie {
+    background-size: 300% 100%;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: auto;
+    color: white;
+    min-height: 100vmax;
+  }
+  .content {
+    min-width: 100vw;
+    min-height: 100vw;
+    background-color: rgba(0, 0, 0, 0.863);
+    text-align: left;
+    line-height: 30px;
+    padding: 20px;
+    margin: 0px;
+  }
+}

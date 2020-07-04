@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import Chip from '@material-ui/core/Chip';
 import LanguageIcon from '@material-ui/icons/Language';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles({
   root: {
@@ -22,9 +23,8 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
-    fontSize: '7rem',
     backgroundColor: '#191413',
-    color: 'red',
+    color: 'yellow',
   },
   media: {
     maxWidth: '100%',
@@ -68,7 +68,6 @@ export const Cards = ({ id, recommend = 'false' }) => {
         variant='outlined'
         size='small'
         style={{
-          // backgroundColor: '#8D550D',
           backgroundColor: '#8c5f26',
           color: 'white',
         }}
@@ -104,7 +103,14 @@ export const Cards = ({ id, recommend = 'false' }) => {
               >
                 {movie.title}
               </Typography>
-              {genreChips}
+              <Grid
+                container
+                alignItems='center'
+                direction='column'
+                justify='center'
+              >
+                {genreChips}
+              </Grid>
             </CardContent>
           </LinkRoute>
         ) : (
@@ -130,7 +136,14 @@ export const Cards = ({ id, recommend = 'false' }) => {
               >
                 {movie.title}
               </Typography>
-              {genreChips}
+              <Grid
+                container
+                alignItems='center'
+                direction='column'
+                justify='center'
+              >
+                {genreChips}
+              </Grid>
             </CardContent>
           </LinkRoute>
         )}

@@ -54,9 +54,10 @@ const useStyles = makeStyles({
     height: 'auto',
   },
   castName: {
-    fontSize: '16px',
+    fontSize: '1rem',
     fontWeight: '600',
     textAlign: 'center',
+    flexDirection: 'column',
   },
   castCharacter: {
     fontSize: '13px',
@@ -157,13 +158,13 @@ const Movie = () => {
   for (let person in cast.cast) {
     castCards.push(
       <Grid
-        item
-        xs={6}
+        xs={4}
         sm={3}
         md={2}
         lg={2}
         xl={2}
         style={{ display: 'flex' }}
+        justify='center'
         key={person}
       >
         <Card className={classes.castCard}>
@@ -182,8 +183,7 @@ const Movie = () => {
           <CardContent>
             <Typography
               gutterBottom
-              variant='h6'
-              component='h2'
+              variant='subtitle1'
               className={classes.castName}
             >
               {cast.cast[person]['name']}
@@ -191,7 +191,6 @@ const Movie = () => {
             <Typography
               gutterBottom
               variant='subtitle2'
-              component='h2'
               className={classes.castCharacter}
             >
               {cast.cast[person]['character']}
