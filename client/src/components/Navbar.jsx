@@ -245,9 +245,9 @@ const Navbar = (props) => {
             />
           </div>
           <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
+          <div className={classes.sectionDesktop}></div>
             <LinkRoute
-              to={`login`}
+              to={`/login`}
               style={{ textDecoration: 'none', color: 'white' }}
             >
               <IconButton aria-label='show 4 new mails' color='inherit'>
@@ -257,7 +257,7 @@ const Navbar = (props) => {
               </IconButton>
             </LinkRoute>
             <LinkRoute
-              to={`register`}
+              to={`/register`}
               style={{ textDecoration: 'none', color: 'white' }}
             >
               <IconButton aria-label='show 4 new mails' color='inherit'>
