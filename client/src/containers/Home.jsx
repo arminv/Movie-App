@@ -159,6 +159,7 @@ const Home = (props) => {
         variant='contained'
         color='primary'
         aria-label='contained primary button group'
+        style={{ maxWidth: '90%' }}
       >
         <Button onClick={handleTabSwitch}>Popular</Button>
         <Button onClick={handleTabSwitch}>Now Playing</Button>
@@ -173,12 +174,7 @@ const Home = (props) => {
       </h1>
 
       <Container>
-        <Grid
-          container
-          alignItems='stretch'
-          direction='row'
-          justify='center'
-        >
+        <Grid container alignItems='stretch' direction='row' justify='center'>
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
             {props.searchQuery !== '' ? (
               <Grid container justify='center' spacing={3}>
@@ -229,59 +225,61 @@ const Home = (props) => {
           </Grid>
         </Grid>
 
-        {props.searchQuery !== '' ? (
-          <Pagination
-            size='large'
-            color='primary'
-            variant='outlined'
-            count={props.searchResults.totalPages}
-            page={props.searchPage}
-            onChange={(event, value) => handleSearchPageChange(event, value)}
-          />
-        ) : (
-          <>
-            {selectedTab === 'POPULAR' && (
-              <Pagination
-                size='large'
-                color='primary'
-                variant='outlined'
-                count={props.popular.totalPages}
-                page={page}
-                onChange={(event, value) => handlePageChange(event, value)}
-              />
-            )}
-            {selectedTab === 'NOW PLAYING' && (
-              <Pagination
-                size='large'
-                color='primary'
-                variant='outlined'
-                count={props.nowPlaying.totalPages}
-                page={page}
-                onChange={(event, value) => handlePageChange(event, value)}
-              />
-            )}
-            {selectedTab === 'TOP RATED' && (
-              <Pagination
-                size='large'
-                color='primary'
-                variant='outlined'
-                count={props.topRated.totalPages}
-                page={page}
-                onChange={(event, value) => handlePageChange(event, value)}
-              />
-            )}
-            {selectedTab === 'UPCOMING' && (
-              <Pagination
-                size='large'
-                color='primary'
-                variant='outlined'
-                count={props.upcoming.totalPages}
-                page={page}
-                onChange={(event, value) => handlePageChange(event, value)}
-              />
-            )}
-          </>
-        )}
+        <div style={{marginBottom: '50px'}}>
+          {props.searchQuery !== '' ? (
+            <Pagination
+              size='large'
+              color='primary'
+              variant='outlined'
+              count={props.searchResults.totalPages}
+              page={props.searchPage}
+              onChange={(event, value) => handleSearchPageChange(event, value)}
+            />
+          ) : (
+            <>
+              {selectedTab === 'POPULAR' && (
+                <Pagination
+                  size='large'
+                  color='primary'
+                  variant='outlined'
+                  count={props.popular.totalPages}
+                  page={page}
+                  onChange={(event, value) => handlePageChange(event, value)}
+                />
+              )}
+              {selectedTab === 'NOW PLAYING' && (
+                <Pagination
+                  size='large'
+                  color='primary'
+                  variant='outlined'
+                  count={props.nowPlaying.totalPages}
+                  page={page}
+                  onChange={(event, value) => handlePageChange(event, value)}
+                />
+              )}
+              {selectedTab === 'TOP RATED' && (
+                <Pagination
+                  size='large'
+                  color='primary'
+                  variant='outlined'
+                  count={props.topRated.totalPages}
+                  page={page}
+                  onChange={(event, value) => handlePageChange(event, value)}
+                />
+              )}
+              {selectedTab === 'UPCOMING' && (
+                <Pagination
+                  size='large'
+                  color='primary'
+                  variant='outlined'
+                  count={props.upcoming.totalPages}
+                  page={page}
+                  onChange={(event, value) => handlePageChange(event, value)}
+                />
+              )}
+            </>
+          )}
+        </div>
       </Container>
     </div>
   );

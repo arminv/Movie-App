@@ -157,16 +157,7 @@ const Movie = () => {
   const castCards = [];
   for (let person in cast.cast) {
     castCards.push(
-      <Grid
-        xs={4}
-        sm={3}
-        md={2}
-        lg={2}
-        xl={2}
-        style={{ display: 'flex' }}
-        justify='center'
-        key={person}
-      >
+      <Grid className='cards' item style={{ display: 'flex' }}>
         <Card className={classes.castCard}>
           <CardMedia
             className={classes.castMedia}
