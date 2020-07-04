@@ -173,7 +173,12 @@ const Home = (props) => {
       </h1>
 
       <Container>
-        <Grid container spacing={2} alignItems='stretch'>
+        <Grid
+          container
+          alignItems='stretch'
+          direction='row'
+          justify='center'
+        >
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
             {props.searchQuery !== '' ? (
               <Grid container justify='center' spacing={3}>

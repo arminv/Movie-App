@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import Chip from '@material-ui/core/Chip';
+import LanguageIcon from '@material-ui/icons/Language';
 
 const useStyles = makeStyles({
   root: {
@@ -21,6 +22,9 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
+    fontSize: '7rem',
+    backgroundColor: '#191413',
+    color: 'red',
   },
   media: {
     maxWidth: '100%',
@@ -57,7 +61,19 @@ export const Cards = ({ id, recommend = 'false' }) => {
   }
 
   const genreChips = genreNames.map((genre, index) => {
-    return <Chip label={genre} key={index} variant='outlined' size='small' />;
+    return (
+      <Chip
+        label={genre}
+        key={index}
+        variant='outlined'
+        size='small'
+        style={{
+          // backgroundColor: '#8D550D',
+          backgroundColor: '#8c5f26',
+          color: 'white',
+        }}
+      />
+    );
   });
 
   const classes = useStyles();
@@ -81,7 +97,11 @@ export const Cards = ({ id, recommend = 'false' }) => {
               onClick={() => {}}
             />
             <CardContent>
-              <Typography gutterBottom variant='h5' component='h2'>
+              <Typography
+                gutterBottom
+                variant='subtitle1'
+                style={{ color: 'whitesmoke' }}
+              >
                 {movie.title}
               </Typography>
               {genreChips}
@@ -103,7 +123,11 @@ export const Cards = ({ id, recommend = 'false' }) => {
               onClick={() => {}}
             />
             <CardContent>
-              <Typography gutterBottom variant='h5' component='h2'>
+              <Typography
+                gutterBottom
+                variant='subtitle1'
+                style={{ color: 'whitesmoke' }}
+              >
                 {movie.title}
               </Typography>
               {genreChips}
@@ -111,13 +135,15 @@ export const Cards = ({ id, recommend = 'false' }) => {
           </LinkRoute>
         )}
       </CardActionArea>
-      <CardActions>
-        <Link target='_blank' href={movie.homepage} rel='noopener noreferrer'>
-          <Button size='small' color='primary'>
-            Website
-          </Button>
-        </Link>
-      </CardActions>
+      {movie.homepage ? (
+        <CardActions>
+          <Link target='_blank' href={movie.homepage} rel='noopener noreferrer'>
+            <Button size='small' color='primary' style={{ color: 'white' }}>
+              <LanguageIcon>Website</LanguageIcon>
+            </Button>
+          </Link>
+        </CardActions>
+      ) : null}
     </Card>
   );
 };
