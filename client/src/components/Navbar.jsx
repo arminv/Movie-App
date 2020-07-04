@@ -245,7 +245,7 @@ const Navbar = (props) => {
             />
           </div>
           <div className={classes.grow} />
-          <div className={classes.sectionDesktop}></div>
+          <div className={classes.sectionDesktop}>
             <LinkRoute
               to={`/login`}
               style={{ textDecoration: 'none', color: 'white' }}
