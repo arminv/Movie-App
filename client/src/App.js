@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import store from './redux/store';
+import { loadUser } from './redux/actions';
 
 import Navbar from './components/Navbar';
 import Home from './containers/Home';
@@ -11,6 +13,10 @@ import AlertBar from './components/AlertBar';
 import './App.css';
 
 const App = () => {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
+
   return (
     <BrowserRouter>
       <div className='App'>

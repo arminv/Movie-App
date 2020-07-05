@@ -18,7 +18,6 @@ import {
   USER_LOADED,
   AUTH_ERROR,
 } from './actionTypes';
-import setAuthToken from '../utils/setAuthToken';
 
 export const addTopRated = (page, content, totalPages) => ({
   type: ADD_TOP_RATED,
@@ -105,13 +104,16 @@ export const setAlert = (msg, alertType, timeout = 4000) => (dispatch) => {
 
 // Load User:
 export const loadUser = () => async (dispatch) => {
-  // If token exists, add it to the headers for the request:
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
-  }
-
   try {
-    const res = await axios.get('/api/auth');
+    const res = await axios({
+      method: 'GET',
+      url: '/api/auth',
+      headers: {
+        common: {
+          'x-auth-token': localStorage.token,
+        },
+      },
+    });
 
     dispatch({
       type: USER_LOADED,
