@@ -1,4 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
+
 import {
   ADD_TOP_RATED,
   ADD_POPULAR,
@@ -11,6 +13,8 @@ import {
   SET_SEARCH_RESULTS,
   SET_ALERT,
   REMOVE_ALERT,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
 } from './actionTypes';
 
 export const addTopRated = (page, content, totalPages) => ({
@@ -94,4 +98,36 @@ export const setAlert = (msg, alertType, timeout = 4000) => (dispatch) => {
   });
 
   setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), timeout);
+};
+
+// Register User:
+export const register = ({ name, email, password }) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const body = JSON.stringify({ name, email, password });
+
+  try {
+    const res = await axios.post('/api/users', body, config);
+    dispatch({
+      type: REGISTER_SUCCESS,
+      // payload is the token:
+      payload: res.data,
+    });
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => {
+        dispatch(setAlert(error.msg, 'error'));
+      });
+    }
+
+    dispatch({
+      type: REGISTER_FAIL,
+    });
+  }
 };

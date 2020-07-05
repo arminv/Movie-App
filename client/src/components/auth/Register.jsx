@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 
-import { setAlert } from '../../redux/actions';
+import { setAlert, register } from '../../redux/actions';
 import PropTypes from 'prop-types';
 
 import './Register.css';
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, register }) => {
   const classes = useStyles();
 
   const [formData, setFormData] = useState({
@@ -44,27 +44,7 @@ const Register = ({ setAlert }) => {
     if (password !== password2) {
       setAlert('Pasword do not match!', 'error');
     } else {
-      console.log('SUCCESS!');
-      // const newUser = {
-      //   name,
-      //   email,
-      //   password,
-      // };
-
-      // try {
-      //   const config = {
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //   };
-
-      //   const body = JSON.stringify(newUser);
-
-      //   const res = await axios.post('/api/users', body, config);
-      //   console.log(res.data);
-      // } catch (err) {
-      //   console.error(err.response.data);
-      // }
+      register({ name, email, password });
     }
   };
 
@@ -140,8 +120,10 @@ const Register = ({ setAlert }) => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
 };
 
 export default connect(null, {
   setAlert,
+  register,
 })(Register);
