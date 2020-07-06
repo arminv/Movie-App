@@ -22,11 +22,16 @@
   color: rgb(255, 38, 0);
 }
 
+h4 {
+  padding-top: 0px !important;
+  margin-top: 0px !important;
+}
+
 .content {
   padding: 5vmax;
   margin: 0vw 15vw;
   min-height: 100vmax;
-  background-color: rgba(0, 0, 0, 0.863);
+  background-color: rgba(0, 0, 0, 0.9);
   text-align: left;
   line-height: 30px;
 }
@@ -43,7 +48,7 @@
   .content {
     min-width: 100vw;
     min-height: 100vw;
-    background-color: rgba(0, 0, 0, 0.863);
+    background-color: rgba(0, 0, 0, 0.95);
     text-align: left;
     line-height: 30px;
     padding: 20px;

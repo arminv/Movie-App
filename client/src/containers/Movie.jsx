@@ -32,7 +32,7 @@ const BASE_IMG_LARGE_URL = 'https://image.tmdb.org/t/p/w1280';
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: '20vw',
+    // maxWidth: '20vw',
     border: '2px solid rgba(255, 174, 0, 0.7)',
     display: 'flex',
     justifyContent: 'space-between',
@@ -234,8 +234,8 @@ const Movie = () => {
           </div>
           <br />
           <br />
-          <Grid container spacing={3}>
-            <Grid item xs={3}>
+          <Grid container spacing={3} alignItems='stretch'>
+            <Grid item xs={12} sm={4}>
               <Card className={classes.card}>
                 {movie.homepage ? (
                   <CardActionArea>
@@ -274,7 +274,7 @@ const Movie = () => {
                 )}
               </Card>
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={12} sm={8}>
               <h4 style={{ marginTop: '50px', marginBottom: '30px' }}>
                 {movie.overview}
               </h4>
@@ -308,7 +308,7 @@ const Movie = () => {
                 ) : null}
               </span>
               <span>
-                {movie.revenue ? (
+                {movie.runtime ? (
                   <Chip
                     className={classes.infoChips}
                     label={`Runtime : ${minutesToHours(movie.runtime)}`}
@@ -337,6 +337,8 @@ const Movie = () => {
                   />
                 ) : null}
               </span>
+              <br />
+              <br />
               <span>{movieGenres}</span>
             </Grid>
             {images.images && Object.keys(images.images).length !== 0 ? (
@@ -367,9 +369,9 @@ const Movie = () => {
               </>
             ) : null}
             {recommendations && Object.keys(recommendations).length ? (
-              <>
+              <div style={{ marginBottom: '30px' }}>
                 <h2 style={{ marginTop: '50px', marginBottom: '30px' }}>
-                  Recommendations:
+                  Recommended Movies:
                 </h2>
                 <Grid
                   container
@@ -379,7 +381,7 @@ const Movie = () => {
                 >
                   {recommendationsCards}
                 </Grid>
-              </>
+              </div>
             ) : null}
           </Grid>
         </div>
