@@ -28,6 +28,23 @@ const App = () => {
           <Route exact path='/movie/:id' component={Movie}></Route>
           <Route exact path='/:myPage?' component={Home}></Route>
         </Switch>
+        <p
+          style={{
+            color: 'white',
+            textDecoration: 'none',
+            marginBottom: '10px',
+            fontSize: '16px',
+          }}
+        >
+          @2020 by{' '}
+          <a
+            href='https://www.arminvarshokar.com'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            Armin Varshokar
+          </a>
+        </p>
       </div>
     </BrowserRouter>
   );
