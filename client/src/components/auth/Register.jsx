@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 // import axios from 'axios';
 
-import { Link as LinkRoute } from 'react-router-dom';
+import { Link as LinkRoute, Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
+import { setAlert, register } from '../../redux/actions';
+
+import PropTypes from 'prop-types';
 
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-
-import { setAlert, register } from '../../redux/actions';
-import PropTypes from 'prop-types';
 
 import './Register.css';
 
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Register = ({ setAlert, register }) => {
+const Register = ({ register, setAlert, isAuthenticated }) => {
   const classes = useStyles();
 
   const [formData, setFormData] = useState({
@@ -47,6 +47,11 @@ const Register = ({ setAlert, register }) => {
       register({ name, email, password });
     }
   };
+
+  // Redirect if user is logged in:
+  if (isAuthenticated) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <>
@@ -121,9 +126,14 @@ const Register = ({ setAlert, register }) => {
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
 
-export default connect(null, {
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.authReducer.isAuthenticated,
+});
+
+export default connect(mapStateToProps, {
   setAlert,
   register,
 })(Register);

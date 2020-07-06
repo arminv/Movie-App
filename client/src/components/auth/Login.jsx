@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 // import axios from 'axios';
+import { Link as LinkRoute, Redirect } from 'react-router-dom';
 
-import { Link as LinkRoute } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login } from '../../redux/actions';
+
+import PropTypes from 'prop-types';
 
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
@@ -18,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+const Login = ({ login, isAuthenticated }) => {
   const classes = useStyles();
 
   const [formData, setFormData] = useState({
@@ -34,28 +38,13 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log('SUCCESS!');
-    // const newUser = {
-    //   name,
-    //   email,
-    //   password,
-    // };
-
-    // try {
-    //   const config = {
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //   };
-
-    //   const body = JSON.stringify(newUser);
-
-    //   const res = await axios.post('/api/users', body, config);
-    //   console.log(res.data);
-    // } catch (err) {
-    //   console.error(err.response.data);
-    // }
+    login(email, password);
   };
+
+  // Redirect if user is logged in:
+  if (isAuthenticated) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <>
@@ -93,7 +82,7 @@ const Login = () => {
           variant='contained'
           color='primary'
         >
-          Register
+          Login
         </Button>
         <h4 className='subtitle'>
           Don't have an account?
@@ -108,4 +97,15 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.authReducer.isAuthenticated,
+});
+
+export default connect(mapStateToProps, {
+  login,
+})(Login);
