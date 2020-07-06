@@ -174,6 +174,7 @@ const Movie = () => {
           />
           <CardContent>
             <Typography
+              style={{ fontSize: '14px', wordWrap: 'break-word' }}
               gutterBottom
               variant='subtitle1'
               className={classes.castName}
@@ -181,6 +182,7 @@ const Movie = () => {
               {cast.cast[person]['name']}
             </Typography>
             <Typography
+              style={{ fontSize: '12px', wordWrap: 'break-word' }}
               gutterBottom
               variant='subtitle2'
               className={classes.castCharacter}
@@ -236,7 +238,7 @@ const Movie = () => {
           <br />
           <br />
           <Grid container spacing={3} alignItems='stretch'>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={3}>
               <Card className={classes.card}>
                 {movie.homepage ? (
                   <CardActionArea>
@@ -275,7 +277,7 @@ const Movie = () => {
                 )}
               </Card>
             </Grid>
-            <Grid item xs={12} sm={8}>
+            <Grid item xs={12} sm={9}>
               <h4 style={{ marginTop: '50px', marginBottom: '30px' }}>
                 {movie.overview}
               </h4>
@@ -290,7 +292,7 @@ const Movie = () => {
                       minimumFractionDigits: 0,
                     })}`}
                     icon={<LocalAtmIcon />}
-                    size='large'
+                    size='medium'
                   />
                 ) : null}
               </span>
@@ -304,7 +306,7 @@ const Movie = () => {
                       minimumFractionDigits: 0,
                     })}`}
                     icon={<AttachMoneyIcon />}
-                    size='large'
+                    size='medium'
                   />
                 ) : null}
               </span>
@@ -314,7 +316,7 @@ const Movie = () => {
                     className={classes.infoChips}
                     label={`Runtime : ${minutesToHours(movie.runtime)}`}
                     icon={<TimerIcon />}
-                    size='large'
+                    size='medium'
                   />
                 ) : null}
               </span>
@@ -324,7 +326,7 @@ const Movie = () => {
                     className={classes.infoChips}
                     label={`Release Date : ${movie.release_date}`}
                     icon={<TodayIcon />}
-                    size='large'
+                    size='medium'
                   />
                 ) : null}
               </span>
@@ -334,7 +336,7 @@ const Movie = () => {
                     className={classes.infoChips}
                     label={`Rating : ${movie.vote_average}`}
                     icon={<ThumbUpIcon />}
-                    size='large'
+                    size='medium'
                   />
                 ) : null}
               </span>

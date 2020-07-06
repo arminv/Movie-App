@@ -103,11 +103,13 @@ export const Cards = ({ id, recommend = 'false' }) => {
               >
                 {movie.title}
               </Typography>
+              <br />
               <Grid
                 container
                 alignItems='center'
-                direction='column'
+                // direction='column'
                 justify='center'
+                spacing={2}
               >
                 {genreChips}
               </Grid>

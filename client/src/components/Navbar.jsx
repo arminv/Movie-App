@@ -241,7 +241,7 @@ const Navbar = (props) => {
               }}
               inputProps={{ 'aria-label': 'search' }}
               onInput={(e) => handleSearch(e.target.value)}
-              autoFocus='true'
+              autoFocus={true}
             />
           </div>
           <div className={classes.grow} />
