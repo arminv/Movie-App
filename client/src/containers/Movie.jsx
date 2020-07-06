@@ -65,6 +65,7 @@ const useStyles = makeStyles({
   },
   infoChips: {
     backgroundColor: '#b7e2ed',
+    margin: '5px',
   },
 });
 
@@ -289,7 +290,7 @@ const Movie = () => {
                       minimumFractionDigits: 0,
                     })}`}
                     icon={<LocalAtmIcon />}
-                    size='small'
+                    size='large'
                   />
                 ) : null}
               </span>
@@ -303,7 +304,7 @@ const Movie = () => {
                       minimumFractionDigits: 0,
                     })}`}
                     icon={<AttachMoneyIcon />}
-                    size='small'
+                    size='large'
                   />
                 ) : null}
               </span>
@@ -313,7 +314,7 @@ const Movie = () => {
                     className={classes.infoChips}
                     label={`Runtime : ${minutesToHours(movie.runtime)}`}
                     icon={<TimerIcon />}
-                    size='small'
+                    size='large'
                   />
                 ) : null}
               </span>
@@ -323,7 +324,7 @@ const Movie = () => {
                     className={classes.infoChips}
                     label={`Release Date : ${movie.release_date}`}
                     icon={<TodayIcon />}
-                    size='small'
+                    size='large'
                   />
                 ) : null}
               </span>
@@ -331,9 +332,9 @@ const Movie = () => {
                 {movie.vote_average ? (
                   <Chip
                     className={classes.infoChips}
-                    label={`Vote Average : ${movie.vote_average}`}
+                    label={`Rating : ${movie.vote_average}`}
                     icon={<ThumbUpIcon />}
-                    size='small'
+                    size='large'
                   />
                 ) : null}
               </span>
