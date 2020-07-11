@@ -179,25 +179,75 @@ const Navbar = (props) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <LinkRoute to={`/`} style={{ textDecoration: 'none', color: 'blue' }}>
-          <HomeIcon />
-          <p style={{ color: 'black' }}>Home</p>
-        </LinkRoute>
-      </MenuItem>
-      <MenuItem>
-        <LinkRoute
-          to={`login`}
-          style={{ textDecoration: 'none', color: 'blue' }}
-        >
-          <IconButton aria-label='show 11 new notifications' color='inherit'>
-            <Badge badgeContent={5} color='secondary'>
-              <ShopIcon />
-            </Badge>
-          </IconButton>
-          <p style={{ color: 'black' }}>My Movies</p>
-        </LinkRoute>
-      </MenuItem>
+      {props.auth.isAuthenticated ? (
+        <div>
+          <MenuItem>
+            <LinkRoute
+              to={`/`}
+              style={{ textDecoration: 'none', color: 'blue' }}
+            >
+              <HomeIcon />
+              <p style={{ color: 'black' }}>Home</p>
+            </LinkRoute>
+          </MenuItem>
+          <MenuItem>
+            <LinkRoute
+              to={`/`}
+              style={{ textDecoration: 'none', color: 'blue' }}
+            >
+              <IconButton
+                aria-label='show 11 new notifications'
+                color='inherit'
+              >
+                <Badge badgeContent={5} color='secondary'>
+                  <ShopIcon />
+                </Badge>
+              </IconButton>
+              <p style={{ color: 'black' }}>My Movies</p>
+            </LinkRoute>
+          </MenuItem>
+          <MenuItem onClick={props.logout}>
+            <LinkRoute
+              to={`/`}
+              style={{ textDecoration: 'none', color: 'blue' }}
+            >
+              <ExitToAppIcon />
+              <p style={{ color: 'black' }}>Logout</p>
+            </LinkRoute>
+          </MenuItem>
+        </div>
+      ) : (
+        <div>
+          <MenuItem>
+            <LinkRoute
+              to={`/`}
+              style={{ textDecoration: 'none', color: 'blue' }}
+            >
+              <HomeIcon />
+              <p style={{ color: 'black' }}>Home</p>
+            </LinkRoute>
+          </MenuItem>
+          <MenuItem>
+            <LinkRoute
+              to={`/login`}
+              style={{ textDecoration: 'none', color: 'blue' }}
+            >
+              <VpnKeyIcon />
+              <p style={{ color: 'black' }}>Log In</p>
+            </LinkRoute>
+          </MenuItem>
+          <MenuItem>
+            <LinkRoute
+              to={`/register`}
+              style={{ textDecoration: 'none', color: 'blue' }}
+            >
+              <LockOpenIcon />
+              <p style={{ color: 'black' }}>Sign Up</p>
+            </LinkRoute>
+          </MenuItem>
+        </div>
+      )}
+
       {/* <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label='account of current user'
@@ -250,7 +300,7 @@ const Navbar = (props) => {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             {props.auth.isAuthenticated ? (
-              <>
+              <div>
                 <IconButton aria-label='show 4 new mails' color='inherit'>
                   <Badge badgeContent={3} color='secondary'>
                     <ShopIcon />
@@ -265,9 +315,9 @@ const Navbar = (props) => {
                     <ExitToAppIcon />
                   </Badge>
                 </IconButton>
-              </>
+              </div>
             ) : (
-              <>
+              <div>
                 <LinkRoute
                   to={`/login`}
                   style={{ textDecoration: 'none', color: 'white' }}
@@ -286,7 +336,7 @@ const Navbar = (props) => {
                     <LockOpenIcon />
                   </IconButton>
                 </LinkRoute>
-              </>
+              </div>
             )}
             {/* <IconButton
               edge='end'
