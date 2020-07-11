@@ -9,6 +9,7 @@ import {
   setSearchQuery,
   setSearchResults,
   setSearchPage,
+  logout,
 } from '../redux/actions';
 
 import { fade, makeStyles } from '@material-ui/core/styles';
@@ -28,6 +29,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ShopIcon from '@material-ui/icons/Shop';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -246,24 +249,45 @@ const Navbar = (props) => {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <LinkRoute
-              to={`/login`}
-              style={{ textDecoration: 'none', color: 'white' }}
-            >
-              <IconButton aria-label='show 4 new mails' color='inherit'>
-                <Badge badgeContent={3} color='secondary'>
-                  <ShopIcon />
-                </Badge>
-              </IconButton>
-            </LinkRoute>
-            <LinkRoute
-              to={`/register`}
-              style={{ textDecoration: 'none', color: 'white' }}
-            >
-              <IconButton aria-label='show 4 new mails' color='inherit'>
-                <LockOpenIcon />
-              </IconButton>
-            </LinkRoute>
+            {props.auth.isAuthenticated ? (
+              <>
+                <IconButton aria-label='show 4 new mails' color='inherit'>
+                  <Badge badgeContent={3} color='secondary'>
+                    <ShopIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton
+                  onClick={props.logout}
+                  aria-label='show 4 new mails'
+                  color='inherit'
+                >
+                  <Badge color='secondary'>
+                    <ExitToAppIcon />
+                  </Badge>
+                </IconButton>
+              </>
+            ) : (
+              <>
+                <LinkRoute
+                  to={`/login`}
+                  style={{ textDecoration: 'none', color: 'white' }}
+                >
+                  <IconButton aria-label='show 4 new mails' color='inherit'>
+                    <Badge color='secondary'>
+                      <VpnKeyIcon />
+                    </Badge>
+                  </IconButton>
+                </LinkRoute>
+                <LinkRoute
+                  to={`/register`}
+                  style={{ textDecoration: 'none', color: 'white' }}
+                >
+                  <IconButton aria-label='show 4 new mails' color='inherit'>
+                    <LockOpenIcon />
+                  </IconButton>
+                </LinkRoute>
+              </>
+            )}
             {/* <IconButton
               edge='end'
               aria-label='account of current user'
@@ -298,6 +322,7 @@ function mapStateToProps(state) {
   return {
     searchPage: state.lastPageReducer.searchPage,
     searchQuery: state.searchReducer.searchQuery,
+    auth: state.authReducer,
   };
 }
 
@@ -305,4 +330,5 @@ export default connect(mapStateToProps, {
   setSearchQuery,
   setSearchResults,
   setSearchPage,
+  logout,
 })(Navbar);
