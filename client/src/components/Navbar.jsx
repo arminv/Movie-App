@@ -192,16 +192,16 @@ const Navbar = (props) => {
           </MenuItem>
           <MenuItem>
             <LinkRoute
-              to={`/`}
+              to={`/cart`}
               style={{ textDecoration: 'none', color: 'blue' }}
             >
               <IconButton
                 aria-label='show 11 new notifications'
                 color='inherit'
               >
-                <Badge badgeContent={5} color='secondary'>
+                {/* <Badge badgeContent={5} color='secondary'> */}
                   <ShopIcon />
-                </Badge>
+                {/* </Badge> */}
               </IconButton>
               <p style={{ color: 'black' }}>My Movies</p>
             </LinkRoute>
