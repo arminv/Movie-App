@@ -20,6 +20,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  GET_USER_MOVIES,
+  GET_MOVIES_ERROR,
 } from './actionTypes';
 
 export const addTopRated = (page, content, totalPages) => ({
@@ -198,4 +200,29 @@ export const login = (email, password) => async (dispatch) => {
 // Logout User:
 export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT });
+};
+
+// Get User's Movies:
+export const getUserMovies = (userId) => async (dispatch) => {
+  try {
+    const res = await axios({
+      method: 'GET',
+      url: `/api/movies/${userId}`,
+      headers: {
+        common: {
+          'x-auth-token': localStorage.token,
+        },
+      },
+    });
+
+    dispatch({
+      type: GET_USER_MOVIES,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: GET_MOVIES_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
 };

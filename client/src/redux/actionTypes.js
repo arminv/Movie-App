@@ -16,3 +16,5 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
+export const GET_USER_MOVIES = 'GET_USER_MOVIES';
+export const GET_MOVIES_ERROR = 'GET_MOVIES_ERROR';

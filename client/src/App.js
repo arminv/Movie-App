@@ -27,8 +27,8 @@ const App = () => {
         <Switch>
           <Route exact path='/register' component={Register} />
           <Route exact path='/login' component={Login} />
-          <PrivateRoute exact path='/cart' component={Cart} />
           <Route exact path='/movie/:id' component={Movie} />
+          <PrivateRoute exact path='/cart' component={Cart} />
           <Route exact path='/:myPage?' component={Home} />
         </Switch>
         <p

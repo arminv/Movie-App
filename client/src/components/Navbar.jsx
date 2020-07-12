@@ -199,7 +199,10 @@ const Navbar = (props) => {
                 aria-label='show 11 new notifications'
                 color='inherit'
               >
-                {/* <Badge badgeContent={5} color='secondary'> */}
+                {/* <Badge
+                  badgeContent={Object.keys(props.userMovies).length}
+                  color='secondary'
+                > */}
                   <ShopIcon />
                 {/* </Badge> */}
               </IconButton>
@@ -306,7 +309,10 @@ const Navbar = (props) => {
                   style={{ textDecoration: 'none', color: 'white' }}
                 >
                   <IconButton aria-label='show 4 new mails' color='inherit'>
-                    {/* <Badge badgeContent={3} color='secondary'> */}
+                    {/* <Badge
+                      badgeContent={Object.keys(props.userMovies).length}
+                      color='secondary'
+                    > */}
                       <ShopIcon />
                     {/* </Badge> */}
                   </IconButton>
@@ -378,6 +384,7 @@ const mapStateToProps = (state) => {
     searchPage: state.lastPageReducer.searchPage,
     searchQuery: state.searchReducer.searchQuery,
     auth: state.authReducer,
+    // userMovies: state.moviesReducer.userMovies,
   };
 };
 
