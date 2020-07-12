@@ -225,7 +225,7 @@ const Home = (props) => {
           </Grid>
         </Grid>
 
-        <div style={{marginBottom: '50px'}}>
+        <div style={{ marginBottom: '50px' }}>
           {props.searchQuery !== '' ? (
             <Pagination
               size='large'
@@ -285,7 +285,7 @@ const Home = (props) => {
   );
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     popular: state.moviesReducer.popular,
     nowPlaying: state.moviesReducer.nowPlaying,
@@ -297,7 +297,7 @@ function mapStateToProps(state) {
     searchResults: state.searchReducer.searchResults,
     searchQuery: state.searchReducer.searchQuery,
   };
-}
+};
 
 export default connect(mapStateToProps, {
   addTopRated,

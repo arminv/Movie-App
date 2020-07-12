@@ -9,6 +9,8 @@ import Movie from './containers/Movie';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import AlertBar from './components/AlertBar';
+import Cart from './containers/Cart';
+import PrivateRoute from './components/routing/PrivateRoute';
 
 import './App.css';
 
@@ -23,10 +25,11 @@ const App = () => {
         <Navbar />
         <AlertBar />
         <Switch>
-          <Route exact path='/register' component={Register}></Route>
-          <Route exact path='/login' component={Login}></Route>
-          <Route exact path='/movie/:id' component={Movie}></Route>
-          <Route exact path='/:myPage?' component={Home}></Route>
+          <Route exact path='/register' component={Register} />
+          <Route exact path='/login' component={Login} />
+          <PrivateRoute exact path='/cart' component={Cart} />
+          <Route exact path='/movie/:id' component={Movie} />
+          <Route exact path='/:myPage?' component={Home} />
         </Switch>
         <p
           style={{

@@ -35,10 +35,10 @@ Alert.propTypes = {
   alerts: PropTypes.array.isRequired,
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     alerts: state.alertReducer,
   };
-}
+};
 
 export default connect(mapStateToProps)(AlertBar);

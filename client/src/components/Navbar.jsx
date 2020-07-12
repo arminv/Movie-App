@@ -301,11 +301,16 @@ const Navbar = (props) => {
           <div className={classes.sectionDesktop}>
             {props.auth.isAuthenticated ? (
               <div>
-                <IconButton aria-label='show 4 new mails' color='inherit'>
-                  <Badge badgeContent={3} color='secondary'>
-                    <ShopIcon />
-                  </Badge>
-                </IconButton>
+                <LinkRoute
+                  to={`/cart`}
+                  style={{ textDecoration: 'none', color: 'white' }}
+                >
+                  <IconButton aria-label='show 4 new mails' color='inherit'>
+                    {/* <Badge badgeContent={3} color='secondary'> */}
+                      <ShopIcon />
+                    {/* </Badge> */}
+                  </IconButton>
+                </LinkRoute>
                 <IconButton
                   onClick={props.logout}
                   aria-label='show 4 new mails'
@@ -368,13 +373,13 @@ const Navbar = (props) => {
   );
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     searchPage: state.lastPageReducer.searchPage,
     searchQuery: state.searchReducer.searchQuery,
     auth: state.authReducer,
   };
-}
+};
 
 export default connect(mapStateToProps, {
   setSearchQuery,
