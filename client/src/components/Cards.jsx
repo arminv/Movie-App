@@ -4,17 +4,18 @@ import { Link as LinkRoute } from 'react-router-dom';
 import { fetch_by_id } from '../api/index';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
-import Chip from '@material-ui/core/Chip';
 import LanguageIcon from '@material-ui/icons/Language';
-import Grid from '@material-ui/core/Grid';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 const useStyles = makeStyles({
   root: {
@@ -141,7 +142,7 @@ export const Cards = ({ id, recommend = 'false' }) => {
               <Grid
                 container
                 alignItems='center'
-                direction='column'
+                // direction='column'
                 justify='center'
               >
                 {genreChips}
@@ -157,8 +158,25 @@ export const Cards = ({ id, recommend = 'false' }) => {
               <LanguageIcon>Website</LanguageIcon>
             </Button>
           </Link>
+          <Button
+            size='small'
+            color='primary'
+            style={{ color: 'white', alignItems: 'flex-end' }}
+          >
+            <AddCircleOutlineIcon>Add Movie</AddCircleOutlineIcon>
+          </Button>
         </CardActions>
-      ) : null}
+      ) : (
+        <CardActions>
+          <Button
+            size='small'
+            color='primary'
+            style={{ color: 'white', alignItems: 'flex-end' }}
+          >
+            <AddCircleOutlineIcon>Add Movie</AddCircleOutlineIcon>
+          </Button>
+        </CardActions>
+      )}
     </Card>
   );
 };

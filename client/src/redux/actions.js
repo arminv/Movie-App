@@ -22,6 +22,7 @@ import {
   LOGOUT,
   GET_USER_MOVIES,
   GET_MOVIES_ERROR,
+  // ADD_USER_MOVIE,
 } from './actionTypes';
 
 export const addTopRated = (page, content, totalPages) => ({
@@ -219,6 +220,33 @@ export const getUserMovies = (userId) => async (dispatch) => {
       type: GET_USER_MOVIES,
       payload: res.data,
     });
+  } catch (err) {
+    dispatch({
+      type: GET_MOVIES_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Add a Movie to User's cart:
+export const addUserMovie = (movieId) => async (dispatch) => {
+  try {
+    return await axios({
+      method: 'POST',
+      url: `/api/movies`,
+      headers: {
+        common: {
+          'Content-Type': 'application/json',
+          'x-auth-token': localStorage.token,
+        },
+      },
+      body: JSON.stringify({ movies: movieId }),
+    });
+
+    // dispatch({
+    //   type: ADD_USER_MOVIE,
+    //   payload: res.data,
+    // });
   } catch (err) {
     dispatch({
       type: GET_MOVIES_ERROR,
