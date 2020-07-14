@@ -23,7 +23,7 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
-import { Cards } from '../components/Cards';
+import Cards from '../components/Cards';
 
 // const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/original';

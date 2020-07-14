@@ -20,7 +20,7 @@ import { ButtonGroup, Button } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import { Pagination } from '@material-ui/lab';
 
-import { Cards } from '../components/Cards';
+import Cards from '../components/Cards';
 
 import './Home.css';
 

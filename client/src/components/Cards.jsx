@@ -3,6 +3,9 @@ import { Link as LinkRoute } from 'react-router-dom';
 
 import { fetch_by_id } from '../api/index';
 
+import { connect } from 'react-redux';
+import { addUserMovie } from '../redux/actions';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -35,7 +38,7 @@ const useStyles = makeStyles({
 
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
-export const Cards = ({ id, recommend = 'false' }) => {
+const Cards = ({ id, recommend = 'false', addUserMovie }) => {
   const [movie, setMovie] = useState({});
 
   useEffect(() => {
@@ -151,32 +154,33 @@ export const Cards = ({ id, recommend = 'false' }) => {
           </LinkRoute>
         )}
       </CardActionArea>
-      {movie.homepage ? (
-        <CardActions>
+      <CardActions>
+        {movie.homepage ? (
           <Link target='_blank' href={movie.homepage} rel='noopener noreferrer'>
             <Button size='small' color='primary' style={{ color: 'white' }}>
               <LanguageIcon>Website</LanguageIcon>
             </Button>
           </Link>
-          <Button
-            size='small'
-            color='primary'
-            style={{ color: 'white', alignItems: 'flex-end' }}
-          >
-            <AddCircleOutlineIcon>Add Movie</AddCircleOutlineIcon>
-          </Button>
-        </CardActions>
-      ) : (
-        <CardActions>
-          <Button
-            size='small'
-            color='primary'
-            style={{ color: 'white', alignItems: 'flex-end' }}
-          >
-            <AddCircleOutlineIcon>Add Movie</AddCircleOutlineIcon>
-          </Button>
-        </CardActions>
-      )}
+        ) : (
+          ''
+        )}
+        <Button
+          size='small'
+          color='primary'
+          style={{ color: 'white', alignItems: 'flex-end' }}
+          onClick={() => addUserMovie(id)}
+        >
+          <AddCircleOutlineIcon>Add Movie</AddCircleOutlineIcon>
+        </Button>
+      </CardActions>
     </Card>
   );
 };
+
+const mapStateToProps = (state) => {
+  return {};
+};
+
+export default connect(mapStateToProps, { addUserMovie })(Cards);
+
+// export default Cards;

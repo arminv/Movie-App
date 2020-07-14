@@ -7,7 +7,7 @@ import { getUserMovies } from '../redux/actions';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
-import { Cards } from '../components/Cards';
+import Cards from '../components/Cards';
 
 const Cart = ({ user, getUserMovies, userMovies }) => {
   useEffect(() => {

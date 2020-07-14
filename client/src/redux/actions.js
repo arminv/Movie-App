@@ -230,23 +230,17 @@ export const getUserMovies = (userId) => async (dispatch) => {
 
 // Add a Movie to User's cart:
 export const addUserMovie = (movieId) => async (dispatch) => {
-  try {
-    return await axios({
-      method: 'POST',
-      url: `/api/movies`,
-      headers: {
-        common: {
-          'Content-Type': 'application/json',
-          'x-auth-token': localStorage.token,
-        },
-      },
-      body: JSON.stringify({ movies: movieId }),
-    });
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-token': localStorage.token,
+    },
+  };
 
-    // dispatch({
-    //   type: ADD_USER_MOVIE,
-    //   payload: res.data,
-    // });
+  const body = JSON.stringify({ movies: movieId });
+  try {
+    const res = await axios.post('/api/movies', body, config);
+    return res;
   } catch (err) {
     dispatch({
       type: GET_MOVIES_ERROR,
