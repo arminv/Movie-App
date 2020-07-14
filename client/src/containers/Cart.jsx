@@ -2,18 +2,12 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getUserMovies } from '../redux/actions';
-
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
 import Cards from '../components/Cards';
 
-const Cart = ({ user, getUserMovies, userMovies }) => {
-  useEffect(() => {
-    getUserMovies(user._id);
-  }, [getUserMovies, user._id]);
-
+const Cart = ({ userMovies }) => {
   const userMovieCards = Object.keys(userMovies).map((item, index) => {
     return (
       <Grid className='cards' key={index} item style={{ display: 'flex' }}>
@@ -38,12 +32,11 @@ const Cart = ({ user, getUserMovies, userMovies }) => {
 };
 
 Cart.propTypes = {
-  user: PropTypes.object.isRequired,
+  userMovies: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  user: state.authReducer.user,
   userMovies: state.moviesReducer.userMovies,
 });
 
-export default connect(mapStateToProps, { getUserMovies })(Cart);
+export default connect(mapStateToProps, {})(Cart);

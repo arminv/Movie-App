@@ -13,6 +13,7 @@ import {
   setLastPage,
   setSearchPage,
   setSearchQuery,
+  getUserMovies,
 } from '../redux/actions';
 
 import Grid from '@material-ui/core/Grid';
@@ -30,6 +31,12 @@ const Home = (props) => {
 
   const selectedTab = props.lastPage;
   const [page, setPage] = useState(parseInt(myPage) ? parseInt(myPage) : 1);
+
+  useEffect(() => {
+    if (props.user) {
+      props.getUserMovies(props.user._id);
+    }
+  }, [props.getUserMovies, props]);
 
   useEffect(() => {
     async function getPopularMovies(page) {
@@ -296,6 +303,7 @@ const mapStateToProps = (state) => {
     searchPage: state.lastPageReducer.searchPage,
     searchResults: state.searchReducer.searchResults,
     searchQuery: state.searchReducer.searchQuery,
+    user: state.authReducer.user,
   };
 };
 
@@ -308,4 +316,5 @@ export default connect(mapStateToProps, {
   setLastPage,
   setSearchPage,
   setSearchQuery,
+  getUserMovies,
 })(Home);
