@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Link as LinkRoute, useHistory } from 'react-router-dom';
 import { throttle } from 'lodash';
 
@@ -124,20 +124,20 @@ const Navbar = (props) => {
 
     props.setSearchQuery(query);
     props.setSearchResults(searchResults, props.searchPage, searchTotalPages);
-  }, 500);
+  }, 1000);
 
-  const handleSearch = (query) => {
-    throttledSearch(query);
-  };
+  const handleSearch = useCallback(
+    (query) => {
+      throttledSearch(query);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [throttledSearch, props]
+  );
 
   useEffect(() => {
     handleSearch(props.searchQuery);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
-
-  // const handleProfileMenuOpen = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -203,7 +203,7 @@ const Navbar = (props) => {
                   badgeContent={Object.keys(props.userMovies).length}
                   color='secondary'
                 > */}
-                  <ShopIcon />
+                <ShopIcon />
                 {/* </Badge> */}
               </IconButton>
               <p style={{ color: 'black' }}>My Movies</p>
@@ -313,7 +313,7 @@ const Navbar = (props) => {
                       badgeContent={Object.keys(props.userMovies).length}
                       color='secondary'
                     > */}
-                      <ShopIcon />
+                    <ShopIcon />
                     {/* </Badge> */}
                   </IconButton>
                 </LinkRoute>

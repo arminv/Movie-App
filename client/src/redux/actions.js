@@ -249,3 +249,22 @@ export const addUserMovie = (movieId) => async (dispatch) => {
     });
   }
 };
+
+// Remove a Movie from User's cart:
+export const removeUserMovie = (movieUId) => async (dispatch) => {
+  const config = {
+    headers: {
+      'x-auth-token': localStorage.token,
+    },
+  };
+
+  try {
+    const res = await axios.post(`/api/movies/${movieUId}`, config);
+    return res;
+  } catch (err) {
+    dispatch({
+      type: GET_MOVIES_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
