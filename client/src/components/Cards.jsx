@@ -19,6 +19,7 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import LanguageIcon from '@material-ui/icons/Language';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 
 const useStyles = makeStyles({
   root: {
@@ -38,7 +39,7 @@ const useStyles = makeStyles({
 
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
-const Cards = ({ id, recommend = 'false', addUserMovie }) => {
+const Cards = ({ id, recommend = 'false', addUserMovie, userMovies }) => {
   const [movie, setMovie] = useState({});
 
   useEffect(() => {
@@ -78,6 +79,39 @@ const Cards = ({ id, recommend = 'false', addUserMovie }) => {
       />
     );
   });
+
+  let alreadyAdded = false;
+  for (const item in userMovies) {
+    if (userMovies[item]['movies'] === id) {
+      alreadyAdded = true;
+    }
+  }
+
+  const AddButton = () => {
+    return (
+      <Button
+        size='small'
+        color='primary'
+        style={{ color: 'white', alignItems: 'flex-end' }}
+        onClick={() => addUserMovie(id)}
+      >
+        <AddCircleOutlineIcon>Add Movie</AddCircleOutlineIcon>
+      </Button>
+    );
+  };
+
+  const RemoveButton = () => {
+    return (
+      <Button
+        size='small'
+        color='primary'
+        style={{ color: 'white', alignItems: 'flex-end' }}
+        onClick={() => addUserMovie(id)}
+      >
+        <RemoveCircleOutlineIcon>Remove Movie</RemoveCircleOutlineIcon>
+      </Button>
+    );
+  };
 
   const classes = useStyles();
 
@@ -164,21 +198,16 @@ const Cards = ({ id, recommend = 'false', addUserMovie }) => {
         ) : (
           ''
         )}
-        <Button
-          size='small'
-          color='primary'
-          style={{ color: 'white', alignItems: 'flex-end' }}
-          onClick={() => addUserMovie(id)}
-        >
-          <AddCircleOutlineIcon>Add Movie</AddCircleOutlineIcon>
-        </Button>
+        {alreadyAdded ? <RemoveButton /> : <AddButton />}
       </CardActions>
     </Card>
   );
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    userMovies: state.moviesReducer.userMovies,
+  };
 };
 
 export default connect(mapStateToProps, { addUserMovie })(Cards);
