@@ -22,15 +22,18 @@ const Cart = ({ user, getUserMovies, userMovies }) => {
     );
   });
   return (
-    <Container>
-      <Grid container alignItems='stretch' direction='row' justify='center'>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          <Grid container justify='center' spacing={3}>
-            {userMovieCards}
+    <div>
+      <h1>MY MOVIES</h1>
+      <Container>
+        <Grid container alignItems='stretch' direction='row' justify='center'>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+            <Grid container justify='center' spacing={3}>
+              {userMovieCards}
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </div>
   );
 };
 

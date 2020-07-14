@@ -238,6 +238,7 @@ export const addUserMovie = (movieId) => async (dispatch) => {
   };
 
   const body = JSON.stringify({ movies: movieId });
+
   try {
     const res = await axios.post('/api/movies', body, config);
     return res;
