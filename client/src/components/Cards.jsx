@@ -21,6 +21,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import { Container } from '@material-ui/core';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles({
   root: {
@@ -46,6 +47,7 @@ const Cards = ({
   addUserMovie,
   userMovies,
   removeUserMovie,
+  auth,
 }) => {
   const [movie, setMovie] = useState({});
 
@@ -95,7 +97,20 @@ const Cards = ({
   }
 
   const AddButton = () => {
-    return (
+    return !auth ? (
+      <Tooltip title='Please sign in to add movie to your list'>
+        <Button
+          size='small'
+          color='primary'
+          style={{ color: 'white', alignItems: 'flex-end' }}
+          onClick={() => {
+            return null;
+          }}
+        >
+          <AddCircleOutlineIcon>Add Movie</AddCircleOutlineIcon>
+        </Button>
+      </Tooltip>
+    ) : (
       <Button
         size='small'
         color='primary'
@@ -236,6 +251,7 @@ const Cards = ({
 const mapStateToProps = (state) => {
   return {
     userMovies: state.moviesReducer.userMovies,
+    auth: state.authReducer.isAuthenticated,
   };
 };
 
