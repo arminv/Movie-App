@@ -209,7 +209,12 @@ const Navbar = (props) => {
               <p style={{ color: 'black' }}>My Movies</p>
             </LinkRoute>
           </MenuItem>
-          <MenuItem onClick={props.logout}>
+          <MenuItem
+            onClick={() => {
+              props.logout();
+              window.location.reload(false);
+            }}
+          >
             <LinkRoute
               to={`/`}
               style={{ textDecoration: 'none', color: 'blue' }}
@@ -318,7 +323,10 @@ const Navbar = (props) => {
                   </IconButton>
                 </LinkRoute>
                 <IconButton
-                  onClick={props.logout}
+                  onClick={() => {
+                    props.logout();
+                    window.location.reload(false);
+                  }}
                   aria-label='show 4 new mails'
                   color='inherit'
                 >
