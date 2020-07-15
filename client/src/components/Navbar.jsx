@@ -384,7 +384,6 @@ const mapStateToProps = (state) => {
     searchPage: state.lastPageReducer.searchPage,
     searchQuery: state.searchReducer.searchQuery,
     auth: state.authReducer,
-    // userMovies: state.moviesReducer.userMovies,
   };
 };
 

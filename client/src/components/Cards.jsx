@@ -4,7 +4,7 @@ import { Link as LinkRoute } from 'react-router-dom';
 import { fetch_by_id } from '../api/index';
 
 import { connect } from 'react-redux';
-import { addUserMovie } from '../redux/actions';
+import { addUserMovie, removeUserMovie } from '../redux/actions';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -20,6 +20,7 @@ import Link from '@material-ui/core/Link';
 import LanguageIcon from '@material-ui/icons/Language';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
+import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
@@ -39,7 +40,13 @@ const useStyles = makeStyles({
 
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
-const Cards = ({ id, recommend = 'false', addUserMovie, userMovies }) => {
+const Cards = ({
+  id,
+  recommend = 'false',
+  addUserMovie,
+  userMovies,
+  removeUserMovie,
+}) => {
   const [movie, setMovie] = useState({});
 
   useEffect(() => {
@@ -93,11 +100,24 @@ const Cards = ({ id, recommend = 'false', addUserMovie, userMovies }) => {
         size='small'
         color='primary'
         style={{ color: 'white', alignItems: 'flex-end' }}
-        onClick={() => addUserMovie(id)}
+        onClick={() => {
+          addUserMovie(id);
+          window.location.reload(false);
+        }}
       >
         <AddCircleOutlineIcon>Add Movie</AddCircleOutlineIcon>
       </Button>
     );
+  };
+
+  const findAndRemoveMovie = (id) => {
+    let uid;
+    for (const item in userMovies) {
+      if (userMovies[item]['movies'] === id) {
+        uid = userMovies[item]['_id'];
+      }
+    }
+    removeUserMovie(uid);
   };
 
   const RemoveButton = () => {
@@ -106,7 +126,10 @@ const Cards = ({ id, recommend = 'false', addUserMovie, userMovies }) => {
         size='small'
         color='primary'
         style={{ color: 'white', alignItems: 'flex-end' }}
-        onClick={() => addUserMovie(id)}
+        onClick={() => {
+          findAndRemoveMovie(id);
+          window.location.reload(false);
+        }}
       >
         <RemoveCircleOutlineIcon>Remove Movie</RemoveCircleOutlineIcon>
       </Button>
@@ -189,16 +212,22 @@ const Cards = ({ id, recommend = 'false', addUserMovie, userMovies }) => {
         )}
       </CardActionArea>
       <CardActions>
-        {movie.homepage ? (
-          <Link target='_blank' href={movie.homepage} rel='noopener noreferrer'>
-            <Button size='small' color='primary' style={{ color: 'white' }}>
-              <LanguageIcon>Website</LanguageIcon>
-            </Button>
-          </Link>
-        ) : (
-          ''
-        )}
-        {alreadyAdded ? <RemoveButton /> : <AddButton />}
+        <Container>
+          {movie.homepage ? (
+            <Link
+              target='_blank'
+              href={movie.homepage}
+              rel='noopener noreferrer'
+            >
+              <Button size='small' color='primary' style={{ color: 'white' }}>
+                <LanguageIcon>Website</LanguageIcon>
+              </Button>
+            </Link>
+          ) : (
+            ''
+          )}
+          {alreadyAdded ? <RemoveButton /> : <AddButton />}
+        </Container>
       </CardActions>
     </Card>
   );
@@ -210,6 +239,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { addUserMovie })(Cards);
+export default connect(mapStateToProps, { addUserMovie, removeUserMovie })(
+  Cards
+);
 
 // export default Cards;

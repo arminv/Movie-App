@@ -254,12 +254,14 @@ export const addUserMovie = (movieId) => async (dispatch) => {
 export const removeUserMovie = (movieUId) => async (dispatch) => {
   const config = {
     headers: {
-      'x-auth-token': localStorage.token,
+      common: {
+        'x-auth-token': localStorage.token,
+      },
     },
   };
 
   try {
-    const res = await axios.post(`/api/movies/${movieUId}`, config);
+    const res = await axios.delete(`/api/movies/${movieUId}`, config);
     return res;
   } catch (err) {
     dispatch({
