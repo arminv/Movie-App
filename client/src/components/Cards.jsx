@@ -241,7 +241,7 @@ const Cards = ({
           ) : (
             ''
           )}
-          {alreadyAdded ? <RemoveButton /> : <AddButton />}
+          {alreadyAdded ? RemoveButton() : AddButton()}
         </Container>
       </CardActions>
     </Card>
