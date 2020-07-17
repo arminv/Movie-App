@@ -8,6 +8,7 @@ import { addUserMovie, removeUserMovie } from '../redux/actions';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import { Container } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -18,10 +19,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import LanguageIcon from '@material-ui/icons/Language';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
-import { Container } from '@material-ui/core';
-import Tooltip from '@material-ui/core/Tooltip';
+import CardButtons from './CardButtons';
 
 const useStyles = makeStyles({
   root: {
@@ -96,35 +94,6 @@ const Cards = ({
     }
   }
 
-  const AddButton = () => {
-    return !auth ? (
-      <Tooltip title='Please sign in to add movie to your list'>
-        <Button
-          size='small'
-          color='primary'
-          style={{ color: 'white', alignItems: 'flex-end' }}
-          onClick={() => {
-            return null;
-          }}
-        >
-          <AddCircleOutlineIcon>Add Movie</AddCircleOutlineIcon>
-        </Button>
-      </Tooltip>
-    ) : (
-      <Button
-        size='small'
-        color='primary'
-        style={{ color: 'white', alignItems: 'flex-end' }}
-        onClick={() => {
-          addUserMovie(id);
-          window.location.reload(false);
-        }}
-      >
-        <AddCircleOutlineIcon>Add Movie</AddCircleOutlineIcon>
-      </Button>
-    );
-  };
-
   const findAndRemoveMovie = (id) => {
     let uid;
     for (const item in userMovies) {
@@ -133,22 +102,6 @@ const Cards = ({
       }
     }
     removeUserMovie(uid);
-  };
-
-  const RemoveButton = () => {
-    return (
-      <Button
-        size='small'
-        color='primary'
-        style={{ color: 'white', alignItems: 'flex-end' }}
-        onClick={() => {
-          findAndRemoveMovie(id);
-          window.location.reload(false);
-        }}
-      >
-        <RemoveCircleOutlineIcon>Remove Movie</RemoveCircleOutlineIcon>
-      </Button>
-    );
   };
 
   const classes = useStyles();
@@ -241,7 +194,13 @@ const Cards = ({
           ) : (
             ''
           )}
-          {alreadyAdded ? RemoveButton() : AddButton()}
+
+          <CardButtons
+            removeBtn={alreadyAdded ? true : false}
+            addBtn={alreadyAdded ? false : true}
+            findAndRemoveMovie={findAndRemoveMovie}
+            id={id}
+          />
         </Container>
       </CardActions>
     </Card>
@@ -258,5 +217,3 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, { addUserMovie, removeUserMovie })(
   Cards
 );
-
-// export default Cards;
