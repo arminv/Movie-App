@@ -18,4 +18,5 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const GET_USER_MOVIES = 'GET_USER_MOVIES';
 export const GET_MOVIES_ERROR = 'GET_MOVIES_ERROR';
-// export const ADD_USER_MOVIE = 'ADD_USER_MOVIE';
+export const REMOVE_USER_MOVIE = 'REMOVE_USER_MOVIE';
+export const ADD_USER_MOVIE = 'ADD_USER_MOVIE';

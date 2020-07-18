@@ -22,7 +22,6 @@ import {
   LOGOUT,
   GET_USER_MOVIES,
   GET_MOVIES_ERROR,
-  // ADD_USER_MOVIE,
 } from './actionTypes';
 
 export const addTopRated = (page, content, totalPages) => ({

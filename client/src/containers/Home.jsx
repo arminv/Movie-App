@@ -27,7 +27,7 @@ import './Home.css';
 
 const Home = (props) => {
   const { myPage } = useParams();
-  const history = useHistory();
+  let history = useHistory();
 
   const selectedTab = props.lastPage;
   const [page, setPage] = useState(parseInt(myPage) ? parseInt(myPage) : 1);
@@ -36,7 +36,7 @@ const Home = (props) => {
     if (props.user) {
       props.getUserMovies(props.user._id);
     }
-  }, [props.getUserMovies, props]);
+  }, [props]);
 
   useEffect(() => {
     async function getPopularMovies(page) {
@@ -298,7 +298,6 @@ const mapStateToProps = (state) => {
     nowPlaying: state.moviesReducer.nowPlaying,
     topRated: state.moviesReducer.topRated,
     upcoming: state.moviesReducer.upcoming,
-    isLoading: state.moviesReducer.isLoading,
     lastPage: state.lastPageReducer.lastPage,
     searchPage: state.lastPageReducer.searchPage,
     searchResults: state.searchReducer.searchResults,

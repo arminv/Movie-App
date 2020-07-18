@@ -1,5 +1,7 @@
 **TODO:**
 
+- IMPORTANT: Add dispatch for ADD_USER_MOVIE and REMOVE_USER_MOVIE
+
 - Link each cast member picture to a Google search by their name + movie name
 - Destructure props inplace (from Redux, passed down, etc.) to clean up
 - Use porpTypes in all components (most are missing now)
