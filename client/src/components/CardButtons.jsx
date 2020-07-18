@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addUserMovie } from '../redux/actions';
+import { useHistory } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
@@ -14,7 +15,10 @@ const CardButtons = ({
   findAndRemoveMovie,
   addUserMovie,
   id,
+  cart,
 }) => {
+  const history = useHistory();
+
   if (addBtn && !auth) {
     return (
       <Tooltip title='Please sign in to add movie to your list'>
@@ -40,7 +44,7 @@ const CardButtons = ({
         style={{ color: 'white', alignItems: 'flex-end' }}
         onClick={() => {
           addUserMovie(id);
-          window.location.reload(false);
+          cart ? history.push(`/cart`) : history.push(`/home`);
         }}
       >
         <AddCircleOutlineIcon>Add Movie</AddCircleOutlineIcon>
@@ -56,7 +60,7 @@ const CardButtons = ({
         style={{ color: 'white', alignItems: 'flex-end' }}
         onClick={() => {
           findAndRemoveMovie(id);
-          window.location.reload(false);
+          cart ? history.push(`/cart`) : history.push(`/home`);
         }}
       >
         <RemoveCircleOutlineIcon>Remove Movie</RemoveCircleOutlineIcon>

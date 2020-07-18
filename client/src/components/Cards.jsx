@@ -46,6 +46,7 @@ const Cards = ({
   userMovies,
   removeUserMovie,
   auth,
+  cart,
 }) => {
   const [movie, setMovie] = useState({});
 
@@ -200,6 +201,7 @@ const Cards = ({
             addBtn={alreadyAdded ? false : true}
             findAndRemoveMovie={findAndRemoveMovie}
             id={id}
+            cart={cart}
           />
         </Container>
       </CardActions>
