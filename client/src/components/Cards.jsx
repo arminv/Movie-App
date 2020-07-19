@@ -135,12 +135,7 @@ const Cards = ({
                 {movie.title}
               </Typography>
               <br />
-              <Grid
-                container
-                alignItems='center'
-                // direction='column'
-                justify='center'
-              >
+              <Grid container alignItems='center' justify='center'>
                 {genreChips}
               </Grid>
             </CardContent>
@@ -168,12 +163,7 @@ const Cards = ({
               >
                 {movie.title}
               </Typography>
-              <Grid
-                container
-                alignItems='center'
-                // direction='column'
-                justify='center'
-              >
+              <Grid container alignItems='center' justify='center'>
                 {genreChips}
               </Grid>
             </CardContent>

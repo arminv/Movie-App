@@ -431,5 +431,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { getUserMovies, setLoading })(Movie);
-
-// export default Movie;

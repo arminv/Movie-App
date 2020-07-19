@@ -1,6 +1,6 @@
 **TODO:**
 
-- IMPORTANT: Add dispatch for ADD_USER_MOVIE and REMOVE_USER_MOVIE
+- use https://video-react.js.org/ and https://developers.themoviedb.org/3/movies/get-movie-videos to embed trailers for each movie
 
 - Link each cast member picture to a Google search by their name + movie name
 - Destructure props inplace (from Redux, passed down, etc.) to clean up

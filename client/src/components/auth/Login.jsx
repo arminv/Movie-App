@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import axios from 'axios';
 import { Link as LinkRoute, Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
@@ -78,7 +77,6 @@ const Login = ({ login, isAuthenticated }) => {
         </div>
         <Button
           type='submit'
-          // onClick={onSubmit}
           variant='contained'
           color='primary'
         >
