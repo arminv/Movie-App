@@ -229,7 +229,7 @@ const Movie = ({ user, userMovies, getUserMovies, setLoading }) => {
         <Grid className='cards' key={index} item style={{ display: 'flex' }}>
           <Cards
             id={recommendations[item]['id']}
-            key={index}
+            key={recommendations[item]['id']}
             recommend='true'
           />
         </Grid>
@@ -396,22 +396,14 @@ const Movie = ({ user, userMovies, getUserMovies, setLoading }) => {
                 <h2 style={{ marginTop: '50px', marginBottom: '30px' }}>
                   Recommended Movies:
                 </h2>
-                <Container style={{ marginBottom: '30px' }}>
+                <Container style={{ marginBottom: '40px' }}>
                   <Grid
                     container
                     alignItems='stretch'
                     direction='row'
                     justify='center'
                   >
-                    <Grid
-                      item
-                      xs={12}
-                      sm={12}
-                      md={12}
-                      lg={12}
-                      xl={12}
-                      justify='center'
-                    >
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                       <Grid container justify='center' spacing={3}>
                         {recommendationsCards}
                       </Grid>
@@ -429,7 +421,7 @@ const Movie = ({ user, userMovies, getUserMovies, setLoading }) => {
 
 Movie.propTypes = {
   userMovies: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
