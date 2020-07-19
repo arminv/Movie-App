@@ -35,7 +35,7 @@ const App = () => {
           style={{
             color: 'white',
             textDecoration: 'none',
-            marginBottom: '10px',
+            padding: '10px 0px',
             fontSize: '16px',
             backgroundColor: 'transparent'
           }}
