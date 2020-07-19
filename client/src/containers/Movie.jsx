@@ -52,6 +52,7 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
+    backgroundColor: 'whitesmoke',
   },
   castMedia: {
     maxWidth: '100%',
@@ -246,7 +247,13 @@ const Movie = ({ user, userMovies, getUserMovies, setLoading }) => {
         <div className='content'>
           <div className='heading'>
             <h1>{movie.title}</h1>
-            {movie.tagline ? <h3>"{movie.tagline}"</h3> : <></>}
+            {movie.tagline ? (
+              <h3>
+                <i>"{movie.tagline}"</i>
+              </h3>
+            ) : (
+              <></>
+            )}
           </div>
           <br />
           <br />
@@ -389,7 +396,7 @@ const Movie = ({ user, userMovies, getUserMovies, setLoading }) => {
                 <h2 style={{ marginTop: '50px', marginBottom: '30px' }}>
                   Recommended Movies:
                 </h2>
-                <Container style={{ marginBottom: '40px' }}>
+                <Container style={{ marginBottom: '30px' }}>
                   <Grid
                     container
                     alignItems='stretch'

@@ -125,7 +125,6 @@ const Cards = ({
                 : 'https://betravingknows.com/wp-content/uploads/2017/06/video-movie-placeholder-image-grey.png'
             }
             title={`${movie.title}`}
-            onClick={() => {}}
           />
           <CardContent>
             <Typography
@@ -158,7 +157,6 @@ const Cards = ({
           ) : (
             ''
           )}
-
           <CardButtons
             removeBtn={alreadyAdded ? true : false}
             addBtn={alreadyAdded ? false : true}
