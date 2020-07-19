@@ -110,65 +110,38 @@ const Cards = ({
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        {recommend !== 'true' ? (
-          <LinkRoute to={`movie/${id}`} style={{ textDecoration: 'none' }}>
-            <CardMedia
-              className={classes.media}
-              component='img'
-              alt={`${movie.title}`}
-              height='500'
-              image={
-                movie.poster_path
-                  ? `${BASE_IMG_URL}${movie.poster_path}`
-                  : 'https://betravingknows.com/wp-content/uploads/2017/06/video-movie-placeholder-image-grey.png'
-              }
-              title={`${movie.title}`}
-              onClick={() => {}}
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant='subtitle1'
-                style={{ color: 'whitesmoke' }}
-                justify='center'
-              >
-                {movie.title}
-              </Typography>
-              <br />
-              <Grid container alignItems='center' justify='center'>
-                {genreChips}
-              </Grid>
-            </CardContent>
-          </LinkRoute>
-        ) : (
-          <LinkRoute to={`${id}`} style={{ textDecoration: 'none' }}>
-            <CardMedia
-              className={classes.media}
-              component='img'
-              alt={`${movie.title}`}
-              height='500'
-              image={
-                movie.poster_path
-                  ? `${BASE_IMG_URL}${movie.poster_path}`
-                  : 'https://betravingknows.com/wp-content/uploads/2017/06/video-movie-placeholder-image-grey.png'
-              }
-              title={`${movie.title}`}
-              onClick={() => {}}
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant='subtitle1'
-                style={{ color: 'whitesmoke' }}
-              >
-                {movie.title}
-              </Typography>
-              <Grid container alignItems='center' justify='center'>
-                {genreChips}
-              </Grid>
-            </CardContent>
-          </LinkRoute>
-        )}
+        <LinkRoute
+          to={recommend !== 'true' ? `movie/${id}` : `${id}`}
+          style={{ textDecoration: 'none' }}
+        >
+          <CardMedia
+            className={classes.media}
+            component='img'
+            alt={`${movie.title}`}
+            height='500'
+            image={
+              movie.poster_path
+                ? `${BASE_IMG_URL}${movie.poster_path}`
+                : 'https://betravingknows.com/wp-content/uploads/2017/06/video-movie-placeholder-image-grey.png'
+            }
+            title={`${movie.title}`}
+            onClick={() => {}}
+          />
+          <CardContent>
+            <Typography
+              gutterBottom
+              variant='subtitle1'
+              style={{ color: 'whitesmoke' }}
+              justify='center'
+            >
+              {movie.title}
+            </Typography>
+            <br />
+            <Grid container alignItems='center' justify='center'>
+              {genreChips}
+            </Grid>
+          </CardContent>
+        </LinkRoute>
       </CardActionArea>
       <CardActions>
         <Container>
