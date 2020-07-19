@@ -29,9 +29,9 @@ h4 {
 
 .content {
   padding: 5vmax;
-  margin: 0vw 15vw;
+  margin: 0vw 12vw;
   min-height: 100vmax;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.95);
   text-align: left;
   line-height: 30px;
 }
@@ -48,7 +48,7 @@ h4 {
   .content {
     min-width: 100vw;
     min-height: 100vw;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.95);
     text-align: left;
     line-height: 30px;
     padding: 20px;
