@@ -37,6 +37,7 @@ const App = () => {
             textDecoration: 'none',
             marginBottom: '10px',
             fontSize: '16px',
+            backgroundColor: 'transparent'
           }}
         >
           @2020 by{' '}

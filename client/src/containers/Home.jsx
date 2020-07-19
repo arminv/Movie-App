@@ -35,7 +35,10 @@ const Home = (props) => {
   useEffect(() => {
     if (props.user) {
       props.getUserMovies(props.user._id);
+      setLoading(false);
+      return;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
 
   useEffect(() => {
@@ -302,6 +305,7 @@ const mapStateToProps = (state) => {
     searchPage: state.lastPageReducer.searchPage,
     searchResults: state.searchReducer.searchResults,
     searchQuery: state.searchReducer.searchQuery,
+    userMovies: state.moviesReducer.userMovies,
     user: state.authReducer.user,
   };
 };
