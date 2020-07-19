@@ -56,7 +56,6 @@ const CardButtons = ({
         style={{ color: 'white', alignItems: 'flex-end' }}
         onClick={() => {
           findAndRemoveMovie(id);
-          cart = false;
         }}
       >
         <RemoveCircleOutlineIcon>Remove Movie</RemoveCircleOutlineIcon>
@@ -72,5 +71,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { addUserMovie })(CardButtons);
-
-// export default CardButtons;
