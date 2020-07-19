@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import { getUserMovies, setLoading } from '../redux/actions';
 import { fetch_by_id } from '../api/index';
 
 import './Movie.css';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -69,7 +73,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Movie = () => {
+const Movie = ({ user, userMovies, getUserMovies, setLoading }) => {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
   const [recommendations, setRecommendations] = useState({});
@@ -80,6 +84,15 @@ const Movie = () => {
     // Scroll to top when page loads:
     window.scrollTo(0, 0);
   }, [id]);
+
+  useEffect(() => {
+    if (user) {
+      getUserMovies(user._id);
+      setLoading(false);
+      return;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userMovies]);
 
   useEffect(() => {
     async function getMovie(id) {
@@ -376,14 +389,28 @@ const Movie = () => {
                 <h2 style={{ marginTop: '50px', marginBottom: '30px' }}>
                   Recommended Movies:
                 </h2>
-                <Grid
-                  container
-                  justify='center'
-                  spacing={3}
-                  alignItems='stretch'
-                >
-                  {recommendationsCards}
-                </Grid>
+                <Container style={{ marginBottom: '40px' }}>
+                  <Grid
+                    container
+                    alignItems='stretch'
+                    direction='row'
+                    justify='center'
+                  >
+                    <Grid
+                      item
+                      xs={12}
+                      sm={12}
+                      md={12}
+                      lg={12}
+                      xl={12}
+                      justify='center'
+                    >
+                      <Grid container justify='center' spacing={3}>
+                        {recommendationsCards}
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Container>
               </div>
             ) : null}
           </Grid>
@@ -393,4 +420,16 @@ const Movie = () => {
   );
 };
 
-export default Movie;
+Movie.propTypes = {
+  userMovies: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  userMovies: state.moviesReducer.userMovies,
+  user: state.authReducer.user,
+});
+
+export default connect(mapStateToProps, { getUserMovies, setLoading })(Movie);
+
+// export default Movie;

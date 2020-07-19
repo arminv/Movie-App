@@ -130,6 +130,7 @@ const Cards = ({
                 gutterBottom
                 variant='subtitle1'
                 style={{ color: 'whitesmoke' }}
+                justify='center'
               >
                 {movie.title}
               </Typography>
@@ -139,7 +140,6 @@ const Cards = ({
                 alignItems='center'
                 // direction='column'
                 justify='center'
-                spacing={2}
               >
                 {genreChips}
               </Grid>
