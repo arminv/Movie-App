@@ -1,5 +1,7 @@
 **TODO:**
 
+- Runtime (Movie page) seems to be wrong (e.g. check movie 'Underwater' - actual duration is 1h35m)
+
 - use https://video-react.js.org/ and https://developers.themoviedb.org/3/movies/get-movie-videos to embed trailers for each movie
 - Sort movies in the Cart by date added, rating, duration, etc.
 
