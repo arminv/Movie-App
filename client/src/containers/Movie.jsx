@@ -14,9 +14,12 @@ import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
-import Link from '@material-ui/core/Link';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
+import Link from '@material-ui/core/Link';
 import Chip from '@material-ui/core/Chip';
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
@@ -363,6 +366,24 @@ const Movie = ({ user, userMovies, getUserMovies, setLoading }) => {
               <br />
               <br />
               <span>{movieGenres}</span>
+              <br />
+              <br />
+              <div style={{ padding: '1em 0em' }}>
+                <Button
+                  color='primary'
+                  variant='contained'
+                  startIcon={<AddCircleOutlineIcon />}
+                >
+                  Add To Cart
+                </Button>
+                <Button
+                  color='secondary'
+                  variant='contained'
+                  startIcon={<RemoveCircleOutlineIcon />}
+                >
+                  Remove From Cart
+                </Button>
+              </div>
             </Grid>
             {images.images && Object.keys(images.images).length !== 0 ? (
               <>
