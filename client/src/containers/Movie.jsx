@@ -165,7 +165,7 @@ const Movie = ({ user, userMovies, getUserMovies, setLoading }) => {
   const minutesToHours = (runtime) => {
     let hrs = runtime / 60;
     let mins = (hrs - Math.floor(hrs)) * 60;
-    let remHrs = hrs.toFixed(0);
+    let remHrs = Math.floor(hrs);
     let remMins = Math.round(mins);
     return remHrs + 'h ' + remMins + 'm';
   };
