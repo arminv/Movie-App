@@ -417,7 +417,6 @@ const Movie = ({
                     variant='contained'
                     startIcon={<AddCircleOutlineIcon />}
                     onClick={() => {
-                      console.log(id);
                       addUserMovie(id);
                     }}
                   >
@@ -429,10 +428,7 @@ const Movie = ({
                       color='primary'
                       variant='contained'
                       startIcon={<AddCircleOutlineIcon />}
-                      onClick={() => {
-                        console.log(id);
-                        addUserMovie(id);
-                      }}
+                      onClick={() => {}}
                     >
                       Add To Cart
                     </Button>
