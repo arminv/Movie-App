@@ -31,6 +31,7 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import TimerIcon from '@material-ui/icons/Timer';
 import TodayIcon from '@material-ui/icons/Today';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
@@ -84,6 +85,7 @@ const useStyles = makeStyles({
 
 const Movie = ({
   user,
+  auth,
   userMovies,
   getUserMovies,
   setLoading,
@@ -409,7 +411,7 @@ const Movie = ({
                   >
                     Remove From Cart
                   </Button>
-                ) : (
+                ) : auth ? (
                   <Button
                     color='primary'
                     variant='contained'
@@ -421,6 +423,20 @@ const Movie = ({
                   >
                     Add To Cart
                   </Button>
+                ) : (
+                  <Tooltip title='Please sign in to add movie to your list'>
+                    <Button
+                      color='primary'
+                      variant='contained'
+                      startIcon={<AddCircleOutlineIcon />}
+                      onClick={() => {
+                        console.log(id);
+                        addUserMovie(id);
+                      }}
+                    >
+                      Add To Cart
+                    </Button>
+                  </Tooltip>
                 )}
               </div>
             </Grid>
@@ -487,6 +503,7 @@ Movie.propTypes = {
 const mapStateToProps = (state) => ({
   userMovies: state.moviesReducer.userMovies,
   user: state.authReducer.user,
+  auth: state.authReducer.isAuthenticated,
 });
 
 export default connect(mapStateToProps, {
