@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
-import { Link as LinkRoute, useHistory } from 'react-router-dom';
+import { Link as LinkRoute } from 'react-router-dom';
 import { throttle } from 'lodash';
 
 import { search_movies_by_name } from '../api/index';
@@ -21,10 +21,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-// import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-// import AccountCircle from '@material-ui/icons/AccountCircle';
-// import NotificationsIcon from '@material-ui/icons/Notifications';
 import HomeIcon from '@material-ui/icons/Home';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ShopIcon from '@material-ui/icons/Shop';
@@ -97,8 +94,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navbar = (props) => {
-  let history = useHistory();
-
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -108,8 +103,6 @@ const Navbar = (props) => {
 
   // Throttle the search via lodash and add both query and results to the store:
   const throttledSearch = throttle(async (query) => {
-    history.push(`/`);
-
     if (query === '') {
       props.setSearchQuery('');
       props.setSearchResults([], props.searchPage, 0);
@@ -124,14 +117,14 @@ const Navbar = (props) => {
 
     props.setSearchQuery(query);
     props.setSearchResults(searchResults, props.searchPage, searchTotalPages);
-  }, 1000);
+  }, 2000);
 
   const handleSearch = useCallback(
     (query) => {
       throttledSearch(query);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [throttledSearch, props]
+    [props]
   );
 
   useEffect(() => {
@@ -255,18 +248,6 @@ const Navbar = (props) => {
           </MenuItem>
         </div>
       )}
-
-      {/* <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label='account of current user'
-          aria-controls='primary-search-account-menu'
-          aria-haspopup='true'
-          color='inherit'
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem> */}
     </Menu>
   );
 
@@ -274,14 +255,6 @@ const Navbar = (props) => {
     <div className={classes.grow}>
       <AppBar position='static'>
         <Toolbar>
-          {/* <IconButton
-            edge='start'
-            className={classes.menuButton}
-            color='inherit'
-            aria-label='open drawer'
-          >
-            <MenuIcon />
-          </IconButton> */}
           <Typography className={classes.title} variant='h6' noWrap>
             <LinkRoute
               to={'/'}
@@ -357,16 +330,6 @@ const Navbar = (props) => {
                 </LinkRoute>
               </div>
             )}
-            {/* <IconButton
-              edge='end'
-              aria-label='account of current user'
-              aria-controls={menuId}
-              aria-haspopup='true'
-              onClick={handleProfileMenuOpen}
-              color='inherit'
-            >
-              <AccountCircle />
-            </IconButton> */}
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
