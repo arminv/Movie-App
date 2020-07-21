@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { getUserMovies, setLoading } from '../redux/actions';
+import {
+  getUserMovies,
+  setLoading,
+  addUserMovie,
+  removeUserMovie,
+} from '../redux/actions';
 import { fetch_by_id } from '../api/index';
 
 import './Movie.css';
@@ -77,12 +82,36 @@ const useStyles = makeStyles({
   },
 });
 
-const Movie = ({ user, userMovies, getUserMovies, setLoading }) => {
+const Movie = ({
+  user,
+  userMovies,
+  getUserMovies,
+  setLoading,
+  addUserMovie,
+  removeUserMovie,
+}) => {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
   const [recommendations, setRecommendations] = useState({});
   const [images, setImages] = useState({});
   const [cast, setCast] = useState({});
+
+  let alreadyAdded = false;
+  for (const item in userMovies) {
+    if (userMovies[item]['movies'] === +id) {
+      alreadyAdded = true;
+    }
+  }
+
+  const findAndRemoveMovie = (id) => {
+    let uid;
+    for (const item in userMovies) {
+      if (userMovies[item]['movies'] === +id) {
+        uid = userMovies[item]['_id'];
+      }
+    }
+    removeUserMovie(uid);
+  };
 
   useEffect(() => {
     // Scroll to top when page loads:
@@ -369,20 +398,30 @@ const Movie = ({ user, userMovies, getUserMovies, setLoading }) => {
               <br />
               <br />
               <div style={{ padding: '1em 0em' }}>
-                <Button
-                  color='primary'
-                  variant='contained'
-                  startIcon={<AddCircleOutlineIcon />}
-                >
-                  Add To Cart
-                </Button>
-                <Button
-                  color='secondary'
-                  variant='contained'
-                  startIcon={<RemoveCircleOutlineIcon />}
-                >
-                  Remove From Cart
-                </Button>
+                {alreadyAdded ? (
+                  <Button
+                    color='secondary'
+                    variant='contained'
+                    startIcon={<RemoveCircleOutlineIcon />}
+                    onClick={() => {
+                      findAndRemoveMovie(id);
+                    }}
+                  >
+                    Remove From Cart
+                  </Button>
+                ) : (
+                  <Button
+                    color='primary'
+                    variant='contained'
+                    startIcon={<AddCircleOutlineIcon />}
+                    onClick={() => {
+                      console.log(id);
+                      addUserMovie(id);
+                    }}
+                  >
+                    Add To Cart
+                  </Button>
+                )}
               </div>
             </Grid>
             {images.images && Object.keys(images.images).length !== 0 ? (
@@ -450,4 +489,9 @@ const mapStateToProps = (state) => ({
   user: state.authReducer.user,
 });
 
-export default connect(mapStateToProps, { getUserMovies, setLoading })(Movie);
+export default connect(mapStateToProps, {
+  getUserMovies,
+  setLoading,
+  addUserMovie,
+  removeUserMovie,
+})(Movie);

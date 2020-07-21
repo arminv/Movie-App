@@ -1,6 +1,5 @@
 **TODO:**
 
-- Runtime (Movie page) seems to be wrong (e.g. check movie 'Underwater' - actual duration is 1h35m)
 
 - use https://video-react.js.org/ and https://developers.themoviedb.org/3/movies/get-movie-videos to embed trailers for each movie
 - Sort movies in the Cart by date added, rating, duration, etc.
@@ -12,6 +11,7 @@
 - Add reference to MOVIE DB website (licence)
 - Add a cart for each user to keep their: 1) Watch Later 2) Already Watched (plus rating for each movie)
 - Deploy on Heroku
+- ~~Runtime (Movie page) seems to be wrong (e.g. check movie 'Underwater' - actual duration is 1h35m)~~
 - ~~Add auth using JWT/PassportJS~~
 - ~~Add reommendations to the bottom of Movie page (based on current page, from Movie DB API)~~
 - ~~Fix issue when there is only one cast member (e.g. http://localhost:3000/movie/36619)~~
