@@ -39,7 +39,7 @@ const Home = (props) => {
       return;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props]);
+  }, [props.user]);
 
   useEffect(() => {
     async function getPopularMovies(page) {

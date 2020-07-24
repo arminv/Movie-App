@@ -127,7 +127,7 @@ const Movie = ({
       return;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userMovies]);
+  }, [user]);
 
   useEffect(() => {
     async function getMovie(id) {
@@ -406,7 +406,7 @@ const Movie = ({
                     variant='contained'
                     startIcon={<RemoveCircleOutlineIcon />}
                     onClick={() => {
-                      findAndRemoveMovie(id);
+                      findAndRemoveMovie(id, user._id);
                     }}
                   >
                     Remove From Cart
@@ -417,7 +417,7 @@ const Movie = ({
                     variant='contained'
                     startIcon={<AddCircleOutlineIcon />}
                     onClick={() => {
-                      addUserMovie(id);
+                      addUserMovie(id, user._id);
                     }}
                   >
                     Add To Cart

@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { getUserMovies, setLoading } from '../redux/actions';
 import PropTypes from 'prop-types';
 
 import Container from '@material-ui/core/Container';
@@ -8,16 +7,7 @@ import Grid from '@material-ui/core/Grid';
 
 import Cards from '../components/Cards';
 
-const Cart = ({ userMovies, getUserMovies, user, setLoading }) => {
-  useEffect(() => {
-    if (user) {
-      getUserMovies(user._id);
-      setLoading(false);
-      return;
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userMovies]);
-
+const Cart = ({ userMovies }) => {
   const userMovieCards = Object.keys(userMovies).map((item, index) => {
     return (
       <Grid className='cards' key={index} item style={{ display: 'flex' }}>
@@ -43,12 +33,10 @@ const Cart = ({ userMovies, getUserMovies, user, setLoading }) => {
 
 Cart.propTypes = {
   userMovies: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   userMovies: state.moviesReducer.userMovies,
-  user: state.authReducer.user,
 });
 
-export default connect(mapStateToProps, { getUserMovies, setLoading })(Cart);
+export default connect(mapStateToProps, {})(Cart);

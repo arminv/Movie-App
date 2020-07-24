@@ -228,7 +228,7 @@ export const getUserMovies = (userId) => async (dispatch) => {
 };
 
 // Add a Movie to User's cart:
-export const addUserMovie = (movieId) => async (dispatch) => {
+export const addUserMovie = (movieId, userId) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -239,8 +239,8 @@ export const addUserMovie = (movieId) => async (dispatch) => {
   const body = JSON.stringify({ movies: movieId });
 
   try {
-    const res = await axios.post('/api/movies', body, config);
-    return res;
+    await axios.post('/api/movies', body, config);
+    dispatch(getUserMovies(userId));
   } catch (err) {
     dispatch({
       type: GET_MOVIES_ERROR,
@@ -250,7 +250,7 @@ export const addUserMovie = (movieId) => async (dispatch) => {
 };
 
 // Remove a Movie from User's cart:
-export const removeUserMovie = (movieUId) => async (dispatch) => {
+export const removeUserMovie = (movieUId, userId) => async (dispatch) => {
   const config = {
     headers: {
       common: {
@@ -260,8 +260,8 @@ export const removeUserMovie = (movieUId) => async (dispatch) => {
   };
 
   try {
-    const res = await axios.delete(`/api/movies/${movieUId}`, config);
-    return res;
+    await axios.delete(`/api/movies/${movieUId}`, config);
+    dispatch(getUserMovies(userId));
   } catch (err) {
     dispatch({
       type: GET_MOVIES_ERROR,

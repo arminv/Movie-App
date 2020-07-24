@@ -15,6 +15,7 @@ const CardButtons = ({
   addUserMovie,
   id,
   cart,
+  user,
 }) => {
   if (addBtn && !auth) {
     return (
@@ -40,7 +41,9 @@ const CardButtons = ({
         color='primary'
         style={{ color: 'white', alignItems: 'flex-end' }}
         onClick={() => {
-          addUserMovie(id);
+          if (user) {
+            addUserMovie(id, user._id);
+          }
         }}
       >
         <AddCircleOutlineIcon>Add Movie</AddCircleOutlineIcon>
@@ -55,7 +58,7 @@ const CardButtons = ({
         color='primary'
         style={{ color: 'white', alignItems: 'flex-end' }}
         onClick={() => {
-          findAndRemoveMovie(id);
+          findAndRemoveMovie(id, user._id);
         }}
       >
         <RemoveCircleOutlineIcon>Remove Movie</RemoveCircleOutlineIcon>
@@ -67,6 +70,7 @@ const CardButtons = ({
 const mapStateToProps = (state) => {
   return {
     auth: state.authReducer.isAuthenticated,
+    user: state.authReducer.user,
   };
 };
 
