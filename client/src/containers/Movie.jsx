@@ -105,14 +105,14 @@ const Movie = ({
     }
   }
 
-  const findAndRemoveMovie = (id) => {
+  const findAndRemoveMovie = (id, userId) => {
     let uid;
     for (const item in userMovies) {
       if (userMovies[item]['movies'] === +id) {
         uid = userMovies[item]['_id'];
       }
     }
-    removeUserMovie(uid);
+    removeUserMovie(uid, userId);
   };
 
   useEffect(() => {
