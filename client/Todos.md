@@ -3,6 +3,7 @@
 
 - use https://video-react.js.org/ and https://developers.themoviedb.org/3/movies/get-movie-videos to embed trailers for each movie
 - Sort movies in the Cart by date added, rating, duration, etc.
+- change footer to an actual HTML footer
 
 - Link each cast member picture to a Google search by their name + movie name
 - Destructure props inplace (from Redux, passed down, etc.) to clean up
