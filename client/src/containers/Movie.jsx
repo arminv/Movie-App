@@ -207,38 +207,45 @@ const Movie = ({
   for (let person in cast.cast) {
     castCards.push(
       <Grid className='cards' item style={{ display: 'flex' }}>
-        <Card className={classes.castCard}>
-          <CardMedia
-            className={classes.castMedia}
-            component='img'
-            alt={`${movie.title}`}
-            height='500'
-            image={
-              cast.cast[person]['profile_path']
-                ? `${BASE_IMG_URL}${cast.cast[person]['profile_path']}`
-                : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
-            }
-            title={`${movie.title}`}
-          />
-          <CardContent>
-            <Typography
-              style={{ fontSize: '14px', wordWrap: 'break-word' }}
-              gutterBottom
-              variant='subtitle1'
-              className={classes.castName}
-            >
-              {cast.cast[person]['name']}
-            </Typography>
-            <Typography
-              style={{ fontSize: '12px', wordWrap: 'break-word' }}
-              gutterBottom
-              variant='subtitle2'
-              className={classes.castCharacter}
-            >
-              {cast.cast[person]['character']}
-            </Typography>
-          </CardContent>
-        </Card>
+        <a
+          href={`https://www.google.com/search?q=${cast.cast[person]['name']}`}
+          target='_blank'
+          style={{ textDecoration: 'none' }}
+          rel='noopener noreferrer'
+        >
+          <Card className={classes.castCard}>
+            <CardMedia
+              className={classes.castMedia}
+              component='img'
+              alt={`${movie.title}`}
+              height='500'
+              image={
+                cast.cast[person]['profile_path']
+                  ? `${BASE_IMG_URL}${cast.cast[person]['profile_path']}`
+                  : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+              }
+              title={`${movie.title}`}
+            />
+            <CardContent>
+              <Typography
+                style={{ fontSize: '14px', wordWrap: 'break-word' }}
+                gutterBottom
+                variant='subtitle1'
+                className={classes.castName}
+              >
+                {cast.cast[person]['name']}
+              </Typography>
+              <Typography
+                style={{ fontSize: '12px', wordWrap: 'break-word' }}
+                gutterBottom
+                variant='subtitle2'
+                className={classes.castCharacter}
+              >
+                {cast.cast[person]['character']}
+              </Typography>
+            </CardContent>
+          </Card>
+        </a>
       </Grid>
     );
   }
