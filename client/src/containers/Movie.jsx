@@ -163,6 +163,11 @@ const Movie = ({
     }
     getMovie(id);
 
+    async function getVideo(id) {
+      await fetch_by_id('VIDEOS', id);
+    }
+    getVideo(id);
+
     async function getRecommendations(id) {
       setRecommendations(await fetch_by_id('RECOMMENDATIONS', id));
     }

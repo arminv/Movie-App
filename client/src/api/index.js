@@ -35,6 +35,20 @@ export const fetch_by_id = async (type, id) => {
           console.log(error);
         });
     }
+    case 'VIDEOS': {
+      return await axios({
+        method: 'GET',
+        url: `${BASE_URL}/3/movie/${id}/videos?api_key=${API_KEY}`,
+        headers: HEADERS,
+      })
+        .then((response) => {
+          // console.log('fetch_by_id -> response', response.data.results);
+          return response.data.results;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
     case 'CAST': {
       return await axios({
         method: 'GET',
