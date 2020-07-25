@@ -42,7 +42,6 @@ export const fetch_by_id = async (type, id) => {
         headers: HEADERS,
       })
         .then((response) => {
-          // console.log('fetch_by_id -> response', response.data.results);
           return response.data.results;
         })
         .catch((error) => {

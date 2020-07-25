@@ -42,42 +42,42 @@ const Home = (props) => {
   }, [props.user]);
 
   useEffect(() => {
-    async function getPopularMovies(page) {
+    const getPopularMovies = async (page) => {
       const [popularMoviesResponse, popularTotalPages] = await fetch_movies(
         'POPULAR',
         page
       );
 
       props.addPopular(page, popularMoviesResponse, popularTotalPages);
-    }
+    };
     getPopularMovies(page);
 
-    async function getNowPlayingMovies(page) {
+    const getNowPlayingMovies = async (page) => {
       const [
         nowPlayingMoviesResponse,
         nowPlayingTotalPages,
       ] = await fetch_movies('NOW_PLAYING', page);
 
       props.addNowPlaying(page, nowPlayingMoviesResponse, nowPlayingTotalPages);
-    }
+    };
     getNowPlayingMovies(page);
 
-    async function getTopRatedMovies(page) {
+    const getTopRatedMovies = async (page) => {
       const [topRatedMoviesResponse, topRatedTotalPages] = await fetch_movies(
         'TOP_RATED',
         page
       );
       props.addTopRated(page, topRatedMoviesResponse, topRatedTotalPages);
-    }
+    };
     getTopRatedMovies(page);
 
-    async function getUpcomingMovies(page) {
+    const getUpcomingMovies = async (page) => {
       const [upcomingMoviesResponse, upcomingTotalPages] = await fetch_movies(
         'UPCOMING',
         page
       );
       props.addUpcoming(page, upcomingMoviesResponse, upcomingTotalPages);
-    }
+    };
     getUpcomingMovies(page);
 
     props.setLoading(false);

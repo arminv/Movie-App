@@ -51,7 +51,7 @@ const Cards = ({
   const [movie, setMovie] = useState({});
 
   useEffect(() => {
-    async function getMovie(id) {
+    const getMovie = async (id) => {
       const {
         title,
         overview,
@@ -61,7 +61,7 @@ const Cards = ({
       } = await fetch_by_id('MOVIE', id);
 
       setMovie({ id, title, overview, poster_path, homepage, genres });
-    }
+    };
     getMovie(id);
   }, [id]);
 

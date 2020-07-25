@@ -96,6 +96,8 @@ const Movie = ({
   const [movie, setMovie] = useState({});
   const [recommendations, setRecommendations] = useState({});
   const [images, setImages] = useState({});
+  // eslint-disable-next-line no-unused-vars
+  const [videos, setVideos] = useState([]);
   const [cast, setCast] = useState({});
 
   let alreadyAdded = false;
@@ -130,7 +132,7 @@ const Movie = ({
   }, [user]);
 
   useEffect(() => {
-    async function getMovie(id) {
+    const getMovie = async (id) => {
       const {
         title,
         overview,
@@ -160,33 +162,34 @@ const Movie = ({
         vote_average,
         tagline,
       });
-    }
+    };
     getMovie(id);
 
-    async function getVideo(id) {
-      await fetch_by_id('VIDEOS', id);
-    }
-    getVideo(id);
-
-    async function getRecommendations(id) {
+    const getRecommendations = async (id) => {
       setRecommendations(await fetch_by_id('RECOMMENDATIONS', id));
-    }
+    };
     getRecommendations(id);
 
-    async function getImages(id) {
+    const getImages = async (id) => {
       const images = await fetch_by_id('IMAGES', id);
       setImages({
         images,
       });
-    }
+    };
     getImages(id);
 
-    async function getCast(id) {
+    const getVideo = async (id) => {
+      const videos = await fetch_by_id('VIDEOS', id);
+      setVideos(videos);
+    };
+    getVideo(id);
+
+    const getCast = async (id) => {
       const cast = await fetch_by_id('CAST', id);
       setCast({
         cast,
       });
-    }
+    };
     getCast(id);
   }, [id]);
 
