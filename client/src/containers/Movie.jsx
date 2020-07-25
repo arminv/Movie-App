@@ -37,6 +37,7 @@ import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
 import Cards from '../components/Cards';
+import Video from '../components/Video';
 
 // const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/original';
@@ -192,6 +193,16 @@ const Movie = ({
     };
     getCast(id);
   }, [id]);
+
+  let trailerUrl = [];
+  for (const item of videos) {
+    if (
+      item['name'].toLowerCase().includes('trailer') &&
+      item['site'].toLowerCase().includes('youtube')
+    ) {
+      trailerUrl.push(item['key']);
+    }
+  }
 
   const imageGallery = [];
   for (let item in images.images) {
@@ -451,6 +462,18 @@ const Movie = ({
                 )}
               </div>
             </Grid>
+            {trailerUrl.length > 0 ? (
+              <>
+                <h2 style={{ marginTop: '50px', marginBottom: '30px' }}>
+                  Trailer:
+                </h2>
+                <Grid item xs={12}>
+                  <Video youtubeId={trailerUrl[0]} />
+                </Grid>
+              </>
+            ) : (
+              <></>
+            )}
             {images.images && Object.keys(images.images).length !== 0 ? (
               <>
                 <h2 style={{ marginTop: '50px', marginBottom: '30px' }}>
