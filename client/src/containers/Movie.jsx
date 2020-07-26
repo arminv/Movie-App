@@ -286,7 +286,7 @@ const Movie = ({
     recommendations &&
     Object.keys(recommendations).map((item, index) => {
       return (
-        <Grid key={index} item style={{ display: 'flex' }}>
+        <Grid className='cards' key={index} item style={{ display: 'flex' }}>
           <Cards
             id={recommendations[item]['id']}
             key={recommendations[item]['id']}
