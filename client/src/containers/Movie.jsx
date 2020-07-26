@@ -225,7 +225,7 @@ const Movie = ({
   const castCards = [];
   for (let person in cast.cast) {
     castCards.push(
-      <Grid className='cards' item style={{ display: 'flex' }} xs={6} sm={3}>
+      <Grid item style={{ display: 'flex' }} xs={6} sm={3}>
         <a
           href={`https://www.google.com/search?q=${cast.cast[person]['name']}`}
           target='_blank'
@@ -286,7 +286,7 @@ const Movie = ({
     recommendations &&
     Object.keys(recommendations).map((item, index) => {
       return (
-        <Grid className='cards' key={index} item style={{ display: 'flex' }}>
+        <Grid key={index} item style={{ display: 'flex' }}>
           <Cards
             id={recommendations[item]['id']}
             key={recommendations[item]['id']}
@@ -508,15 +508,11 @@ const Movie = ({
                 </h2>
                 <Grid
                   container
-                  alignItems='stretch'
-                  direction='row'
                   justify='center'
+                  spacing={3}
+                  alignItems='stretch'
                 >
-                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                    <Grid container justify='center' spacing={3}>
-                      {recommendationsCards}
-                    </Grid>
-                  </Grid>
+                  {recommendationsCards}
                 </Grid>
               </div>
             ) : null}
