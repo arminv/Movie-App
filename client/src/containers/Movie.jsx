@@ -15,7 +15,6 @@ import './Movie.css';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -57,7 +56,8 @@ const useStyles = makeStyles({
     height: 'auto',
   },
   castCard: {
-    maxWidth: '10vmax',
+    maxWidth: '250px',
+    // width: 'auto',
     border: '2px solid rgba(255, 174, 0, 0.7)',
     display: 'flex',
     justifyContent: 'space-between',
@@ -225,7 +225,7 @@ const Movie = ({
   const castCards = [];
   for (let person in cast.cast) {
     castCards.push(
-      <Grid className='cards' item style={{ display: 'flex' }}>
+      <Grid className='cards' item style={{ display: 'flex' }} xs={6} sm={3}>
         <a
           href={`https://www.google.com/search?q=${cast.cast[person]['name']}`}
           target='_blank'
@@ -506,20 +506,18 @@ const Movie = ({
                 <h2 style={{ marginTop: '50px', marginBottom: '30px' }}>
                   Recommended Movies:
                 </h2>
-                <Container style={{ marginBottom: '40px' }}>
-                  <Grid
-                    container
-                    alignItems='stretch'
-                    direction='row'
-                    justify='center'
-                  >
-                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                      <Grid container justify='center' spacing={3}>
-                        {recommendationsCards}
-                      </Grid>
+                <Grid
+                  container
+                  alignItems='stretch'
+                  direction='row'
+                  justify='center'
+                >
+                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <Grid container justify='center' spacing={3}>
+                      {recommendationsCards}
                     </Grid>
                   </Grid>
-                </Container>
+                </Grid>
               </div>
             ) : null}
           </Grid>

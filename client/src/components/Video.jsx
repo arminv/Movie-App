@@ -22,7 +22,7 @@ const Video = ({ youtubeId }) => {
         }}
         src={`https://www.youtube.com/embed/${youtubeId}`}
         frameBorder='0'
-        allowfullscreen='allowfullscreen'
+        allowFullScreen='allowfullscreen'
         mozallowfullscreen='mozallowfullscreen'
         msallowfullscreen='msallowfullscreen'
         oallowfullscreen='oallowfullscreen'
