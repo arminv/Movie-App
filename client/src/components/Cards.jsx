@@ -23,7 +23,8 @@ import CardButtons from './CardButtons';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: '15vmax',
+    // maxWidth: '15vmax',
+    maxWidth: 300,
     border: '2px solid darkblue',
     display: 'flex',
     justifyContent: 'space-between',
