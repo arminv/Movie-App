@@ -174,24 +174,36 @@ const Home = (props) => {
         <Button
           onClick={handleTabSwitch}
           color={selectedTab === 'POPULAR' ? 'secondary' : ''}
+          style={{
+            border: selectedTab === 'POPULAR' ? '1px solid orange' : '',
+          }}
         >
           Popular
         </Button>
         <Button
           onClick={handleTabSwitch}
           color={selectedTab === 'NOW PLAYING' ? 'secondary' : ''}
+          style={{
+            border: selectedTab === 'NOW PLAYING' ? '1px solid orange' : '',
+          }}
         >
           Now Playing
         </Button>
         <Button
           onClick={handleTabSwitch}
           color={selectedTab === 'TOP RATED' ? 'secondary' : ''}
+          style={{
+            border: selectedTab === 'TOP RATED' ? '1px solid orange' : '',
+          }}
         >
           Top Rated
         </Button>
         <Button
           onClick={handleTabSwitch}
           color={selectedTab === 'UPCOMING' ? 'secondary' : ''}
+          style={{
+            border: selectedTab === 'UPCOMING' ? '1px solid orange' : '',
+          }}
         >
           Upcoming
         </Button>
