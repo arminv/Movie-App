@@ -171,10 +171,30 @@ const Home = (props) => {
         aria-label='contained primary button group'
         style={{ maxWidth: '90%' }}
       >
-        <Button onClick={handleTabSwitch}>Popular</Button>
-        <Button onClick={handleTabSwitch}>Now Playing</Button>
-        <Button onClick={handleTabSwitch}>Top Rated</Button>
-        <Button onClick={handleTabSwitch}>Upcoming</Button>
+        <Button
+          onClick={handleTabSwitch}
+          color={selectedTab === 'POPULAR' ? 'secondary' : ''}
+        >
+          Popular
+        </Button>
+        <Button
+          onClick={handleTabSwitch}
+          color={selectedTab === 'NOW PLAYING' ? 'secondary' : ''}
+        >
+          Now Playing
+        </Button>
+        <Button
+          onClick={handleTabSwitch}
+          color={selectedTab === 'TOP RATED' ? 'secondary' : ''}
+        >
+          Top Rated
+        </Button>
+        <Button
+          onClick={handleTabSwitch}
+          color={selectedTab === 'UPCOMING' ? 'secondary' : ''}
+        >
+          Upcoming
+        </Button>
       </ButtonGroup>
 
       <h1>
