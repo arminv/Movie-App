@@ -25,21 +25,40 @@ import Cards from '../components/Cards';
 
 import './Home.css';
 
-const Home = (props) => {
+const Home = ({
+  lastPage,
+  user,
+  getUserMovies,
+  addPopular,
+  addNowPlaying,
+  addTopRated,
+  addUpcoming,
+  setLoading,
+  popular,
+  nowPlaying,
+  topRated,
+  upcoming,
+  searchResults,
+  searchPage,
+  setLastPage,
+  setSearchQuery,
+  setSearchPage,
+  searchQuery,
+}) => {
   const { myPage } = useParams();
   let history = useHistory();
 
-  const selectedTab = props.lastPage;
+  const selectedTab = lastPage;
   const [page, setPage] = useState(parseInt(myPage) ? parseInt(myPage) : 1);
 
   useEffect(() => {
-    if (props.user) {
-      props.getUserMovies(props.user._id);
+    if (user) {
+      getUserMovies(user._id);
       setLoading(false);
       return;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.user]);
+  }, [user]);
 
   useEffect(() => {
     const getPopularMovies = async (page) => {
@@ -48,7 +67,7 @@ const Home = (props) => {
         page
       );
 
-      props.addPopular(page, popularMoviesResponse, popularTotalPages);
+      addPopular(page, popularMoviesResponse, popularTotalPages);
     };
     getPopularMovies(page);
 
@@ -58,7 +77,7 @@ const Home = (props) => {
         nowPlayingTotalPages,
       ] = await fetch_movies('NOW_PLAYING', page);
 
-      props.addNowPlaying(page, nowPlayingMoviesResponse, nowPlayingTotalPages);
+      addNowPlaying(page, nowPlayingMoviesResponse, nowPlayingTotalPages);
     };
     getNowPlayingMovies(page);
 
@@ -67,7 +86,7 @@ const Home = (props) => {
         'TOP_RATED',
         page
       );
-      props.addTopRated(page, topRatedMoviesResponse, topRatedTotalPages);
+      addTopRated(page, topRatedMoviesResponse, topRatedTotalPages);
     };
     getTopRatedMovies(page);
 
@@ -76,14 +95,14 @@ const Home = (props) => {
         'UPCOMING',
         page
       );
-      props.addUpcoming(page, upcomingMoviesResponse, upcomingTotalPages);
+      addUpcoming(page, upcomingMoviesResponse, upcomingTotalPages);
     };
     getUpcomingMovies(page);
 
-    props.setLoading(false);
+    setLoading(false);
 
     return () => {
-      props.setLoading(true);
+      setLoading(true);
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -91,66 +110,63 @@ const Home = (props) => {
 
   // Popular movies card:
   const popularMovieCards =
-    props.popular[page] &&
-    Object.keys(props.popular[page]).map((item, index) => {
+    popular[page] &&
+    Object.keys(popular[page]).map((item, index) => {
       return (
         <Grid className='cards' key={index} item style={{ display: 'flex' }}>
-          <Cards id={props.popular[page][item]['id']} key={index} />
+          <Cards id={popular[page][item]['id']} key={index} />
         </Grid>
       );
     });
 
   // Now-playing movies cards:
   const nowPlayingMovieCards =
-    props.nowPlaying[page] &&
-    Object.keys(props.nowPlaying[page]).map((item, index) => {
+    nowPlaying[page] &&
+    Object.keys(nowPlaying[page]).map((item, index) => {
       return (
         <Grid className='cards' key={index} item style={{ display: 'flex' }}>
-          <Cards id={props.nowPlaying[page][item]['id']} key={index} />
+          <Cards id={nowPlaying[page][item]['id']} key={index} />
         </Grid>
       );
     });
 
   // Top-rated movies cards:
   const topRatedMovieCards =
-    props.topRated[page] &&
-    Object.keys(props.topRated[page]).map((item, index) => {
+    topRated[page] &&
+    Object.keys(topRated[page]).map((item, index) => {
       return (
         <Grid className='cards' key={index} item style={{ display: 'flex' }}>
-          <Cards id={props.topRated[page][item]['id']} key={index} />
+          <Cards id={topRated[page][item]['id']} key={index} />
         </Grid>
       );
     });
 
   // Upcoming movies cards:
   const upcomingMovieCards =
-    props.upcoming[page] &&
-    Object.keys(props.upcoming[page]).map((item, index) => {
+    upcoming[page] &&
+    Object.keys(upcoming[page]).map((item, index) => {
       return (
         <Grid className='cards' key={index} item style={{ display: 'flex' }}>
-          <Cards id={props.upcoming[page][item]['id']} key={index} />
+          <Cards id={upcoming[page][item]['id']} key={index} />
         </Grid>
       );
     });
 
   // Upcoming movies cards:
   const searchResultsCards =
-    props.searchResults[props.searchPage] &&
-    Object.keys(props.searchResults[props.searchPage]).map((item, index) => {
+    searchResults[searchPage] &&
+    Object.keys(searchResults[searchPage]).map((item, index) => {
       return (
         <Grid className='cards' key={index} item style={{ display: 'flex' }}>
-          <Cards
-            id={props.searchResults[props.searchPage][item]['id']}
-            key={index}
-          />
+          <Cards id={searchResults[searchPage][item]['id']} key={index} />
         </Grid>
       );
     });
 
   const handleTabSwitch = (event) => {
     handlePageChange(event, 1);
-    props.setLastPage(event.target.innerText);
-    props.setSearchQuery('');
+    setLastPage(event.target.innerText);
+    setSearchQuery('');
   };
 
   const handlePageChange = (event, value) => {
@@ -159,7 +175,7 @@ const Home = (props) => {
   };
 
   const handleSearchPageChange = (event, value) => {
-    props.setSearchPage(value);
+    setSearchPage(value);
   };
 
   return (
@@ -210,15 +226,13 @@ const Home = (props) => {
       </ButtonGroup>
 
       <h1>
-        {props.searchQuery !== ''
-          ? `RESULTS FOR: ${props.searchQuery}`
-          : selectedTab}
+        {searchQuery !== '' ? `RESULTS FOR: ${searchQuery}` : selectedTab}
       </h1>
 
       <Container>
         <Grid container alignItems='stretch' direction='row' justify='center'>
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            {props.searchQuery !== '' ? (
+            {searchQuery !== '' ? (
               <Grid container justify='center' spacing={3}>
                 {searchResultsCards}
               </Grid>
@@ -228,16 +242,12 @@ const Home = (props) => {
                   switch (selectedTab) {
                     case 'POPULAR':
                       return (
-                        <>
-                          {props.popular[page]
-                            ? popularMovieCards
-                            : 'Loading...'}
-                        </>
+                        <>{popular[page] ? popularMovieCards : 'Loading...'}</>
                       );
                     case 'NOW PLAYING':
                       return (
                         <>
-                          {props.nowPlaying[page]
+                          {nowPlaying[page]
                             ? nowPlayingMovieCards
                             : 'Loading...'}
                         </>
@@ -245,17 +255,13 @@ const Home = (props) => {
                     case 'TOP RATED':
                       return (
                         <>
-                          {props.topRated[page]
-                            ? topRatedMovieCards
-                            : 'Loading...'}
+                          {topRated[page] ? topRatedMovieCards : 'Loading...'}
                         </>
                       );
                     case 'UPCOMING':
                       return (
                         <>
-                          {props.upcoming[page]
-                            ? upcomingMovieCards
-                            : 'Loading...'}
+                          {upcoming[page] ? upcomingMovieCards : 'Loading...'}
                         </>
                       );
                     default:
@@ -268,13 +274,13 @@ const Home = (props) => {
         </Grid>
 
         <div style={{ marginBottom: '50px' }}>
-          {props.searchQuery !== '' ? (
+          {searchQuery !== '' ? (
             <Pagination
               size='large'
               color='primary'
               variant='outlined'
-              count={props.searchResults.totalPages}
-              page={props.searchPage}
+              count={searchResults.totalPages}
+              page={searchPage}
               onChange={(event, value) => handleSearchPageChange(event, value)}
             />
           ) : (
@@ -284,7 +290,7 @@ const Home = (props) => {
                   size='large'
                   color='primary'
                   variant='outlined'
-                  count={props.popular.totalPages}
+                  count={popular.totalPages}
                   page={page}
                   onChange={(event, value) => handlePageChange(event, value)}
                 />
@@ -294,7 +300,7 @@ const Home = (props) => {
                   size='large'
                   color='primary'
                   variant='outlined'
-                  count={props.nowPlaying.totalPages}
+                  count={nowPlaying.totalPages}
                   page={page}
                   onChange={(event, value) => handlePageChange(event, value)}
                 />
@@ -304,7 +310,7 @@ const Home = (props) => {
                   size='large'
                   color='primary'
                   variant='outlined'
-                  count={props.topRated.totalPages}
+                  count={topRated.totalPages}
                   page={page}
                   onChange={(event, value) => handlePageChange(event, value)}
                 />
@@ -314,7 +320,7 @@ const Home = (props) => {
                   size='large'
                   color='primary'
                   variant='outlined'
-                  count={props.upcoming.totalPages}
+                  count={upcoming.totalPages}
                   page={page}
                   onChange={(event, value) => handlePageChange(event, value)}
                 />
