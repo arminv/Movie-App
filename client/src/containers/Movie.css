@@ -48,7 +48,7 @@ h4 {
   .content {
     min-width: 100vw;
     min-height: 100vw;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.85);
     text-align: left;
     line-height: 30px;
     padding: 20px;
@@ -68,7 +68,8 @@ h4 {
   .content {
     min-width: 90vw;
     min-height: 100vw;
-    background-color: rgba(0, 0, 0, 0.85);
+    /* background-color: rgba(0, 0, 0, 0.95); */
+    background-color: rgba(0, 0, 0, 1);
     text-align: left;
     line-height: 30px;
     padding: 20px;
