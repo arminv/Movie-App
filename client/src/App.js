@@ -24,7 +24,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className='App'>
-        <Suspense fallback={<LinearProgress />}>
+        <Suspense fallback={<LinearProgress style={{ height: '20px' }} />}>
           <Navbar />
           <AlertBar />
           <Switch>
