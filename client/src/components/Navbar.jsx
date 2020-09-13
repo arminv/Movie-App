@@ -29,6 +29,8 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
+import MoviedbLogoSmall from '../Icons/MoviedbLogoSmall';
+
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -255,6 +257,15 @@ const Navbar = (props) => {
     <div className={classes.grow}>
       <AppBar position='static'>
         <Toolbar>
+          <div style={{ padding: '0px 20px' }}>
+            <a
+              href='https://www.themoviedb.org/?language=en-CA'
+              rel='noopener noreferrer'
+              target='_blank'
+            >
+              <MoviedbLogoSmall width='60px' height='60px' />
+            </a>
+          </div>
           <Typography className={classes.title} variant='h6' noWrap>
             <LinkRoute
               to={'/'}
