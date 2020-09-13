@@ -13,6 +13,8 @@ import { fetch_by_id } from '../api/index';
 
 import './Movie.css';
 
+import { motion } from 'framer-motion';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -83,6 +85,47 @@ const useStyles = makeStyles({
     margin: '5px',
   },
 });
+
+// Animations:
+const movieNameVariants = {
+  animationOne: {
+    opacity: 0,
+    rotate: -180,
+    x: '-100vw',
+  },
+  animationTwo: {
+    opacity: 1,
+    rotate: 0,
+    x: 0,
+    transition: { duration: 1, ease: 'easeInOut' },
+  },
+};
+
+const movieTagLineVariants = {
+  animationOne: {
+    opacity: 0,
+    rotate: -180,
+    x: '100vw',
+  },
+  animationTwo: {
+    opacity: 1,
+    rotate: 0,
+    x: 0,
+    transition: { duration: 1, ease: 'easeInOut' },
+  },
+};
+
+const movieInfoVariants = {
+  animationOne: {
+    opacity: 0,
+    y: '-100vh',
+  },
+  animationTwo: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1, ease: 'easeInOut' },
+  },
+};
 
 const Movie = ({
   user,
@@ -306,11 +349,21 @@ const Movie = ({
       >
         <div className='content'>
           <div className='heading'>
-            <h1>{movie.title}</h1>
+            <motion.h1
+              variants={movieNameVariants}
+              initial='animationOne'
+              animate='animationTwo'
+            >
+              {movie.title}
+            </motion.h1>
             {movie.tagline ? (
-              <h3>
+              <motion.h3
+                variants={movieTagLineVariants}
+                initial='animationOne'
+                animate='animationTwo'
+              >
                 <i>"{movie.tagline}"</i>
-              </h3>
+              </motion.h3>
             ) : (
               <></>
             )}
