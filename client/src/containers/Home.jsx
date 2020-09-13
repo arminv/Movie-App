@@ -21,9 +21,21 @@ import { ButtonGroup, Button } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import { Pagination } from '@material-ui/lab';
 
+import { motion } from 'framer-motion';
+
 import Cards from '../components/Cards';
 
 import './Home.css';
+
+const buttongroupVariants = {
+  animationOne: {
+    opacity: 0,
+  },
+  animationTwo: {
+    opacity: 1,
+    transition: { duration: 2 },
+  },
+};
 
 const Home = ({
   lastPage,
@@ -179,7 +191,12 @@ const Home = ({
   };
 
   return (
-    <div className='App'>
+    <motion.div
+      className='App'
+      variants={buttongroupVariants}
+      initial='animationOne'
+      animate='animationTwo'
+    >
       <ButtonGroup
         className='tabs'
         variant='contained'
@@ -329,7 +346,7 @@ const Home = ({
           )}
         </div>
       </Container>
-    </div>
+    </motion.div>
   );
 };
 
