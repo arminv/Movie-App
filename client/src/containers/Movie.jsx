@@ -115,18 +115,6 @@ const movieTagLineVariants = {
   },
 };
 
-const movieInfoVariants = {
-  animationOne: {
-    opacity: 0,
-    y: '-100vh',
-  },
-  animationTwo: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1, ease: 'easeInOut' },
-  },
-};
-
 const Movie = ({
   user,
   auth,
