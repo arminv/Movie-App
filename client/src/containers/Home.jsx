@@ -27,13 +27,18 @@ import Cards from '../components/Cards';
 
 import './Home.css';
 
-const buttongroupVariants = {
+const pageVariants = {
   animationOne: {
-    opacity: 0,
+    y: '200vh',
   },
   animationTwo: {
-    opacity: 1,
-    transition: { duration: 2 },
+    scale: [1.8, 1],
+    opacity: [0, 0.3, 0.6, 1],
+    y: 0,
+    transition: {
+      duration: 1,
+      ease: 'easeInOut',
+    },
   },
 };
 
@@ -193,7 +198,7 @@ const Home = ({
   return (
     <motion.div
       className='App'
-      variants={buttongroupVariants}
+      variants={pageVariants}
       initial='animationOne'
       animate='animationTwo'
     >
