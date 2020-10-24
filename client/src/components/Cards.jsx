@@ -6,6 +6,8 @@ import { fetch_by_id } from '../api/index';
 import { connect } from 'react-redux';
 import { addUserMovie, removeUserMovie } from '../redux/actions';
 
+import RatingStars from './Rating';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Container } from '@material-ui/core';
@@ -59,9 +61,18 @@ const Cards = ({
         poster_path,
         homepage,
         genres,
+        vote_average,
       } = await fetch_by_id('MOVIE', id);
 
-      setMovie({ id, title, overview, poster_path, homepage, genres });
+      setMovie({
+        id,
+        title,
+        overview,
+        poster_path,
+        homepage,
+        genres,
+        vote_average,
+      });
     };
     getMovie(id);
   }, [id]);
@@ -136,6 +147,13 @@ const Cards = ({
             >
               {movie.title}
             </Typography>
+            <RatingStars
+              voteAverage={
+                movie.vote_average && movie.vote_average !== 0
+                  ? movie.vote_average
+                  : null
+              }
+            />
             <br />
             <Grid container alignItems='center' justify='center'>
               {genreChips}
