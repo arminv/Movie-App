@@ -2,12 +2,19 @@
 
 .movie {
   margin-top: -20px;
-  background-size: 100% 100%;
-  background-position: center center;
-  background-attachment: fixed;
-  background-repeat: auto;
   color: white;
   min-height: 100vmax;
+}
+
+#background_wrap {
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-size: 100%;
+  background-attachment: fixed;
 }
 
 .heading {

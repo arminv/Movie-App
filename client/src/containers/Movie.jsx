@@ -329,12 +329,13 @@ const Movie = ({
 
   return (
     <div>
-      <div
-        className='movie'
-        style={{
-          backgroundImage: `url(${BASE_IMG_URL + movie.backdrop_path})`,
-        }}
-      >
+      <div className='movie'>
+        <div
+          id='background_wrap'
+          style={{
+            backgroundImage: `url(${BASE_IMG_URL + movie.backdrop_path})`,
+          }}
+        ></div>
         <div className='content'>
           <div className='heading'>
             <motion.h1
