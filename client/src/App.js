@@ -43,7 +43,7 @@ const App = () => {
               backgroundColor: 'transparent',
             }}
           >
-            @2020 by{' '}
+            @2021 by{' '}
             <a
               href='https://www.arminvarshokar.com'
               target='_blank'

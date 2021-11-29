@@ -58,9 +58,9 @@ const useStyles = makeStyles({
     height: 'auto',
   },
   castCard: {
-    maxWidth: '250px',
+    maxWidth: '150px',
     // width: 'auto',
-    border: '2px solid rgba(255, 174, 0, 0.7)',
+    border: '1px solid rgba(255, 174, 0, 0.7)',
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
