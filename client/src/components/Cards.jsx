@@ -38,6 +38,15 @@ const useStyles = makeStyles({
     maxWidth: '100%',
     height: 'auto',
   },
+  rootCompact: {
+    maxWidth: 200,
+    border: '2px solid darkblue',
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    backgroundColor: '#191413',
+    color: 'red',
+  }
 });
 
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
@@ -50,6 +59,7 @@ const Cards = ({
   removeUserMovie,
   auth,
   cart,
+  compact,
 }) => {
   const [movie, setMovie] = useState({});
 
@@ -120,7 +130,9 @@ const Cards = ({
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card
+      className={compact ? classes.rootCompact : classes.root}
+    >
       <CardActionArea>
         <LinkRoute
           to={recommend !== 'true' ? `movie/${id}` : `${id}`}

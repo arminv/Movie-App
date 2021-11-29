@@ -322,6 +322,7 @@ const Movie = ({
             id={recommendations[item]['id']}
             key={recommendations[item]['id']}
             recommend='true'
+            compact='true'
           />
         </Grid>
       );
