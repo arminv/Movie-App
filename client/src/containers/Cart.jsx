@@ -11,7 +11,7 @@ const Cart = ({ userMovies }) => {
   const userMovieCards = Object.keys(userMovies).map((item, index) => {
     return (
       <Grid className='cards' key={index} item style={{ display: 'flex' }}>
-        <Cards id={userMovies[item]['movies']} key={index} cart={true} />
+        <Cards compact='true' id={userMovies[item]['movies']} key={index} cart={true} />
       </Grid>
     );
   });
