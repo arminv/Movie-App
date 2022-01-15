@@ -34,7 +34,7 @@ const App = () => {
             <PrivateRoute exact path='/cart' component={Cart} />
             <Route exact path='/:myPage?' component={Home} />
           </Switch>
-          <p
+          <h3
             style={{
               color: 'white',
               textDecoration: 'none',
@@ -43,7 +43,7 @@ const App = () => {
               backgroundColor: 'transparent',
             }}
           >
-            @2021 by{' '}
+            @2022 by{' '}
             <a
               href='https://www.arminvarshokar.com'
               target='_blank'
@@ -51,7 +51,7 @@ const App = () => {
             >
               Armin Varshokar
             </a>
-          </p>
+          </h3>
         </Suspense>
       </div>
     </BrowserRouter>

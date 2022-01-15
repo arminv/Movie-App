@@ -20,6 +20,7 @@ import Grid from '@material-ui/core/Grid';
 import { ButtonGroup, Button } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import { Pagination } from '@material-ui/lab';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { motion } from 'framer-motion';
 
@@ -61,6 +62,7 @@ const Home = ({
   setSearchQuery,
   setSearchPage,
   searchQuery,
+  isLoading,
 }) => {
   const { myPage } = useParams();
   let history = useHistory();
@@ -181,9 +183,13 @@ const Home = ({
     });
 
   const handleTabSwitch = (event) => {
+    setLoading(true);
     handlePageChange(event, 1);
     setLastPage(event.target.innerText);
     setSearchQuery('');
+    setTimeout(() => {
+      setLoading(false);
+    }, 400);
   };
 
   const handlePageChange = (event, value) => {
@@ -258,6 +264,8 @@ const Home = ({
               <Grid container justify='center' spacing={3}>
                 {searchResultsCards}
               </Grid>
+            ) : (isLoading ? (
+              <CircularProgress color='secondary' />
             ) : (
               <Grid container justify='center' spacing={3}>
                 {(() => {
@@ -291,7 +299,7 @@ const Home = ({
                   }
                 })()}
               </Grid>
-            )}
+            ))}
           </Grid>
         </Grid>
 
@@ -367,6 +375,7 @@ const mapStateToProps = (state) => {
     searchQuery: state.searchReducer.searchQuery,
     userMovies: state.moviesReducer.userMovies,
     user: state.authReducer.user,
+    isLoading: state.moviesReducer.isLoading,
   };
 };
 
