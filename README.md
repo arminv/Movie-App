@@ -1,8 +1,8 @@
-# [Movie App](https://movie-app-arminv.vercel.app/)
+# [Movie App](https://frozen-reaches-76353.herokuapp.com/)
 
 An app to search for movies and add them to your watchlist. Built using the MERN stack and using [The Movie Database API](https://www.themoviedb.org).
 
-You can find a [live demo here](https://movie-app-arminv.vercel.app/).
+You can find a [live demo here](https://frozen-reaches-76353.herokuapp.com/).
 
 ![Alt text](Demo1.png?raw=true "Movieapp")
 
