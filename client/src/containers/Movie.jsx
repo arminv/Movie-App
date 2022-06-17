@@ -40,8 +40,8 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 import Cards from '../components/Cards';
 import Video from '../components/Video';
 
-// const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
-const BASE_IMG_URL = 'https://image.tmdb.org/t/p/original';
+const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
+// const BASE_IMG_URL = 'https://image.tmdb.org/t/p/original';
 const BASE_IMG_SMALL_URL = 'https://image.tmdb.org/t/p/w185';
 const BASE_IMG_LARGE_URL = 'https://image.tmdb.org/t/p/w1280';
 

@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link as LinkRoute } from 'react-router-dom';
-
 import { fetch_by_id } from '../api/index';
-
 import { connect } from 'react-redux';
 import { addUserMovie, removeUserMovie } from '../redux/actions';
-
 import RatingStars from './Rating';
-
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Container } from '@material-ui/core';
@@ -25,7 +21,6 @@ import CardButtons from './CardButtons';
 
 const useStyles = makeStyles({
   root: {
-    // maxWidth: '15vmax',
     maxWidth: 300,
     border: '2px solid darkblue',
     display: 'flex',
@@ -46,7 +41,7 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     backgroundColor: '#191413',
     color: 'red',
-  }
+  },
 });
 
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
@@ -130,9 +125,7 @@ const Cards = ({
   const classes = useStyles();
 
   return (
-    <Card
-      className={compact ? classes.rootCompact : classes.root}
-    >
+    <Card className={compact ? classes.rootCompact : classes.root}>
       <CardActionArea>
         <LinkRoute
           to={recommend !== 'true' ? `movie/${id}` : `${id}`}

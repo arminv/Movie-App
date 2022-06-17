@@ -2,13 +2,11 @@ import React, { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import store from './redux/store';
 import { loadUser } from './redux/actions';
-
+import Navbar from './components/Navbar';
+import Home from './containers/Home';
 import LinearProgress from '@material-ui/core/LinearProgress';
-
 import './App.css';
 
-const Navbar = lazy(() => import('./components/Navbar'));
-const Home = lazy(() => import('./containers/Home'));
 const Movie = lazy(() => import('./containers/Movie'));
 const Login = lazy(() => import('./components/auth/Login'));
 const Register = lazy(() => import('./components/auth/Register'));
@@ -43,7 +41,7 @@ const App = () => {
               backgroundColor: 'transparent',
             }}
           >
-            @2022 by{' '}
+            @2022 by
             <a
               href='https://www.arminvarshokar.com'
               target='_blank'
