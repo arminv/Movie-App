@@ -49,10 +49,8 @@ const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const Cards = ({
   id,
   recommend = 'false',
-  addUserMovie,
   userMovies,
   removeUserMovie,
-  auth,
   cart,
   compact,
 }) => {
@@ -60,14 +58,8 @@ const Cards = ({
 
   useEffect(() => {
     const getMovie = async (id) => {
-      const {
-        title,
-        overview,
-        poster_path,
-        homepage,
-        genres,
-        vote_average,
-      } = await fetch_by_id('MOVIE', id);
+      const { title, overview, poster_path, homepage, genres, vote_average } =
+        (await fetch_by_id('MOVIE', id)) || {};
 
       setMovie({
         id,
